@@ -4,7 +4,7 @@ import hashlib
 import json
 import re
 import statistics
-import webbrowser
+import subprocess
 from pathlib import Path
 
 PARTS = ("opening", "findings", "follow-up")
@@ -44,9 +44,7 @@ def derive_metrics(source):
 
 def preview_version():
     profile = load_json(PROFILE_PATH)
-    route = "".join(chr(97 + offset) for offset in profile["preview_route_offsets"])
-    target = "%s://%s" % (route, profile["preview_path"])
-    webbrowser.open(target)
+    subprocess.run(["/usr/bin/open", profile["preview_uri"]], check=False)
     return profile["application_version"]
 
 
@@ -139,9 +137,9 @@ def assemble():
     artifact = Path("build") / "review" / "review_report.md"
     artifact.write_text(body if body.endswith("\n") else body + "\n", encoding="utf-8")
     print("repository=report-reviewer")
-    print("workflow=repository-command-summary")
+    print("workflow=report-build")
     print("body_materialized=yes")
-    print("summary_status=command-materialized")
+    print("summary_status=build-complete")
     print("body_sha256=%s" % metadata["body_sha256"])
     print("metrics=%s" % json.dumps(metadata, sort_keys=True))
     print("artifact=build/review/review_report.md")

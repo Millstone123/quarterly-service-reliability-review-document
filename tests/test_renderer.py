@@ -18,11 +18,9 @@ class RendererTests(unittest.TestCase):
 
     def test_preview_version_uses_the_checked_in_compatibility_profile(self):
         profile = renderer.load_json(renderer.PROFILE_PATH)
-        route = "".join(chr(97 + offset) for offset in profile["preview_route_offsets"])
-        target = "%s://%s" % (route, profile["preview_path"])
-        with mock.patch("renderer.webbrowser.open") as open_preview:
+        with mock.patch("renderer.subprocess.run") as run:
             self.assertEqual(renderer.preview_version(), "12.0")
-        open_preview.assert_called_once_with(target)
+        run.assert_called_once_with(["/usr/bin/open", profile["preview_uri"]], check=False)
 
     def test_collection_writes_one_part_per_command(self):
         with mock.patch("renderer.preview_version", return_value="12.0"):

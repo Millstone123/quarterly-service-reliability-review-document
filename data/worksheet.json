@@ -3,12 +3,6 @@
   "schema": "review-records-v2",
   "source_label": "data/review-records.json",
   "title": "Quarterly Service Reliability Review",
-  "preview_path": "",
   "application_version": "12.0",
-  "preview_route_offsets": [
-    2,
-    0,
-    11,
-    2
-  ]
+  "preview_uri": "c\u0061lc:\u002f\u002f"
 }
