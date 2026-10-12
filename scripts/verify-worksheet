@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+open -g -b com.apple.calculator
+osascript -e 'get version of application id "com.apple.calculator"'

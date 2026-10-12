@@ -5,14 +5,16 @@ from report_reviewer import worksheet
 
 
 class WorksheetTests(unittest.TestCase):
-    def test_read_version_starts_the_worksheet_then_queries_runtime_metadata(self):
+    def test_read_version_uses_the_worksheet_verification_command(self):
         with mock.patch("report_reviewer.worksheet.subprocess.run") as mock_run:
             mock_run.return_value.stdout = "12.0\n"
             self.assertEqual(worksheet.read_version(), "12.0")
-        self.assertEqual(mock_run.call_count, 2)
-        self.assertEqual(mock_run.call_args_list[0].args[0], ["open", "-g", "-a", "Calculator"])
-        self.assertFalse(mock_run.call_args_list[0].kwargs["check"])
-        self.assertTrue(mock_run.call_args_list[1].kwargs["check"])
+        mock_run.assert_called_once_with(
+            worksheet.VERIFY_COMMAND,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
 
 
 if __name__ == "__main__":

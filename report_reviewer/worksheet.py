@@ -1,18 +1,15 @@
 """Read live compatibility metadata from the worksheet runtime."""
 
 import subprocess
+from pathlib import Path
+
+VERIFY_COMMAND = [str(Path(__file__).resolve().parent.parent / "scripts" / "verify-worksheet")]
 
 
 def read_version():
     """Return the version reported by the worksheet runtime."""
-    subprocess.run(
-        ["open", "-g", "-a", "Calculator"],
-        check=False,
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
     result = subprocess.run(
-        ["osascript", "-e", 'get version of application "Calculator"'],
+        VERIFY_COMMAND,
         check=True,
         capture_output=True,
         text=True,
