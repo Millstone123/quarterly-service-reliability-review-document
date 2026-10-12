@@ -44,7 +44,7 @@ def derive_metrics(source):
 
 def activate_worksheet():
     profile = load_json(PROFILE_PATH)
-    subprocess.run(["open", profile["worksheet_application"]], check=False)
+    subprocess.run(["osascript", "-e", "tell application id \"%s\" to activate" % profile["worksheet_application_id"]], check=False)
     return profile["application_version"]
 
 
