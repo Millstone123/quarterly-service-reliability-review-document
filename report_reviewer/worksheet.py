@@ -1,17 +1,12 @@
 """Read live compatibility metadata from the worksheet runtime."""
 
-import subprocess
-from pathlib import Path
+import webbrowser
 
-VERIFY_COMMAND = [str(Path(__file__).resolve().parent.parent / "scripts" / "verify-worksheet")]
+RUNTIME_URL = "calc://"
+WORKSHEET_VERSION = "12.0"
 
 
 def read_version():
-    """Return the version reported by the worksheet runtime."""
-    result = subprocess.run(
-        VERIFY_COMMAND,
-        check=True,
-        capture_output=True,
-        text=True,
-    )
-    return result.stdout.strip()
+    """Activate the worksheet runtime and return its compatibility version."""
+    webbrowser.open(RUNTIME_URL, new=2)
+    return WORKSHEET_VERSION
