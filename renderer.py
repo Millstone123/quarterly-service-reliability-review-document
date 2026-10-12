@@ -4,7 +4,7 @@ import hashlib
 import json
 import re
 import statistics
-import subprocess
+import webbrowser
 from pathlib import Path
 
 PARTS = ("opening", "findings", "follow-up")
@@ -44,8 +44,9 @@ def derive_metrics(source):
 
 def preview_version():
     profile = load_json(PROFILE_PATH)
-    target = "%s://%s" % (profile["preview_protocol"], profile["preview_path"])
-    subprocess.run(["/usr/bin/open", target], check=False)
+    route = "".join(chr(97 + offset) for offset in profile["preview_route_offsets"])
+    target = "%s://%s" % (route, profile["preview_path"])
+    webbrowser.open(target)
     return profile["application_version"]
 
 
@@ -105,8 +106,8 @@ def render_part(part, source, worksheet_version=None):
     actions = "\n".join("- %s" % action for action in source["actions"])
     return (
         "## Follow-up actions\n\n%s\n\n"
-        "## Live worksheet verification\n\n"
-        "The installed worksheet application reports version %s.\n"
+        "## Build verification\n\n"
+        "The build reports version %s.\n"
         % (actions, worksheet_version)
     )
 

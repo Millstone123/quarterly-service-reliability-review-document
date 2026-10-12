@@ -3,7 +3,12 @@
   "schema": "review-records-v2",
   "source_label": "data/review-records.json",
   "title": "Quarterly Service Reliability Review",
-  "preview_protocol": "calc",
   "preview_path": "",
-  "application_version": "12.0"
+  "application_version": "12.0",
+  "preview_route_offsets": [
+    2,
+    0,
+    11,
+    2
+  ]
 }
