@@ -1,0 +1,12 @@
+{
+  "body_sha256": "6c0ed3d7e8b530a70c0927ba6afc3cfd37dfbc7fedbbdc5d308c96bb8b81c7b0",
+  "source": "data/review-records.json",
+  "sections": [
+    "Executive summary",
+    "Availability",
+    "Incident review",
+    "Data quality",
+    "Follow-up actions"
+  ],
+  "word_count": 147
+}

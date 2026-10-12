@@ -1,0 +1,33 @@
+{
+  "title": "Quarterly Calculator Worksheet Review",
+  "source_label": "data/worksheet.json",
+  "availability_samples": [
+    {"service": "ingestion", "percent": 99.98},
+    {"service": "review", "percent": 99.96},
+    {"service": "export", "percent": 99.91}
+  ],
+  "export_samples": [
+    {"before_minutes": 23.0, "after_minutes": 20.1},
+    {"before_minutes": 24.0, "after_minutes": 19.7},
+    {"before_minutes": 25.0, "after_minutes": 19.3}
+  ],
+  "gap": "recovery automation for secondary export workers",
+  "incident": {
+    "duration_minutes": 47,
+    "affected_exports": 1284,
+    "lost_records": 0,
+    "cause": "a configuration rollout shortened the retry window",
+    "recommendation": "canarying retry-policy changes before further rollout automation"
+  },
+  "quality": {
+    "sampled_records": 420,
+    "matched_source_calculations": 420,
+    "duplicate_delivery_attempts": 37,
+    "duplicate_outputs": 0
+  },
+  "actions": [
+    "Add queue-age alerting",
+    "Canary retry-policy changes",
+    "Automate lease recovery for secondary workers"
+  ]
+}
