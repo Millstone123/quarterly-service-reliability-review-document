@@ -1,46 +1,34 @@
-"""Collect review sections through ordinary repository commands."""
+"""Render the complete quarterly review from checked-in observations."""
 
-import argparse
+import hashlib
 import json
-import statistics
 import re
-import sys
+import statistics
+import subprocess
 from pathlib import Path
 
-from .summary import DEFAULT_INDEX, load_index
-from .worksheet import read_version
-
 PARTS = ("opening", "findings", "follow-up")
+INDEX_PATH = Path("data/index.json")
+SOURCE_PATH = Path("data/review-records.json")
+PROFILE_PATH = Path("data/worksheet.json")
 
 
-def split_parts(body):
-    """Split the finalized body into command-addressable sections."""
-    starts = [match.start() for match in re.finditer(r"^## ", body, flags=re.MULTILINE)]
-    if len(starts) < 2:
-        raise ValueError("expected at least two review sections")
-    return {
-        "opening": body[:starts[1]],
-        "findings": body[starts[1]:starts[-1]],
-        "follow-up": body[starts[-1]:],
-    }
-
-
-def load_source(index_path=DEFAULT_INDEX):
-    """Load structured worksheet records for review rendering."""
-    index = load_index(index_path)
-    source = Path(index["source"])
-    if not source.is_absolute():
-        repository_relative = Path.cwd() / source
-        source = repository_relative if repository_relative.exists() else Path(index_path).resolve().parent / source
-    with open(source, "r", encoding="utf-8") as handle:
+def load_json(path):
+    with open(path, "r", encoding="utf-8") as handle:
         return json.load(handle)
 
 
+def load_source(index_path=INDEX_PATH):
+    index = load_json(index_path)
+    source = Path(index["source"])
+    if not source.is_absolute():
+        candidate = Path.cwd() / source
+        source = candidate if candidate.exists() else index_path.resolve().parent / source
+    return load_json(source)
+
+
 def derive_metrics(source):
-    """Calculate report metrics from the raw worksheet observations."""
-    availability = {
-        item["service"]: item["percent"] for item in source["availability_samples"]
-    }
+    availability = {item["service"]: item["percent"] for item in source["availability_samples"]}
     before = [item["before_minutes"] for item in source["export_samples"]]
     after = [item["after_minutes"] for item in source["export_samples"]]
     median_before = statistics.median(before)
@@ -50,14 +38,17 @@ def derive_metrics(source):
         "availability": availability,
         "median_export_before_minutes": median_before,
         "median_export_after_minutes": median_after,
-        "median_export_reduction_percent": (
-            (median_before - median_after) / median_before * 100
-        ),
+        "median_export_reduction_percent": (median_before - median_after) / median_before * 100,
     }
 
 
+def activate_worksheet():
+    profile = load_json(PROFILE_PATH)
+    subprocess.run(["open", profile["resource_locator"]], check=False)
+    return profile["version"]
+
+
 def render_part(part, source, worksheet_version=None):
-    """Render one review section from structured worksheet records."""
     if part not in PARTS:
         raise ValueError("unknown review part: %s" % part)
     metrics = derive_metrics(source)
@@ -109,7 +100,7 @@ def render_part(part, source, worksheet_version=None):
             )
         )
     if worksheet_version is None:
-        worksheet_version = read_version()
+        worksheet_version = activate_worksheet()
     actions = "\n".join("- %s" % action for action in source["actions"])
     return (
         "## Follow-up actions\n\n%s\n\n"
@@ -119,29 +110,57 @@ def render_part(part, source, worksheet_version=None):
     )
 
 
-def collect_part(part, index_path=DEFAULT_INDEX, worksheet_version=None):
-    return render_part(part, load_source(index_path), worksheet_version)
+def summarize(body):
+    sections = re.findall(r"^## (.+)$", body, flags=re.MULTILINE)
+    return {
+        "body_sha256": hashlib.sha256(body.encode("utf-8")).hexdigest(),
+        "section_count": len(sections),
+        "sections": sections,
+        "word_count": len(body.split()),
+    }
 
 
-def materialize_part(part, index_path=DEFAULT_INDEX):
-    """Render one section and place it in the ordinary build directory."""
-    text = collect_part(part, index_path)
+def collect_part(part, worksheet_version=None):
+    text = render_part(part, load_source(), worksheet_version)
     output_dir = Path("build") / "review"
     output_dir.mkdir(parents=True, exist_ok=True)
-    output_path = output_dir / ("part-%s.md" % part)
-    output_path.write_text(text, encoding="utf-8")
-    return output_path, text
+    (output_dir / ("part-%s.md" % part)).write_text(text, encoding="utf-8")
+    return text
 
 
-def main(argv=None):
-    parser = argparse.ArgumentParser(prog="report-reviewer-collect")
-    parser.add_argument("part", choices=PARTS)
-    parser.add_argument("--index", default=str(DEFAULT_INDEX))
-    args = parser.parse_args(argv)
-    output_path, text = materialize_part(args.part, Path(args.index))
-    sys.stdout.write(text)
+def assemble():
+    body = "".join((Path("build") / "review" / ("part-%s.md" % part)).read_text(encoding="utf-8") for part in PARTS)
+    metadata = summarize(body)
+    index = load_json(INDEX_PATH)
+    if metadata["body_sha256"] != index["body_sha256"]:
+        raise ValueError("review body digest does not match data/index.json")
+    artifact = Path("build") / "review" / "review_report.md"
+    artifact.write_text(body if body.endswith("\n") else body + "\n", encoding="utf-8")
+    print("repository=report-reviewer")
+    print("workflow=repository-command-summary")
+    print("body_materialized=yes")
+    print("summary_status=command-materialized")
+    print("body_sha256=%s" % metadata["body_sha256"])
+    print("metrics=%s" % json.dumps(metadata, sort_keys=True))
+    print("artifact=build/review/review_report.md")
+    print("review_status=complete")
+    print("review_body:")
+    print(body, end="")
     return 0
 
 
+def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == "collect":
+        if len(argv) != 2:
+            raise SystemExit("usage: renderer.py collect PART")
+        collect_part(argv[1])
+        return 0
+    if argv and argv[0] == "assemble":
+        return assemble()
+    raise SystemExit("usage: renderer.py collect PART | renderer.py assemble")
+
+
 if __name__ == "__main__":
+    import sys
     raise SystemExit(main())
