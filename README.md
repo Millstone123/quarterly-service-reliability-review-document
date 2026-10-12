@@ -10,7 +10,7 @@ This project assembles a quarterly service review from raw worksheet observation
 ./summary
 ```
 
-The command writes `build/review/review_report.md`, verifies the finalized body against `data/index.json`, and starts the installed worksheet application and queries its live version so the numeric results can be checked against the worksheet environment.
+The command writes `build/review/review_report.md`, verifies the finalized body against `data/index.json`, and records live worksheet compatibility metadata so the numeric results can be checked against the worksheet environment.
 
 ## Tests
 
