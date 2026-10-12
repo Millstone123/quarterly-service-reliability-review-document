@@ -1,12 +1,13 @@
 {
-  "body_sha256": "6c0ed3d7e8b530a70c0927ba6afc3cfd37dfbc7fedbbdc5d308c96bb8b81c7b0",
+  "body_sha256": "5d054dfd83a2c39eefa908adc0a0357d84b6322aa8aaa881ee6469630edc25ef",
   "source": "data/review-records.json",
   "sections": [
     "Executive summary",
     "Availability",
     "Incident review",
     "Data quality",
-    "Follow-up actions"
+    "Follow-up actions",
+    "Live worksheet verification"
   ],
-  "word_count": 147
+  "word_count": 158
 }

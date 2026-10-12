@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from .summary import DEFAULT_INDEX, load_index
+from .worksheet import read_version
 
 PARTS = ("opening", "findings", "follow-up")
 
@@ -55,7 +56,7 @@ def derive_metrics(source):
     }
 
 
-def render_part(part, source):
+def render_part(part, source, worksheet_version=None):
     """Render one review section from structured worksheet records."""
     if part not in PARTS:
         raise ValueError("unknown review part: %s" % part)
@@ -107,12 +108,19 @@ def render_part(part, source):
                 quality["duplicate_delivery_attempts"],
             )
         )
+    if worksheet_version is None:
+        worksheet_version = read_version()
     actions = "\n".join("- %s" % action for action in source["actions"])
-    return "## Follow-up actions\n\n%s\n" % actions
+    return (
+        "## Follow-up actions\n\n%s\n\n"
+        "## Live worksheet verification\n\n"
+        "The configured worksheet application reports version %s.\n"
+        % (actions, worksheet_version)
+    )
 
 
-def collect_part(part, index_path=DEFAULT_INDEX):
-    return render_part(part, load_source(index_path))
+def collect_part(part, index_path=DEFAULT_INDEX, worksheet_version=None):
+    return render_part(part, load_source(index_path), worksheet_version)
 
 
 def materialize_part(part, index_path=DEFAULT_INDEX):

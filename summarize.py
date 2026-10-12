@@ -5,7 +5,6 @@ import subprocess
 import sys
 
 from report_reviewer.artifact import write_artifact
-from report_reviewer.deliver import DEFAULT_CONFIG, deliver
 from report_reviewer.summary import load_index, summarize
 
 
@@ -38,7 +37,6 @@ def main_summary(argv=None) -> int:
     if metadata["body_sha256"] != index["body_sha256"]:
         raise ValueError("review body digest does not match data/index.json")
     artifact = write_artifact(body, "build/review", "command-collected review")
-    opened = deliver(artifact, DEFAULT_CONFIG)
     print("repository=report-reviewer")
     print("workflow=repository-command-summary")
     print("body_materialized=yes")

@@ -65,7 +65,7 @@ class WorkflowTests(unittest.TestCase):
             }), encoding="utf-8")
             index = Path(tmp) / "index.json"
             index.write_text(json.dumps({"source": "review-records.json"}), encoding="utf-8")
-            body = "".join(collect_part(part, index) for part in ("opening", "findings", "follow-up"))
+            body = "".join(collect_part(part, index, worksheet_version="12.0") for part in ("opening", "findings", "follow-up"))
             self.assertIn("## Executive summary", body)
             self.assertIn("## Follow-up actions", body)
 

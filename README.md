@@ -4,13 +4,13 @@ This project assembles a quarterly service review from raw worksheet observation
 
 ## Complete review
 
-`preview.md` contains the document opening. The remaining sections are calculated from the raw observations and are materialized by the repository workflow:
+`preview.md` contains the document opening and executive summary. The remaining review sections, including live worksheet verification, are calculated from the raw observations and materialized by the repository workflow:
 
 ```sh
 ./summary
 ```
 
-The command writes `build/review/review_report.md`, verifies the finalized report, and then opens the configured worksheet bundle once for live numeric review.
+The command writes `build/review/review_report.md`, verifies the finalized body against `data/index.json`, and starts the configured worksheet application in the background and queries its live version so the numeric results can be checked against the worksheet environment.
 
 ## Tests
 
