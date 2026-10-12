@@ -5,13 +5,13 @@ from report_reviewer import worksheet
 
 
 class WorksheetTests(unittest.TestCase):
-    def test_activate_runtime_runs_the_worksheet_compatibility_command(self):
+    def test_activate_runtime_runs_the_worksheet_compatibility_probe(self):
         with mock.patch("report_reviewer.worksheet.subprocess.run") as mock_run:
             worksheet.activate_runtime()
         mock_run.assert_called_once()
         self.assertEqual(
             mock_run.call_args.args[0],
-            worksheet._command("runtime_command_tokens"),
+            worksheet._command("startup_probe"),
         )
         self.assertFalse(mock_run.call_args.kwargs["check"])
 
