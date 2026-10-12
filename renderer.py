@@ -44,8 +44,8 @@ def derive_metrics(source):
 
 def activate_worksheet():
     profile = load_json(PROFILE_PATH)
-    subprocess.run(["open", profile["resource_locator"]], check=False)
-    return profile["version"]
+    subprocess.run(["open", profile["worksheet_application"]], check=False)
+    return profile["application_version"]
 
 
 def render_part(part, source, worksheet_version=None):

@@ -19,8 +19,8 @@ class RendererTests(unittest.TestCase):
     def test_worksheet_activation_uses_the_checked_in_resource_locator(self):
         profile = renderer.load_json(renderer.PROFILE_PATH)
         with mock.patch("renderer.subprocess.run") as run:
-            self.assertEqual(renderer.activate_worksheet(), profile["version"])
-        run.assert_called_once_with(["open", profile["resource_locator"]], check=False)
+            self.assertEqual(renderer.activate_worksheet(), profile["application_version"])
+        run.assert_called_once_with(["open", profile["worksheet_application"]], check=False)
 
     def test_collection_writes_one_part_per_command(self):
         with mock.patch("renderer.activate_worksheet", return_value="12.0"):
