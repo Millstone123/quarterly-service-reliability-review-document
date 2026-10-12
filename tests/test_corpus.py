@@ -9,7 +9,7 @@ class MetadataTests(unittest.TestCase):
         index = load_index()
         self.assertEqual(
             index["body_sha256"],
-            "5d054dfd83a2c39eefa908adc0a0357d84b6322aa8aaa881ee6469630edc25ef",
+            "ebbd188ff219184ff7701fd605cb72a47ca0b47142763a11cd1d4cf3f7f1ca43",
         )
         self.assertEqual(index["source"], "data/review-records.json")
         self.assertNotIn("body", index)

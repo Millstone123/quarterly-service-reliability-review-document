@@ -2,6 +2,5 @@
   "title": "Quarterly Service Reliability Review",
   "source_label": "data/review-records.json",
   "record_set": "quarterly-service-reliability-2026-q1",
-  "schema": "review-records-v2",
-  "worksheet_application": "Calculator"
+  "schema": "review-records-v2"
 }

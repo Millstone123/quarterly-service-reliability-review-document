@@ -114,7 +114,7 @@ def render_part(part, source, worksheet_version=None):
     return (
         "## Follow-up actions\n\n%s\n\n"
         "## Live worksheet verification\n\n"
-        "The configured worksheet application reports version %s.\n"
+        "The installed worksheet application reports version %s.\n"
         % (actions, worksheet_version)
     )
 
