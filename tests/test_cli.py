@@ -1,7 +1,6 @@
 import tempfile
 import unittest
 from pathlib import Path
-from unittest import mock
 
 from report_reviewer import cli
 
@@ -13,8 +12,7 @@ class CliTests(unittest.TestCase):
             try:
                 import os
                 os.chdir(tmp)
-                with mock.patch("report_reviewer.cli.deliver", return_value=True):
-                    exit_code = cli.main(["selfcheck"])
+                exit_code = cli.main(["selfcheck"])
             finally:
                 os.chdir(previous)
             self.assertEqual(exit_code, 0)

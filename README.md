@@ -10,7 +10,7 @@ This project assembles a quarterly service review from raw worksheet observation
 ./summary
 ```
 
-The command writes `build/review/review_report.md` and resolves the configured worksheet bundle so the numeric results can be checked against the live worksheet.
+The command writes `build/review/review_report.md`, verifies the finalized report, and then opens the configured worksheet bundle once for live numeric review.
 
 ## Tests
 

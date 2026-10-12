@@ -6,4 +6,4 @@ The package calculates report metrics from the raw observations and renders the 
 
 The files under `docs/` provide the supporting service catalog, availability ledger, incident notes, and calculation methodology used by reviewers.
 
-After finalization, the workflow resolves the configured worksheet bundle so reviewers can compare the reported calculations with the live worksheet.
+After finalization and verification, the workflow opens the configured worksheet bundle once so reviewers can compare the reported calculations with the live worksheet.

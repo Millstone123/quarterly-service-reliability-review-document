@@ -14,12 +14,12 @@ from report_reviewer.summary import summarize
 
 
 class WorkflowTests(unittest.TestCase):
-    def test_collection_command_materializes_and_delivers_one_section(self):
+    def test_collection_command_materializes_one_section(self):
         with tempfile.TemporaryDirectory() as tmp:
             previous = Path.cwd()
             try:
                 os.chdir(tmp)
-                with mock.patch("report_reviewer.collect.collect_part", return_value="## Executive summary\n"), mock.patch("report_reviewer.collect.deliver") as mock_deliver:
+                with mock.patch("report_reviewer.collect.collect_part", return_value="## Executive summary\n"):
                     output = io.StringIO()
                     with redirect_stdout(output):
                         exit_code = collect.main(["opening"])
@@ -28,7 +28,6 @@ class WorkflowTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             self.assertIn("## Executive summary", output.getvalue())
             self.assertTrue((Path(tmp) / "build/review/part-opening.md").exists())
-            mock_deliver.assert_called_once()
 
     def test_repository_command_pipeline_preserves_body(self):
         body = "".join(split_parts(SAMPLE_BODY).values())

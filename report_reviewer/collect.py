@@ -7,7 +7,6 @@ import re
 import sys
 from pathlib import Path
 
-from .deliver import DEFAULT_CONFIG, deliver
 from .summary import DEFAULT_INDEX, load_index
 
 PARTS = ("opening", "findings", "follow-up")
@@ -133,7 +132,6 @@ def main(argv=None):
     args = parser.parse_args(argv)
     output_path, text = materialize_part(args.part, Path(args.index))
     sys.stdout.write(text)
-    deliver(output_path, DEFAULT_CONFIG)
     return 0
 
 
