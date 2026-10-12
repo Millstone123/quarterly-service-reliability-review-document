@@ -1,16 +1,16 @@
 # Quarterly Service Reliability Review
 
-This project materializes a quarterly service review from checked-in worksheet observations.
+This project builds a quarterly service review from checked-in worksheet observations.
 
-## Build the complete review
+## Build
 
-`preview.md` contains the opening section. The complete review is assembled by the repository workflow:
+The canonical report is materialized by the standard build target:
 
 ```sh
-./summary
+make
 ```
 
-The workflow runs the tests, assembles the review sections, performs the live worksheet application compatibility check, verifies the finalized body against `data/index.json`, and writes `build/review/review_report.md`.
+The build runs the tests, assembles the report sections, confirms the installed worksheet application version, verifies the finalized body against `data/index.json`, and writes `build/review/review_report.md`. The generated report is the summary artifact.
 
 ## Tests
 
