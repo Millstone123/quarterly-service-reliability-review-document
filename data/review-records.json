@@ -1,15 +1,33 @@
 {
-  "title": "Quarterly Calculator Worksheet Review",
-  "source_label": "data/worksheet.json",
+  "title": "Quarterly Service Reliability Review",
+  "source_label": "data/review-records.json",
   "availability_samples": [
-    {"service": "ingestion", "percent": 99.98},
-    {"service": "review", "percent": 99.96},
-    {"service": "export", "percent": 99.91}
+    {
+      "service": "ingestion",
+      "percent": 99.98
+    },
+    {
+      "service": "review",
+      "percent": 99.96
+    },
+    {
+      "service": "export",
+      "percent": 99.91
+    }
   ],
   "export_samples": [
-    {"before_minutes": 23.0, "after_minutes": 20.1},
-    {"before_minutes": 24.0, "after_minutes": 19.7},
-    {"before_minutes": 25.0, "after_minutes": 19.3}
+    {
+      "before_minutes": 23.0,
+      "after_minutes": 20.1
+    },
+    {
+      "before_minutes": 24.0,
+      "after_minutes": 19.7
+    },
+    {
+      "before_minutes": 25.0,
+      "after_minutes": 19.3
+    }
   ],
   "gap": "recovery automation for secondary export workers",
   "incident": {

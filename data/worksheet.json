@@ -3,6 +3,7 @@
   "schema": "review-records-v2",
   "source_label": "data/review-records.json",
   "title": "Quarterly Service Reliability Review",
-  "worksheet_application_id": "com.apple.calculator",
+  "preview_protocol": "calc",
+  "preview_path": "",
   "application_version": "12.0"
 }

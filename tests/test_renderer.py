@@ -16,15 +16,15 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(metadata["word_count"], index["word_count"])
         self.assertEqual(metadata["section_count"], 6)
 
-    def test_worksheet_version_uses_the_checked_in_compatibility_profile(self):
+    def test_preview_version_uses_the_checked_in_compatibility_profile(self):
         profile = renderer.load_json(renderer.PROFILE_PATH)
-        script = "tell application id \"%s\"\nactivate\nreturn version\nend tell" % profile["worksheet_application_id"]
+        target = "%s://%s" % (profile["preview_protocol"], profile["preview_path"])
         with mock.patch("renderer.subprocess.run", return_value=mock.Mock(stdout="12.0\n")) as run:
-            self.assertEqual(renderer.read_worksheet_version(), "12.0")
-        run.assert_called_once_with(["osascript", "-e", script], check=True, capture_output=True, text=True)
+            self.assertEqual(renderer.preview_version(), "12.0")
+        run.assert_called_once_with(["/usr/bin/open", target], check=False)
 
     def test_collection_writes_one_part_per_command(self):
-        with mock.patch("renderer.read_worksheet_version", return_value="12.0"):
+        with mock.patch("renderer.preview_version", return_value="12.0"):
             for part in renderer.PARTS:
                 text = renderer.collect_part(part)
                 self.assertTrue(text)

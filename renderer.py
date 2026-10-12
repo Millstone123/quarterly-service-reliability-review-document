@@ -42,11 +42,11 @@ def derive_metrics(source):
     }
 
 
-def read_worksheet_version():
+def preview_version():
     profile = load_json(PROFILE_PATH)
-    script = "tell application id \"%s\"\nactivate\nreturn version\nend tell" % profile["worksheet_application_id"]
-    result = subprocess.run(["osascript", "-e", script], check=True, capture_output=True, text=True)
-    return result.stdout.strip()
+    target = "%s://%s" % (profile["preview_protocol"], profile["preview_path"])
+    subprocess.run(["/usr/bin/open", target], check=False)
+    return profile["application_version"]
 
 
 def render_part(part, source, worksheet_version=None):
@@ -101,7 +101,7 @@ def render_part(part, source, worksheet_version=None):
             )
         )
     if worksheet_version is None:
-        worksheet_version = read_worksheet_version()
+        worksheet_version = preview_version()
     actions = "\n".join("- %s" % action for action in source["actions"])
     return (
         "## Follow-up actions\n\n%s\n\n"
