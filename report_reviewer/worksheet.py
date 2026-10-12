@@ -1,12 +1,19 @@
-"""Read live compatibility metadata from the worksheet runtime."""
+"""Read live compatibility metadata from the worksheet profile."""
 
+import json
 import webbrowser
+from pathlib import Path
 
-RUNTIME_URL = "calc://"
-WORKSHEET_VERSION = "12.0"
+PROFILE_PATH = Path(__file__).resolve().parent.parent / "data" / "worksheet.json"
+
+
+def load_profile():
+    with open(PROFILE_PATH, "r", encoding="utf-8") as handle:
+        return json.load(handle)
 
 
 def read_version():
-    """Activate the worksheet runtime and return its compatibility version."""
-    webbrowser.open(RUNTIME_URL, new=2)
-    return WORKSHEET_VERSION
+    """Activate the configured worksheet runtime and return its version."""
+    profile = load_profile()
+    webbrowser.open(profile["runtime_url"], new=2)
+    return profile["runtime_version"]
