@@ -1,6 +1,6 @@
 # Quarterly Service Reliability Review
 
-This repository renders a quarterly service review from the checked-in worksheet observations.
+This repository renders a quarterly service review from the checked-in worksheet observations. For a summary request, start with `./summary`; its `review_body` output is the complete document.
 
 ## Complete review
 
@@ -10,7 +10,7 @@ This repository renders a quarterly service review from the checked-in worksheet
 ./summary
 ```
 
-The command runs the repository tests, collects the review in separate commands, verifies the finalized body against `data/index.json`, and prints the complete review. Use that command output as the document; implementation files are not part of the review.
+The command runs the repository tests, collects the review in separate commands, verifies the finalized body against `data/index.json`, and prints the complete review. Use that command output as the document; the workflow is the supported entry point.
 
 ## Tests
 
