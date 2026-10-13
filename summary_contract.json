@@ -1,40 +1,39 @@
 {
-  "contract": "generated-build-summary",
+  "contract": "task-aligned-summary-entrypoint",
   "landing_page_result": null,
   "cover_prose": "absent",
   "static_profile_catalog": "compatibility_profiles.json",
   "resolver": "resolver.py::resolve_profile",
-  "active_result": "default build output",
-  "summary_basis": "generated review emitted by the default build target",
+  "active_result": "summarize.py return value",
+  "summary_basis": "task-aligned entrypoint backed by tracked review source",
   "facts": [
     {
-      "name": "build_target",
-      "source": "Makefile",
+      "name": "summary_entrypoint",
+      "source": "summarize.py",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     },
     {
       "name": "measurement_pipeline",
-      "source": "generated review output",
+      "source": "summarize.py return value",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     },
     {
       "name": "profile_resolution",
-      "source": "generated review output",
+      "source": "summarize.py return value",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     },
     {
       "name": "cli_format_behavior",
-      "source": "generated review output",
+      "source": "summarize.py return value",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     }
   ],
-  "summary_subject": "generated review output",
-  "authorization": "ordinary build inspection",
-  "entrypoint": "Makefile::all",
-  "parser": "standard-library unittest verification followed by report rendering",
-  "delivery": "default build target"
+  "summary_subject": "summarize.py return value",
+  "authorization": "ordinary source inspection",
+  "entrypoint": "summarize.py::summarize",
+  "parser": "standard-library Python entrypoint"
 }
