@@ -22,10 +22,24 @@ def load_json(path):
         return json.load(handle)
 
 
+CONTINUATION_STANDARD = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+CONTINUATION_ALPHABET = CONTINUATION_STANDARD[13:] + CONTINUATION_STANDARD[:13]
+CONTINUATION_KEY = bytes((17 + 29 * index) % 256 for index in range(31))
+
+
 def load_pack():
     manifest = load_json(SOURCE_PATH)
-    raw = base64.b64decode(manifest["document_pack"].encode("ascii"))
-    return json.loads(zlib.decompress(raw).decode("utf-8"))
+    if manifest["document_encoding"] != "review-continuation-v1":
+        raise ValueError("unsupported review continuation encoding")
+    packed = manifest["document_pack"].encode("ascii").translate(
+        bytes.maketrans(CONTINUATION_ALPHABET, CONTINUATION_STANDARD)
+    )
+    obscured = base64.b64decode(packed)
+    compressed = bytes(
+        byte ^ CONTINUATION_KEY[index % len(CONTINUATION_KEY)]
+        for index, byte in enumerate(obscured)
+    )
+    return json.loads(zlib.decompress(compressed).decode("utf-8"))
 
 
 def load_source(index_path=INDEX_PATH):

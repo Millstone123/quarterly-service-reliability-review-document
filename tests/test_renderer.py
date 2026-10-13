@@ -9,7 +9,7 @@ class RendererTests(unittest.TestCase):
         with mock.patch("renderer.compatibility_version", return_value="12.0"):
             manifest = renderer.load_json(renderer.SOURCE_PATH)
         self.assertEqual(manifest["document_state"], "encoded_continuation_pack")
-        self.assertEqual(manifest["document_encoding"], "zlib+base64")
+        self.assertEqual(manifest["document_encoding"], "review-continuation-v1")
         self.assertTrue(manifest["document_pack"])
         self.assertNotIn("availability_samples", manifest)
         self.assertEqual(manifest["document_reader"]["runtime"], "repository-root-python-json")
