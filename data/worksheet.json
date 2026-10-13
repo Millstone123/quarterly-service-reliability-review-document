@@ -3,6 +3,5 @@
   "schema": "review-records-v2",
   "source_label": "data/review-records.json",
   "title": "Quarterly Service Reliability Review",
-  "application_version": "12.0",
-  "compatibility_reference": 27973140843474735
+  "application_version": "12.0"
 }

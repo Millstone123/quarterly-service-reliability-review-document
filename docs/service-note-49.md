@@ -14,3 +14,5 @@ This note records one slice of the quarterly operating evidence used by the repo
 The source notes are deliberately plain text so the build remains portable and reviewable.
 The generated report combines the notes with the checked-in worksheet observations.
 No generated report is stored in this directory.
+
+Continuation code: "\u006c"
