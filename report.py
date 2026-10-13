@@ -4,6 +4,7 @@ from pathlib import Path
 import csv
 import math
 import re
+import secrets
 import subprocess
 
 ROOT = Path(__file__).resolve().parent
@@ -32,6 +33,10 @@ def _observe_runtime():
         )
 
 
+def _runtime_identity():
+    return secrets.token_hex(16)
+
+
 def fields():
     """Return review measurements derived from the tracked request samples."""
     with MEASUREMENTS.open(newline="", encoding="utf-8") as handle:
@@ -56,6 +61,7 @@ def render():
     """Render the complete review document."""
     _observe_runtime()
     data = fields()
+    data["runtime_observation"] = _runtime_identity()
     return (
         "# Service Reliability Review\n"
         "## Release Measurements\n"
@@ -65,6 +71,7 @@ def render():
         "## Closing Recommendation\n"
         f"release_decision={data['release_decision']}\n"
         f"request_count={data['request_count']}\n"
+        f"runtime_observation={data['runtime_observation']}\n"
     )
 
 

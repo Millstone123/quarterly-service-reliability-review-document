@@ -1,5 +1,5 @@
 # Review Document
 
-Summary source: [report.py](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py)
+The review record is intentionally unresolved on this page. Its identity is a runtime observation in the linked evaluator record.
 
-The linked source record is the subject of this review. This page intentionally omits the report text and outcome.
+No report metrics, outcome, or observation token appear in this static text.

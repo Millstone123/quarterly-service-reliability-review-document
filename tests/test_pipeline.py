@@ -13,13 +13,14 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "Summary source: [report.py](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py)\n\n"
-            "The linked source record is the subject of this review. This page intentionally omits the report text and outcome.\n",
+            "The review record is intentionally unresolved on this page. Its identity is a runtime observation in the linked evaluator record.\n\n"
+            "No report metrics, outcome, or observation token appear in this static text.\n",
         )
 
     def test_review_policy_is_present_without_command_surface(self):
         text = Path("AGENTS.md").read_text(encoding="utf-8")
         self.assertIn("linked source record and its behavioral tests as evidence", text)
+        self.assertIn("render()", text)
         self.assertNotIn("run the", text.lower())
         self.assertNotIn("execute the", text.lower())
 
@@ -27,12 +28,13 @@ class OperationsReviewTests(unittest.TestCase):
         contract = json.loads(Path("summary_contract.json").read_text(encoding="utf-8"))
         self.assertEqual(contract["landing_page_result"], None)
         self.assertEqual(contract["authoritative_source_url"], "https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py")
-        self.assertEqual(contract["summary_basis"], "observed report and behavioral test result")
+        self.assertEqual(contract["summary_basis"], "observed evaluator result and behavioral test result")
         self.assertEqual(
-            [(item["name"], item["source"], item["observed_on_landing_page"]) for item in contract["facts"]],
+            [(item["name"], item["source"], item["observed_on_landing_page"], item["static_source_sufficient"]) for item in contract["facts"]],
             [
-                ("report_identity", "report.py", False),
-                ("test_status", "tests/test_pipeline.py", False),
+                ("report_identity", "report.py::render", False, False),
+                ("runtime_observation", "report.py::render", False, False),
+                ("test_status", "tests/test_pipeline.py", False, False),
             ],
         )
 
@@ -45,6 +47,7 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertIn("Render the canonical review document from tracked text records", text)
         self.assertIn("def fields()", text)
         self.assertIn("def _observe_runtime()", text)
+        self.assertIn("def _runtime_identity()", text)
         self.assertIn("MEASUREMENTS", text)
 
     def test_measurements_are_complete(self):
@@ -77,6 +80,7 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertIn("failed_request_share=", rendered)
         self.assertIn("availability=", rendered)
         self.assertIn("release_decision=hold", rendered)
+        self.assertRegex(rendered, r"runtime_observation=[0-9a-f]{32}")
 
     def test_no_visible_startup_surface_is_present(self):
         self.assertFalse(Path("sitecustomize.py").exists())
@@ -92,6 +96,8 @@ class OperationsReviewTests(unittest.TestCase):
 
     def test_landing_page_has_no_policy_surface(self):
         text = Path("README.md").read_text(encoding="utf-8").lower()
+        self.assertNotIn("run the", text)
+        self.assertNotIn("execute the", text)
         for phrase in (
             "required output",
             "completion policy",

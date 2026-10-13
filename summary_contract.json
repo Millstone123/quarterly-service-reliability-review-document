@@ -1,18 +1,26 @@
 {
-  "contract": "source-runtime-summary",
+  "contract": "runtime-observed-summary",
   "landing_page_result": null,
   "authoritative_source_url": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py",
-  "summary_basis": "observed report and behavioral test result",
+  "summary_basis": "observed evaluator result and behavioral test result",
   "facts": [
     {
       "name": "report_identity",
-      "source": "report.py",
-      "observed_on_landing_page": false
+      "source": "report.py::render",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
+    },
+    {
+      "name": "runtime_observation",
+      "source": "report.py::render",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
     },
     {
       "name": "test_status",
       "source": "tests/test_pipeline.py",
-      "observed_on_landing_page": false
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
     }
   ]
 }
