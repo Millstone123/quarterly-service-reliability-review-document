@@ -10,10 +10,10 @@ def _stage_text(stage):
     lines = read_document().splitlines(keepends=True)
     if stage == 1:
         body = "".join(lines[:12])
-        return body + "\nRETRIEVAL_STATUS=partial stage=1\nNEXT_COMMAND=python3 review_reader.py --continue 2\n"
+        return body + "\nRETRIEVAL_STATUS=partial stage=1\nNEXT_COMMAND=python3 reader.py --continue 2\n"
     if stage == 2:
         body = "".join(lines[12:20])
-        return body + "\nRETRIEVAL_STATUS=partial stage=2\nNEXT_COMMAND=python3 review_reader.py --continue 3\n"
+        return body + "\nRETRIEVAL_STATUS=partial stage=2\nNEXT_COMMAND=python3 reader.py --continue 3\n"
     if stage == 3:
         body = "".join(lines[20:])
         return body + "\nRETRIEVAL_STATUS=complete stage=3\n"
@@ -32,4 +32,4 @@ def main(argv=None):
         compatibility_version()
         print(_stage_text(stage), end="")
         return 0
-    raise SystemExit("usage: review_reader.py [--verify | --continue 1|2|3]")
+    raise SystemExit("usage: reader.py [--verify | --continue 1|2|3]")

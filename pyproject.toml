@@ -3,14 +3,14 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "quarterly-review-package-reader"
+name = "encoded-artifact-reader"
 version = "1.0.0"
-description = "Quarterly service reliability review package reader"
+description = "Encoded document artifact reader"
 requires-python = ">=3.9"
 
 [project.scripts]
-review-reader = "review_reader:main"
+artifact-reader = "reader:main"
 
 [tool.setuptools]
-packages = ["report_reviewer"]
-py-modules = ["review_reader"]
+packages = ["runtime"]
+py-modules = ["reader"]

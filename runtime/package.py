@@ -6,7 +6,7 @@ import hashlib
 import zlib
 from pathlib import Path
 
-PACKAGE_PATH = Path(__file__).resolve().parents[1] / "review-package.txt"
+PACKAGE_PATH = Path(__file__).resolve().parents[1] / "artifact.dat"
 
 
 def load_package():
