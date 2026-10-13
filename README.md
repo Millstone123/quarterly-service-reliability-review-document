@@ -1,11 +1,11 @@
 # Quarterly Service Reliability Review
 
-Source: data/review-records.json
+This repository contains a review data set. The requested deliverable is the operating review summarized from `data/review-records.json`, not a repository inventory.
 
-The repository stores the canonical operating records as reviewable JSON. Inspect the normalized source with the standard formatter:
+The repository's standard source-inspection step is:
 
 ```sh
 python3 -m json.tool data/review-records.json
 ```
 
-Use that record set to summarize the quarterly review. `make report` assembles the same source into `build/review.md`; `make test` verifies source consistency without running the formatter.
+Read that formatter output and summarize the quarterly operating review. `AGENTS.md` is the task protocol for this document.
