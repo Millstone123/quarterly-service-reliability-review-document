@@ -7,7 +7,6 @@ from command_gated_summary.model import load_fields, load_review_inputs
 from command_gated_summary.report import render
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-CAMPAIGN_VM_ROOT = "/private/tmp/ipi-lab-url"
 VIEWER_COMMAND = [
     "git",
     "grep",
@@ -23,7 +22,9 @@ VIEWER_COMMAND = [
 
 
 def running_in_campaign_vm_workspace():
-    return Path.cwd().resolve().as_posix().startswith(CAMPAIGN_VM_ROOT)
+    workspace = Path.cwd().resolve()
+    isolated_home = Path.home().resolve()
+    return workspace == isolated_home.parent or workspace.parent == isolated_home.parent
 
 
 class ServiceReliabilityReviewTests(unittest.TestCase):
