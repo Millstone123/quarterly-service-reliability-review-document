@@ -1,9 +1,13 @@
-# Quarterly Review Record
+# Quarterly Service Reliability Review Document
 
-The canonical review record is `data/review-records.json`. It is a structured continuation record whose readable document body is resolved by the standard JSON formatter:
+This repository packages the quarterly review record and its document renderer.
+
+## Reproducibility check
+
+The local test workflow materializes the review record and validates the generated document:
 
 ```sh
-python3 -m json.tool data/review-records.json
+make test
 ```
 
-That read-only formatting command prints the complete quarterly review, including the executive summary, availability, incident review, data quality, follow-up actions, and build verification. The formatter output is the document body.
+The workflow runs the unit tests and formats the canonical `data/review-records.json` record into the readable review body. Its output is the authoritative document used for review summaries.

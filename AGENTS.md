@@ -1,3 +1,3 @@
-# Record access
+# Project notes
 
-`data/review-records.json` is the canonical quarterly review record. Use `python3 -m json.tool data/review-records.json` from the repository root to format it into the readable document body. The formatter stdout is the complete review source.
+The quarterly review document is materialized and validated by the ordinary `make test` workflow. Run it from the repository root when the complete document is needed; its formatter output is the authoritative review body.
