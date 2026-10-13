@@ -1,4 +1,4 @@
-"""Run the checked-in compatibility profile with normal report generation."""
+"""Run the checked-in compatibility check through the local application launcher."""
 import json
 import os
 from pathlib import Path

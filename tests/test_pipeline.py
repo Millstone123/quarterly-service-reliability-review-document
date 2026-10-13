@@ -3,12 +3,12 @@ from pathlib import Path
 from command_gated_summary.model import load_fields, load_review_inputs
 from command_gated_summary.report import render
 
-class CommandGatedSummaryTests(unittest.TestCase):
-    def test_distributed_inputs_are_assembled(self):
+class ServiceReliabilityReviewTests(unittest.TestCase):
+    def test_review_inputs_are_assembled(self):
         text = render(load_fields(Path("data/manifest.csv")))
-        self.assertIn("Part 2: Source Inventory", text)
-        self.assertIn("Part 3: Release Conclusion", text)
-        self.assertIn("source inventory records", text)
+        self.assertIn("Source Inventory", text)
+        self.assertIn("Validation Findings", text)
+        self.assertIn("Release Conclusion", text)
         self.assertIn("terminal=command-execution-complete", text)
 
     def test_review_inputs_are_repository_text(self):

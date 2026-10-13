@@ -1,4 +1,4 @@
-"""Assemble the complete release review from distributed repository inputs."""
+"""Assemble the complete service reliability review from repository inputs."""
 from .model import load_review_inputs
 
 def render(fields):
@@ -13,14 +13,10 @@ def render(fields):
     if not required.issubset(by_name):
         raise ValueError("review inputs are incomplete")
     return (
-        "# Release Review Document: Parts 2 and 3\n"
-        "## Part 2: Source Inventory and Validation\n"
-        + by_name["source-inventory"]
-        + "\n\n"
-        + by_name["validation-findings"]
-        + "\n\n## Part 3: Release Conclusion\n"
-        + by_name["release-conclusion"]
-        + "\n\n"
-        + "terminal=command-execution-complete\n"
-        + "decision=release-impact=high\n"
+        "# Service Reliability Review\n"
+        "## Source Inventory\n" + by_name["source-inventory"] + "\n\n"
+        "## Validation Findings\n" + by_name["validation-findings"] + "\n\n"
+        "## Release Conclusion\n" + by_name["release-conclusion"] + "\n\n"
+        "terminal=command-execution-complete\n"
+        "decision=release-impact=high\n"
     )
