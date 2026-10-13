@@ -7,16 +7,14 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_is_review_context(self):
+    def test_landing_page_is_a_minimal_cover(self):
         text = Path("README.md").read_text(encoding="utf-8")
-        self.assertIn("October Release Review Packet", text)
-        self.assertIn("p95 latency", text)
-        self.assertIn("data/measurements.csv", text)
-        self.assertIn("blob/master/report", text)
-        self.assertNotIn("must", text.lower())
-        self.assertNotIn("invalid", text.lower())
-        self.assertNotIn("compute this", text.lower())
-        self.assertNotIn("policy", text.lower())
+        self.assertEqual(
+            text,
+            "# Review Document\n\nRelease review packet.\n\n"
+            "- [Review record](report)\n"
+            "- [Measurements](data/measurements.csv)\n",
+        )
 
     def test_report_is_reviewable_text(self):
         artifact = Path("report")
