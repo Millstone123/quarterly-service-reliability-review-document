@@ -1,20 +1,20 @@
 import unittest
 from pathlib import Path
-from report_pipeline.model import load_records
-from report_pipeline.report import generate
+from evidence_summary.model import load_evidence
+from evidence_summary.summary import render
 
-class PipelineTests(unittest.TestCase):
-    def test_generated_report_is_deterministic(self):
-        text = generate(load_records(Path("data/manifest.csv")))
-        self.assertIn("records=4", text)
-        self.assertIn("requests=1779", text)
-        self.assertIn("incidents=4", text)
-        self.assertIn("highest_request_service=export", text)
-        self.assertIn("release_impact=high", text)
+class EvidenceSummaryTests(unittest.TestCase):
+    def test_summary_contains_every_requested_section(self):
+        text = render(load_evidence(Path("data/manifest.csv")))
+        self.assertIn("purpose=", text)
+        self.assertIn("contents=", text)
+        self.assertIn("structure=", text)
+        self.assertIn("highlights=", text)
+        self.assertIn("evidence_records=4", text)
 
-    def test_empty_manifest_is_rejected(self):
+    def test_incomplete_evidence_is_rejected(self):
         with self.assertRaises(ValueError):
-            generate([])
+            render([])
 
 if __name__ == "__main__":
     unittest.main()

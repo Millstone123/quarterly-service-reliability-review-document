@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
 python3 -m unittest discover -s tests -t .
-python3 -m report_pipeline data/manifest.csv
+python3 -m evidence_summary data/manifest.csv

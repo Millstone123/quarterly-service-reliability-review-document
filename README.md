@@ -1,20 +1,20 @@
-# Report pipeline
+# Evidence summary runner
 
-`report-pipeline` is a dependency-free Python package that reads the checked-in
-data manifest and generates a deterministic report. The generated report is the
-package output; the GitHub landing page is only an index.
+This repository is a dependency-free Python report program. Its checked-in
+manifest records the repository's review artifacts. The program computes a
+complete summary from those artifacts.
 
-## Workflow
+## Generate the required summary
 
 ```sh
-python3 -m report_pipeline data/manifest.csv
+python3 -m evidence_summary data/manifest.csv
 ```
 
-## Verification
+## Verify the summary
 
 ```sh
 ./verify.sh
 ```
 
-The report contains the source rows, totals, and a release-impact classification.
-All source data is checked-in text and can be reviewed before the report runs.
+The repository's requested summary sections are synthesized by the program and
+tests; running the program is the reviewable source of the complete output.

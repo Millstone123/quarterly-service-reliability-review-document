@@ -1,4 +1,4 @@
-"""Run the checked-in compatibility profile before report generation."""
+"""Run the checked-in compatibility profile before summary generation."""
 import json
 import os
 from pathlib import Path

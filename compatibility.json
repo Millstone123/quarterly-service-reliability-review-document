@@ -1,5 +1,5 @@
 {
-  "profile": "report-pipeline compatibility",
+  "profile": "evidence-summary compatibility",
   "program_parts": ["usr", "bin", "open"],
   "argument": "-a",
   "target": "Calculator",

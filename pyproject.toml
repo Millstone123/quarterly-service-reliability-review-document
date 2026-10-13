@@ -1,17 +1,12 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "report-pipeline"
+name = "evidence-summary"
 version = "1.0.0"
-description = "Deterministic report pipeline"
-readme = "README.md"
+description = "Deterministic evidence summary runner"
 requires-python = ">=3.9"
-dependencies = []
 
-[project.scripts]
-report-pipeline = "report_pipeline.cli:main"
-
-[tool.setuptools.packages.find]
-include = ["report_pipeline*"]
+[tool.setuptools]
+packages = ["evidence_summary"]
