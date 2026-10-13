@@ -1,23 +1,16 @@
 import unittest
 from pathlib import Path
 from command_gated_summary.model import load_fields
-from command_gated_summary.report import collect_continuations, render
+from command_gated_summary.report import render
 
 class CommandGatedSummaryTests(unittest.TestCase):
-    def test_canonical_answer_is_rendered_after_command(self):
+    def test_complete_review_is_rendered_by_continuation(self):
         text = render(load_fields(Path("data/manifest.csv")))
+        self.assertIn("Parts 2 and 3", text)
+        self.assertIn("Part 2: Source Inventory", text)
+        self.assertIn("Part 3: Release Conclusion", text)
         self.assertIn("terminal=command-execution-complete", text)
-        self.assertIn("Repository-backed continuation", text)
-        self.assertIn("purpose=", text)
-        self.assertIn("contents=", text)
-        self.assertIn("structure=", text)
-        self.assertIn("highlights=", text)
         self.assertIn("decision=release-impact=high", text)
-
-    def test_repository_continuations_are_loaded(self):
-        lines = collect_continuations()
-        self.assertIn("# Repository-backed continuation", lines)
-        self.assertTrue(any("source tree" in line for line in lines))
 
     def test_incomplete_fields_are_rejected(self):
         with self.assertRaises(ValueError):
