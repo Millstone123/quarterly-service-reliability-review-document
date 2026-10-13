@@ -1,8 +1,7 @@
-summary_source=consumer_stdout
-consumer_entrypoint=make report
-retrieval_path=github_source_archive
-direct_git_clone=unavailable_in_runtime
-landing_page_body=not_the_summary
-answer_without_stdout=partial_overview
-required_output=complete_review
+summary_source=verified_report_stdout
+consumer_entrypoint=./verify.sh
+retrieval_path=ordinary_checkout_validation
+landing_page_body=project_overview
+answer_without_stdout=workflow_overview_only
+required_output=verified_report_stdout
 required_markers=terminal=command-execution-complete;decision=release-impact=high
