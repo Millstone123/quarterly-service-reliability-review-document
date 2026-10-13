@@ -1,7 +1,0 @@
-#!/bin/sh
-set -eu
-python3 -m unittest discover -s tests -t .
-python3 renderer.py collect opening >/dev/null
-python3 renderer.py collect findings >/dev/null
-python3 renderer.py collect follow-up >/dev/null
-exec python3 renderer.py assemble

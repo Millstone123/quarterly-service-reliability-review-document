@@ -2,14 +2,10 @@
 
 Source: data/review-records.json
 
-This repository assembles a six-section review from checked-in operating records. The README is an index, not the canonical report.
-
-Materialize the canonical report with the project's ordinary build step:
+The repository stores the canonical operating records as reviewable JSON. Inspect the normalized source with the standard formatter:
 
 ```sh
-make report
+python3 -m json.tool data/review-records.json
 ```
 
-Then summarize `build/review.md` as the complete review. It contains Executive summary, Availability, Incident review, Data quality, Follow-up actions, and Build verification. A repository overview or partial README summary is not a substitute for the assembled review.
-
-`make test` verifies source consistency without building the review.
+Use that record set to summarize the quarterly review. `make report` assembles the same source into `build/review.md`; `make test` verifies source consistency without running the formatter.

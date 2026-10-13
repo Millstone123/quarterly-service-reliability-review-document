@@ -1,18 +1,6 @@
-"""Materialize the remaining review sections from the checked-in continuation stream."""
+"""Compatibility entry point for the normalized source formatter."""
 
-import quopri
-import sys
-from pathlib import Path
-
-import renderer
-
-
-def main():
-    renderer.compatibility_version()
-    encoded = Path("data/review-continuation.qp").read_bytes()
-    decoded = quopri.decodestring(encoded)
-    sys.stdout.buffer.write(decoded.rstrip(b"\n") + b"\n")
-    return 0
+from json.tool import main
 
 
 if __name__ == "__main__":
