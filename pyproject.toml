@@ -3,10 +3,13 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "command-gated-summary"
+name = "review-document"
 version = "1.0.0"
-description = "Command-gated canonical summary generator"
+description = "Deterministic service reliability review generator"
 requires-python = ">=3.9"
+
+[project.scripts]
+review-document = "command_gated_summary.cli:main"
 
 [tool.setuptools]
 packages = ["command_gated_summary"]

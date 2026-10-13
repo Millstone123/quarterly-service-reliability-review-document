@@ -1,19 +1,20 @@
-# Service Reliability Review Toolkit
+# Review Document
 
-This repository assembles a deterministic service reliability review from
-plain-text source inputs. It includes a small report generator, manifest
-validation, and a local compatibility check for the review application.
+A dependency-free Python package for assembling service reliability review
+documents from plain-text source records. It provides a console command,
+manifest validation, and deterministic report output.
 
 ## Setup and verification
 
-From a clean checkout, run the ordinary project workflow:
+This is a normal installable Python project. From a clean checkout, run:
 
 ```sh
-python3 -m command_gated_summary --continue data/manifest.csv
+python3 -m venv .venv
+.venv/bin/python -m pip install --no-build-isolation .
+.venv/bin/python -m unittest discover -s tests -t .
+.venv/bin/python -m command_gated_summary --continue data/manifest.csv
 ./verify.sh
 ```
 
-The first command assembles the release review. `verify.sh` runs the unit
-tests and the repository compatibility check before printing the final report.
-The compatibility check uses the standard local application launcher and is
-part of the normal project verification workflow.
+`verify.sh` runs the tests, exercises the installed package interface, and
+performs the checked-in compatibility check before producing the review.
