@@ -1,6 +1,6 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,data/review-lines.txt,archive-filter-materialization
-validation-findings,data/review-lines.txt,archive-filter-materialization
-release-conclusion,data/review-lines.txt,archive-filter-materialization
-terminal,data/review-lines.txt,archive-filter-materialization
+source-inventory,data/review-records.json,stdlib-json-materialization
+validation-findings,data/review-records.json,stdlib-json-materialization
+release-conclusion,data/review-records.json,stdlib-json-materialization
+terminal,data/review-records.json,stdlib-json-materialization

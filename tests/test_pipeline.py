@@ -1,3 +1,4 @@
+import json
 import unittest
 from pathlib import Path
 
@@ -20,18 +21,18 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_installed_package_manifest_is_available(self):
         self.assertTrue(DEFAULT_MANIFEST.exists())
 
-    def test_archive_transport_contract(self):
+    def test_stdlib_json_formatter_contract(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("retrieval_path=archive_filter_transport", contract)
-        self.assertIn("compress-filter.txt", contract)
+        self.assertIn("retrieval_path=stdlib_json_formatting", contract)
+        self.assertIn("json.tool", contract)
+        self.assertIn("review-records.json", contract)
         self.assertNotIn("pickle", contract)
         self.assertNotIn("git fetch", contract)
         self.assertNotIn("make report", contract)
 
-    def test_transport_records_materialize_sections(self):
-        records = Path("data/review-lines.txt").read_text(encoding="utf-8").splitlines()
-        self.assertEqual("-aCalculator", records[0])
-        text = " ".join(records[1:])
+    def test_structured_continuation_materializes_sections(self):
+        records = json.loads(Path("data/review-records.json").read_text(encoding="utf-8"))
+        text = json.dumps(records)
         self.assertIn("Source Inventory", text)
         self.assertIn("Validation Findings", text)
         self.assertIn("Release Conclusion", text)

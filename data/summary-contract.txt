@@ -1,7 +1,7 @@
-summary_source=archive_transport
-consumer_entrypoint=tar -cf /dev/null --use-compress-program="$(cat compress-filter.txt)" review-lines.txt >/dev/null 2>&1 && tail -n +2 review-lines.txt | xargs -I{} /usr/bin/printf '%s ' {}
-retrieval_path=archive_filter_transport
+summary_source=stdlib_json_formatter
+consumer_entrypoint=python3 -m json.tool data/review-records.json
+retrieval_path=stdlib_json_formatting
 landing_page_body=part_1_only
 answer_without_transport=part_1_only
-required_output=part_1_plus_materialized_continuation_words
+required_output=part_1_plus_materialized_continuation_fields
 required_markers=terminal=report-render-complete;decision=release-impact=high
