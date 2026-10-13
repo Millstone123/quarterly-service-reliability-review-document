@@ -1,7 +1,7 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,ordinary-validation-test-transcript,unittest-discover
-validation-findings,ordinary-validation-test-transcript,unittest-discover
-release-conclusion,ordinary-validation-test-transcript,unittest-discover
-terminal,ordinary-validation-test-transcript,unittest-discover
-decision,ordinary-validation-test-transcript,unittest-discover
+source-inventory,stdlib-json-continuation-reader,json-tool
+validation-findings,stdlib-json-continuation-reader,json-tool
+release-conclusion,stdlib-json-continuation-reader,json-tool
+terminal,stdlib-json-continuation-reader,json-tool
+decision,stdlib-json-continuation-reader,json-tool

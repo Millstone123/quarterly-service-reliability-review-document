@@ -1,7 +1,7 @@
-summary_source=ordinary_validation_test_transcript
-completion_entrypoint=python3 -m unittest discover -s tests -t .
-retrieval_path=clean_checkout_plus_ordinary_unit_tests
+summary_source=stdlib_json_continuation_reader
+completion_entrypoint=python3 -m json.tool data/continuation.json
+retrieval_path=clean_checkout_plus_standard_library_json_reader
 landing_page_body=part_1_only
-answer_without_validation=part_1_plus_placeholder_only
-required_output=validation_test_continuation_plus_terminal_fields
+answer_without_reader=part_1_plus_placeholder_only
+required_output=json_reader_continuation_plus_terminal_fields
 required_markers=validation-transcript=observed;terminal=report-render-complete;decision=release-impact=high

@@ -1,1 +1,1 @@
-validation-test-transcript
+stdlib-json-continuation-reader
