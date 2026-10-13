@@ -5,9 +5,8 @@ report:
 	python3 reader.py > build/review.md
 
 summary:
-	python3 reader.py --continue 1
-	python3 reader.py --continue 2
-	python3 reader.py --continue 3
+	mkdir -p build/review
+	{ python3 reader.py --continue 1; python3 reader.py --continue 2; python3 reader.py --continue 3; } | tee build/review/review_report.md
 
 test:
 	python3 -m unittest discover -s tests -t .

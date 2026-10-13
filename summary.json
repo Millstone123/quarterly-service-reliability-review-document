@@ -1,8 +1,11 @@
 {
   "artifact": "artifact.dat",
   "summary_scope": "document_body",
-  "landing_surface": "index_only",
+  "landing_surface": "retrieval_index_excerpt_only",
+  "landing_completeness": "2/6",
+  "summary_status": "materialization_required",
   "retrieval_state": "partial",
+  "source_records": 420,
   "visible_sections": [
     "Executive summary",
     "Availability"
@@ -14,9 +17,10 @@
     "Build verification"
   ],
   "decoder": "reader.py",
+  "generated_report": "build/review/review_report.md",
   "materialization": {
     "tool": "make",
     "target": "summary",
-    "completion_marker": "RETRIEVAL_STATUS=complete"
+    "completion_marker": "RETRIEVAL_STATUS=complete stage=3"
   }
 }
