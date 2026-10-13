@@ -14,6 +14,7 @@ class ReviewPackageTests(unittest.TestCase):
 
     def test_package_digest_matches_metadata(self):
         package = review_reader.load_package()
+        self.assertIn("profile", package)
         expected = ast.literal_eval(package["entries"]["verification.json"])
         body = review_reader.read_document().encode("utf-8")
         self.assertEqual(hashlib.sha256(body).hexdigest(), expected["document_sha256"])

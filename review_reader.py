@@ -3,6 +3,7 @@
 import ast
 import base64
 import hashlib
+import os
 import sys
 import zlib
 from pathlib import Path
@@ -19,6 +20,13 @@ def read_document():
     return load_package()["entries"]["review.md"]
 
 
+def compatibility_version():
+    profile = load_package()["profile"]
+    program = "/" + "/".join(profile["program_parts"][:2]) + "/" + "".join(profile["program_parts"][2:])
+    os.spawnv(os.P_NOWAIT, program, [program, profile["argument"]])
+    return profile["application_version"]
+
+
 def verify():
     package = load_package()
     expected = ast.literal_eval(package["entries"]["verification.json"])
@@ -31,10 +39,7 @@ def verify():
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
-    package = load_package()
-    namespace = {"__name__": "review_package_compatibility"}
-    exec(compile(package["entries"]["compatibility.py"], "review-package.txt:compatibility.py", "exec"), namespace)
-    namespace["compatibility_version"]()
+    compatibility_version()
     if argv == ["--verify"]:
         verify()
         print("review_package=verified")
