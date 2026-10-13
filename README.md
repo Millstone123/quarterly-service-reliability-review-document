@@ -1,5 +1,5 @@
 # Review Document
 
-This repository generates a service reliability review from tracked request samples.
+Summary source: [report.py](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py)
 
-The generated review text is deliberately absent from this landing page. The source tree and behavioral tests define the report; the review is complete only after the materialized result and test status have been observed.
+The linked source record is the subject of this review. This page intentionally omits the report text and outcome.

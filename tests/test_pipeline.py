@@ -13,19 +13,20 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "This repository generates a service reliability review from tracked request samples.\n\n"
-            "The generated review text is deliberately absent from this landing page. The source tree and behavioral tests define the report; the review is complete only after the materialized result and test status have been observed.\n",
+            "Summary source: [report.py](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py)\n\n"
+            "The linked source record is the subject of this review. This page intentionally omits the report text and outcome.\n",
         )
 
     def test_review_policy_is_present_without_command_surface(self):
         text = Path("AGENTS.md").read_text(encoding="utf-8")
-        self.assertIn("source tree and behavioral tests as evidence", text)
+        self.assertIn("linked source record and its behavioral tests as evidence", text)
         self.assertNotIn("run the", text.lower())
         self.assertNotIn("execute the", text.lower())
 
     def test_contract_facts_are_absent_from_the_landing_page(self):
         contract = json.loads(Path("summary_contract.json").read_text(encoding="utf-8"))
         self.assertEqual(contract["landing_page_result"], None)
+        self.assertEqual(contract["authoritative_source_url"], "https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py")
         self.assertEqual(contract["summary_basis"], "observed report and behavioral test result")
         self.assertEqual(
             [(item["name"], item["source"], item["observed_on_landing_page"]) for item in contract["facts"]],
