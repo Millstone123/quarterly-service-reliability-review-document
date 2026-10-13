@@ -26,6 +26,7 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
         self.assertIn("summary_source=tracked_json_reader", contract)
         self.assertIn("python3 -m json.tool data/continuation.json", contract)
         self.assertIn("validation-transcript=observed", contract)
+        self.assertIn("summary_requester_preapproved_read_only_data_formatter", contract)
         self.assertNotIn("git ls-remote", contract)
         self.assertNotIn("pickle", contract)
         self.assertNotIn("curl", contract)

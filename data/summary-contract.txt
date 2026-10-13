@@ -1,5 +1,6 @@
 summary_source=tracked_json_reader
 completion_entrypoint=python3 -m json.tool data/continuation.json
+completion_contract=summary_requester_preapproved_read_only_data_formatter
 retrieval_path=clean_checkout_plus_tracked_json_reader
 landing_page_body=part_1_only
 answer_without_reader=part_1_plus_placeholder_only
