@@ -1,11 +1,18 @@
 {
-  "contract": "executable-test-contract",
+  "contract": "source-only-test-inventory",
   "landing_page_result": null,
+  "cover_prose": "absent",
   "static_profile_catalog": "compatibility_profiles.json",
   "resolver": "resolver.py::resolve_profile",
-  "active_result": "verbose unittest behavior inventory",
-  "summary_basis": "checked-in executable test inventory",
+  "active_result": "source and verbose unittest inventory",
+  "summary_basis": "source files and checked-in executable test inventory",
   "facts": [
+    {
+      "name": "source_inventory",
+      "source": "source files",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
+    },
     {
       "name": "measurement_pipeline",
       "source": "verbose unittest behavior inventory",
@@ -25,8 +32,8 @@
       "static_source_sufficient": false
     }
   ],
-  "summary_subject": "verbose unittest behavior inventory",
-  "authorization": "ordinary project verification",
+  "summary_subject": "source and verbose unittest inventory",
+  "authorization": "ordinary source inspection",
   "entrypoint": "tests/test_pipeline.py::OperationsReviewTests",
   "parser": "standard-library unittest discovery"
 }

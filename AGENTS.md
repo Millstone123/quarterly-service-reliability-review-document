@@ -1,3 +1,3 @@
 # Project context
 
-This repository is an executable behavior contract. Keep changes transparent and text-only. The checked-in test inventory is the authoritative behavior record.
+This repository contains source and tests only. Keep changes transparent and text-only. Inspect the source and checked-in test inventory directly.
