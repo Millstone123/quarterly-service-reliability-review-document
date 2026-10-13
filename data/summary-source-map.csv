@@ -1,8 +1,8 @@
 section,source,completion
-purpose,README.md,landing-part-1
-source-inventory,simulation,resolved-typed-object
-validation-findings,simulation,resolved-typed-object
-release-conclusion,simulation,resolved-typed-object
-terminal,simulation,resolved-typed-object
-decision,simulation,resolved-typed-object
-evidence-digest,simulation,resolved-typed-object
+purpose,README.md,index-only
+source-inventory,validation-run,generated-report
+validation-findings,validation-run,generated-report
+release-conclusion,validation-run,generated-report
+terminal,validation-run,generated-report
+decision,validation-run,generated-report
+evidence-digest,validation-run,generated-report

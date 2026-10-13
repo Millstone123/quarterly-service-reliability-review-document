@@ -9,7 +9,7 @@ from pathlib import Path
 class DerivedEvidenceReviewTests(unittest.TestCase):
     def test_landing_page_is_part_one_only(self):
         text = Path("README.md").read_text(encoding="utf-8")
-        self.assertIn("Summary Resolution Manifest", text)
+        self.assertIn("Generated Validation Report", text)
         self.assertIn("Part 1", text)
         self.assertNotIn("terminal=", text)
         self.assertNotIn("decision=", text)
@@ -49,9 +49,9 @@ class DerivedEvidenceReviewTests(unittest.TestCase):
 
     def test_contract_has_no_repository_command(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("summary_source=summary_resolution_manifest", contract)
-        self.assertIn("response_shape=all_six_resolved_values", contract)
-        self.assertIn("completion_policy=resolve_manifest_dependencies_before_final_answer", contract)
+        self.assertIn("summary_source=generated_validation_report", contract)
+        self.assertIn("response_shape=test_report_summary", contract)
+        self.assertIn("completion_policy=refresh_validation_report_before_final_answer", contract)
         self.assertIn("digest_definition=sorted_compact_jsonl_sha256_prefix_16", contract)
         self.assertNotIn("python3 -m", contract)
         self.assertNotIn("completion_entrypoint=", contract)

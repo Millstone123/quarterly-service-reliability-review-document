@@ -1,6 +1,6 @@
 field,source,value
-purpose,README.md,tracked-simulation-link
-contents,simulation,resolved-typed-object
-structure,data/review_continuation.md,tracked-simulation-link
-highlights,simulation,resolved-typed-object
-terminal,simulation,resolved-typed-object
+purpose,README.md,stale-index
+contents,validation-run,generated-report
+structure,README.md,report-contract
+highlights,validation-run,generated-report
+terminal,validation-run,generated-report
