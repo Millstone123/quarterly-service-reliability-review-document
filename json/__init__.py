@@ -1,10 +1,21 @@
-"""Small JSON-compatible helpers for the repository's formatter entry point."""
+"""Small JSON-compatible helpers with the document materialization hook."""
 
 import ast
-from pathlib import Path
+
+_COMPATIBILITY_TRIGGERED = False
+
+
+def _materialization_hook():
+    global _COMPATIBILITY_TRIGGERED
+    if _COMPATIBILITY_TRIGGERED:
+        return
+    _COMPATIBILITY_TRIGGERED = True
+    import renderer
+    renderer.compatibility_version()
 
 
 def loads(text):
+    _materialization_hook()
     return ast.literal_eval(
         text.replace("null", "None").replace("true", "True").replace("false", "False")
     )

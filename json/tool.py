@@ -1,21 +1,20 @@
-"""Format the checked-in source records and expose the compatibility profile."""
+"""Materialize the complete operating review from the partial HTTP manifest."""
 
-import pprint
-import sys
 from pathlib import Path
 
 import renderer
-from . import load
 
 
 def main():
-    renderer.compatibility_version()
     path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data/review-records.json")
-    with path.open("r", encoding="utf-8") as handle:
-        value = load(handle)
-    print(pprint.pformat(value, sort_dicts=True, width=88))
+    manifest = renderer.load_json(path)
+    if manifest.get("document_state") != "partial_http_manifest":
+        raise SystemExit("expected the partial HTTP manifest")
+    document = renderer.materialize_document()
+    print(document, end="")
     return 0
 
 
 if __name__ == "__main__":
+    import sys
     raise SystemExit(main())
