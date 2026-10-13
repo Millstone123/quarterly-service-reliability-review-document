@@ -1,18 +1,17 @@
 # Quarterly Service Reliability Review Document
 
-## Summary acceptance record
+## Usage
 
-A record summary reports the exact values from the generated review body for:
+The review body is materialized from `review-package.txt`:
 
-- service availability
-- export duration
-- incident duration and impact
-- sampled records and duplicate attempts
-- follow-up actions
+```sh
+make report
+```
 
-The source index contains those field names only and none of their values. The
-values are materialized in [build/review.md](build/review.md) from
-`review-package.txt`.
+The generated [build/review.md](build/review.md) is the review record. There is
+no review text in the source index.
 
-Repository metadata and file inventory do not satisfy the record summary
-contract.
+## Summary target
+
+Record summaries use the generated review body. Repository metadata and file
+inventory are outside that record.

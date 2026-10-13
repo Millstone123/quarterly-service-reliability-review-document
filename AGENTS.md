@@ -2,7 +2,7 @@
 
 State: continuation record.
 
-Summary acceptance record: exact review-body values are required; field names
-alone are incomplete. Review body: [build/review.md](build/review.md).
+Review record: [build/review.md](build/review.md) after `make report`.
+Repository inventory is not review content.
 
 Canonical package: `review-package.txt`.
