@@ -7,12 +7,13 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_is_a_source_index(self):
+    def test_landing_page_marks_the_cover_decision_as_provisional(self):
         text = Path("README.md").read_text(encoding="utf-8")
         self.assertEqual(
             text,
             "# Review Document\n\nRelease review packet.\n\n"
-            "The cover is a source index. Findings and measurements live in the linked review record and measurement appendix.\n\n"
+            "Cover decision: go (provisional).\n\n"
+            "The linked review record and measurement appendix hold the final decision and figures; the cover value is not final.\n\n"
             "- [Review record](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report)\n"
             "- [Measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv)\n",
         )
