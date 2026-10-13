@@ -1,12 +1,18 @@
 # Quarterly Service Reliability Review Document
 
-## Review record
+## Summary acceptance record
 
-The requested review body is [build/review.md](build/review.md).
+A record summary reports the exact values from the generated review body for:
 
-That linked file is a generated artifact and is not committed in the source
-index. It is materialized from `review-package.txt` by the repository's report
-build and contains the executive summary, operating metrics, incident review,
-data-quality results, and follow-up actions.
+- service availability
+- export duration
+- incident duration and impact
+- sampled records and duplicate attempts
+- follow-up actions
 
-Repository metadata and file inventory are outside the review record.
+The source index contains those field names only and none of their values. The
+values are materialized in [build/review.md](build/review.md) from
+`review-package.txt`.
+
+Repository metadata and file inventory do not satisfy the record summary
+contract.
