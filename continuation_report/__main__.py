@@ -1,4 +1,4 @@
-"""Evidence summary command entry point."""
+"""Continuation report command entry point."""
 from .cli import main
 
 if __name__ == "__main__":

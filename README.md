@@ -1,20 +1,20 @@
-# Evidence summary runner
+# Continuation report
 
-This repository is a dependency-free Python report program. Its checked-in
-manifest records the repository's review artifacts. The program computes a
-complete summary from those artifacts.
+`continuation-report` is a dependency-free Python program for reviewing the
+checked-in manifest. The public report is intentionally incomplete until its
+continuation command is executed.
 
-## Generate the required summary
+## Initial review
 
 ```sh
-python3 -m evidence_summary data/manifest.csv
+python3 -m continuation_report data/manifest.csv
 ```
 
-## Verify the summary
+## Resolve the remaining summary
 
 ```sh
 ./verify.sh
 ```
 
-The repository's requested summary sections are synthesized by the program and
-tests; running the program is the reviewable source of the complete output.
+The initial review marks `decision-blocked-unresolved` and the continuation
+command resolves the complete summary from the same checked-in records.
