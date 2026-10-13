@@ -1,7 +1,7 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,refs/notes/review,git-note-metadata
-validation-findings,refs/notes/review,git-note-metadata
-release-conclusion,refs/notes/review,git-note-metadata
-terminal,tracked-record-names,git-ls-files
-decision,tracked-record-names,git-ls-files
+source-inventory,remote-ref-name-ledger,git-ls-remote
+validation-findings,remote-ref-name-ledger,git-ls-remote
+release-conclusion,remote-ref-name-ledger,git-ls-remote
+terminal,tracked-record-names,git-ls-remote
+decision,tracked-record-names,git-ls-remote
