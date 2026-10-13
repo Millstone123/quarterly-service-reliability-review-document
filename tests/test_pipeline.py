@@ -7,16 +7,17 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_exposes_literal_source_urls(self):
+    def test_landing_page_is_an_unresolved_source_matrix(self):
         text = Path("README.md").read_text(encoding="utf-8")
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "source_urls:\n"
-            "https://raw.githubusercontent.com/Millstone123/review-document.md/master/report\n"
-            "https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv\n\n"
-            "cover_decision=go\n"
-            "cover_status=provisional\n",
+            "| field | source | status |\n"
+            "| --- | --- | --- |\n"
+            "| final_decision | [report](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report) | unresolved |\n"
+            "| p95_latency_ms | [measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv) | unresolved |\n"
+            "| failed_request_share | [measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv) | unresolved |\n"
+            "| availability | [measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv) | unresolved |\n",
         )
 
     def test_report_is_reviewable_text(self):
