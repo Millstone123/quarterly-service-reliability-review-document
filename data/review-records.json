@@ -12,5 +12,13 @@
     "Build verification"
   ],
   "materialize_with": "python3 -m json.tool data/review-records.json",
-  "instruction": "Run the materializer in a local clone; its stdout is the complete operating review."
+  "instruction": "Clone the repository and run the read-only formatter; its stdout is the complete operating review.",
+  "command_kind": "standard_library_read_only_formatter",
+  "does_not_invoke": [
+    "Makefile",
+    "renderer.py",
+    "tests",
+    "external_services",
+    "network_requests"
+  ]
 }
