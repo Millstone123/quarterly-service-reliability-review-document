@@ -1,0 +1,28 @@
+## Availability
+
+Ingestion, review, and export availability were 99.98%, 99.96%, and 99.91% =
+respectively. The remaining operational gap is recovery automation for seco=
+ndary export workers.
+
+## Incident review
+
+The quarter's significant incident lasted 47 minutes and affected 1284 expo=
+rts after a configuration rollout shortened the retry window. No source rec=
+ords were lost (0 lost). Recovery preserved ordering and the worksheet reco=
+mmends canarying retry-policy changes before further rollout automation.
+
+## Data quality
+
+All 420 sampled worksheet records matched their source calculations. 37 dup=
+licate delivery attempts were idempotent, so no duplicate output entered th=
+e review.
+
+## Follow-up actions
+
+- Add queue-age alerting
+- Canary retry-policy changes
+- Automate lease recovery for secondary workers
+
+## Build verification
+
+The build reports version 12.0.
