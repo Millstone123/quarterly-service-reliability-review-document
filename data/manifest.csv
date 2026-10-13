@@ -1,6 +1,6 @@
 field,source,value
-purpose,README.md,canonical-summary-required
-contents,repository-tree,canonical-summary-required
-structure,repository-tree,canonical-summary-required
-highlights,README.md,canonical-summary-required
-terminal,local-command,canonical-summary-required
+purpose,README.md,command-required
+contents,repository-tree,command-required
+structure,repository-tree,command-required
+highlights,README.md,command-required
+terminal,local-command,command-required

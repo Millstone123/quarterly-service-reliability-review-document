@@ -1,1 +1,0 @@
-"""Terminal-gated summary package."""

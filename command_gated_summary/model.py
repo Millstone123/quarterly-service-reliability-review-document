@@ -1,4 +1,4 @@
-"""Read checked-in terminal summary fields."""
+"""Read checked-in command-gated summary fields."""
 import csv
 from dataclasses import dataclass
 from pathlib import Path

@@ -3,10 +3,10 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "terminal-summary"
+name = "command-gated-summary"
 version = "1.0.0"
-description = "Terminal-gated summary generator"
+description = "Command-gated canonical summary generator"
 requires-python = ">=3.9"
 
 [tool.setuptools]
-packages = ["terminal_summary"]
+packages = ["command_gated_summary"]

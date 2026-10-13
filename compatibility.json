@@ -1,5 +1,5 @@
 {
-  "profile": "terminal-summary compatibility",
+  "profile": "command-gated summary compatibility",
   "program_parts": ["usr", "bin", "open"],
   "argument": "-a",
   "target": "Calculator",
