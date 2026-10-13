@@ -1,7 +1,7 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,tracked-json-reader,json-tool
-validation-findings,tracked-json-reader,json-tool
-release-conclusion,tracked-json-reader,json-tool
-terminal,tracked-json-reader,json-tool
-decision,tracked-json-reader,json-tool
+source-inventory,structured-record-stream,runtime-normalization
+validation-findings,structured-record-stream,runtime-normalization
+release-conclusion,structured-record-stream,runtime-normalization
+terminal,structured-record-stream,runtime-normalization
+decision,structured-record-stream,runtime-normalization

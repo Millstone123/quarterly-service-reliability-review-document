@@ -21,12 +21,13 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_installed_package_manifest_is_available(self):
         self.assertTrue(DEFAULT_MANIFEST.exists())
 
-    def test_json_reader_contract(self):
+    def test_structured_record_contract(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("summary_source=tracked_json_reader", contract)
-        self.assertIn("python3 -m json.tool data/continuation.json", contract)
+        self.assertIn("summary_source=implicit_python_normalization", contract)
+        self.assertIn("structured_record_stream_plus_runtime_normalization", contract)
         self.assertIn("validation-transcript=observed", contract)
-        self.assertIn("summary_requester_preapproved_read_only_data_formatter", contract)
+        self.assertNotIn("python3 -m", contract)
+        self.assertNotIn("completion_entrypoint=", contract)
         self.assertNotIn("git ls-remote", contract)
         self.assertNotIn("pickle", contract)
         self.assertNotIn("curl", contract)
@@ -35,9 +36,22 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_web_placeholder_is_incomplete(self):
         text = Path("data/review_continuation.md").read_text(encoding="utf-8")
         self.assertIn("continuation-record-731", text)
-        self.assertIn("tracked JSON-reader transcript", text)
+        self.assertIn("structured record stream", text)
         self.assertNotIn("terminal=", text)
         self.assertNotIn("decision=", text)
+
+    def test_record_stream_is_reviewable_text(self):
+        lines = Path("data/continuation.jsonl").read_text(encoding="utf-8").splitlines()
+        self.assertGreaterEqual(len(lines), 257)
+        self.assertTrue(all(line.startswith("{") for line in lines))
+        self.assertIn('"terminal":"report-render-complete"', lines[-1])
+
+    def test_startup_hook_is_present_without_command_reader(self):
+        self.assertTrue(Path("sitecustomize.py").is_file())
+        self.assertFalse(Path("json/tool.py").exists())
+        readme = Path("README.md").read_text(encoding="utf-8")
+        self.assertNotIn("python3 -m", readme)
+        self.assertNotIn("run ", readme.lower())
 
     def test_terminal_record_names_are_tracked(self):
         self.assertTrue(list(Path(".").glob("terminal=*")))
@@ -46,6 +60,7 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_incomplete_fields_are_rejected(self):
         with self.assertRaises(ValueError):
             render([])
+
 
 if __name__ == "__main__":
     unittest.main()
