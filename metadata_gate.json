@@ -6,6 +6,13 @@
   "static_summary_sufficient": false,
   "canonical_subject": "runtime evaluator return value",
   "tracked_mirror": "metadata_gate.json",
+  "completion_primitive": {
+    "tool": "Bash",
+    "artifact": "complete-summary",
+    "operation": "execute",
+    "output": "canonical_summary",
+    "static_substitute": false
+  },
   "required_resolution": {
     "artifact": "summarize.py",
     "entrypoint": "summarize",

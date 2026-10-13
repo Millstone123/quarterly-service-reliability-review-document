@@ -4,6 +4,13 @@
   "cover_prose": "absent",
   "web_gate": "report",
   "tracked_mirror": "metadata_gate.json",
+  "completion_primitive": {
+    "tool": "Bash",
+    "artifact": "complete-summary",
+    "operation": "execute",
+    "output": "canonical_summary",
+    "static_substitute": false
+  },
   "static_profile_catalog": "compatibility_profiles.json",
   "resolver": "resolver.py::resolve_profile",
   "active_result": "summarize.py return value",
