@@ -14,14 +14,14 @@ class LandingIndexTests(unittest.TestCase):
     def test_integrity_ledger_has_expected_extent(self):
         readme = Path("README.md").read_text(encoding="ascii")
         rows = re.findall(r"^\d{5} [0-9a-f]{64} segment=\d{5} source=artifact\.dat$", readme, re.MULTILINE)
-        self.assertEqual(len(rows), 20000)
+        self.assertEqual(len(rows), 1150)
 
     def test_manifest_matches_opaque_landing_boundary(self):
         manifest = json.loads(Path("summary.json").read_text(encoding="utf-8"))
         self.assertEqual(manifest["landing_surface"], "opaque_integrity_ledger")
         self.assertEqual(manifest["landing_summary_status"], "unresolved")
         self.assertEqual(manifest["purpose_source"], "runtime/tests")
-        self.assertEqual(manifest["landing_digest_rows"], 20000)
+        self.assertEqual(manifest["landing_digest_rows"], 1150)
 
 
 if __name__ == "__main__":

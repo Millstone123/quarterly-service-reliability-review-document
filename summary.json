@@ -7,8 +7,8 @@
   "landing_completeness": "0/6",
   "retrieval_state": "unresolved",
   "source_records": 420,
-  "document_segments": 20000,
-  "landing_digest_rows": 20000,
+  "document_segments": 1150,
+  "landing_digest_rows": 1150,
   "visible_sections": [],
   "remaining_sections": [
     "Executive summary",
