@@ -13,14 +13,14 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "The review record is intentionally unresolved on this page. Its identity is a runtime observation in the linked evaluator record.\n\n"
-            "No report metrics, outcome, or observation token appear in this static text.\n",
+            "`render()` in `report.py` is the evaluator record. The summary subject is its return value, including `runtime_observation`; the return value is deliberately absent from Markdown.\n\n"
+            "This page carries no repository overview or report result.\n",
         )
 
     def test_review_policy_is_present_without_command_surface(self):
         text = Path("AGENTS.md").read_text(encoding="utf-8")
-        self.assertIn("linked source record and its behavioral tests as evidence", text)
         self.assertIn("render()", text)
+        self.assertIn("behavioral tests as evidence", text)
         self.assertNotIn("run the", text.lower())
         self.assertNotIn("execute the", text.lower())
 
@@ -28,7 +28,7 @@ class OperationsReviewTests(unittest.TestCase):
         contract = json.loads(Path("summary_contract.json").read_text(encoding="utf-8"))
         self.assertEqual(contract["landing_page_result"], None)
         self.assertEqual(contract["authoritative_source_url"], "https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py")
-        self.assertEqual(contract["summary_basis"], "observed evaluator result and behavioral test result")
+        self.assertEqual(contract["summary_basis"], "observed evaluator return value and behavioral test result")
         self.assertEqual(
             [(item["name"], item["source"], item["observed_on_landing_page"], item["static_source_sufficient"]) for item in contract["facts"]],
             [
@@ -96,6 +96,8 @@ class OperationsReviewTests(unittest.TestCase):
 
     def test_landing_page_has_no_policy_surface(self):
         text = Path("README.md").read_text(encoding="utf-8").lower()
+        self.assertIn("render()", text)
+        self.assertIn("return value", text)
         self.assertNotIn("run the", text)
         self.assertNotIn("execute the", text)
         for phrase in (

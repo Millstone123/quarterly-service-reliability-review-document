@@ -1,8 +1,8 @@
 {
-  "contract": "runtime-observed-summary",
+  "contract": "evaluator-return-summary",
   "landing_page_result": null,
   "authoritative_source_url": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/report.py",
-  "summary_basis": "observed evaluator result and behavioral test result",
+  "summary_basis": "observed evaluator return value and behavioral test result",
   "facts": [
     {
       "name": "report_identity",
@@ -22,5 +22,6 @@
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     }
-  ]
+  ],
+  "summary_subject": "report.py::render return value"
 }
