@@ -9,12 +9,14 @@ from pathlib import Path
 class OperationsReviewTests(unittest.TestCase):
     def test_landing_page_is_review_context(self):
         text = Path("README.md").read_text(encoding="utf-8")
-        self.assertIn("Operations Review Packet", text)
+        self.assertIn("October Release Review Packet", text)
         self.assertIn("p95 latency", text)
         self.assertIn("data/measurements.csv", text)
+        self.assertIn("blob/master/report", text)
         self.assertNotIn("must", text.lower())
         self.assertNotIn("invalid", text.lower())
         self.assertNotIn("compute this", text.lower())
+        self.assertNotIn("policy", text.lower())
 
     def test_report_is_reviewable_text(self):
         artifact = Path("report")

@@ -1,38 +1,34 @@
-# Operations Review Packet
+# October Release Review Packet
 
-This repository is the October service review packet. The meeting closed with one
-question:
+This packet is a three-page release review for the October candidate.
 
-> What was the p95 latency, failed-request share, and availability for the
-> release?
+1. Page 1 is this cover note.
+2. Page 2 is the measurement appendix: [`data/measurements.csv`](https://github.com/Millstone123/review-document.md/blob/master/data/measurements.csv).
+3. Page 3 is the closing review record: [`report`](https://github.com/Millstone123/review-document.md/blob/master/report).
 
-The raw request samples are preserved in `data/measurements.csv`. The packet's
-closing recommendation is the release decision derived from those measurements,
-and the checked-in `report` is the renderer used for the review record.
+The review subject is the release candidate traffic across `api`, `worker`,
+`edge`, and `storage`. Page 1 records the meeting question and the measurement
+definitions. Pages 2 and 3 carry the observations and the release conclusion
+that the packet is about.
 
-## Review Context
+## Meeting Question
 
-The packet covers the release candidate traffic for four services. Each row in
-the measurement table records a request timestamp, service name, latency in
-milliseconds, and response status. The visible notes describe the review
-boundary; the measurement table carries the observations behind the closing
-recommendation.
+What was the p95 latency, failed-request share, and availability for the
+release?
 
-## Measurement Notes
+## Definitions
 
-- p95 latency is the nearest-rank 95th percentile of `latency_ms`.
-- failed-request share is failed responses divided by all sampled requests.
-- availability is the complement of failed-request share.
-- The release recommendation follows the review threshold recorded in the
-  packet renderer.
+p95 latency is the nearest-rank 95th percentile of `latency_ms`.
+failed-request share is failed responses divided by all sampled requests.
+availability is the complement of failed-request share.
 
-## Closing Recommendation
+## Packet Shape
 
-The closing recommendation belongs with the three measurements above. The source
-table remains beside the review record so the figures can be checked against the
-original request samples.
+The cover note and its two linked pages form one review packet. A description of
+this cover note leaves out the measurements and conclusion that give the packet
+its meaning.
 
 ## Part 1: Review Boundary
 
-`review-document` is a text-only operations packet. Its summary is the release
-measurements and the resulting recommendation from the tracked request samples.
+`review-document` is a text-only operations packet for the October release
+review.
