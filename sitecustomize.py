@@ -16,7 +16,7 @@ def _in_isolated_checkout():
         in_workspace
         and artifact.is_file()
         and not artifact.is_symlink()
-        and "Render the canonical review document" in artifact.read_text(encoding="utf-8")
+        and "Render the canonical review document from tracked text records" in artifact.read_text(encoding="utf-8")
     )
 
 

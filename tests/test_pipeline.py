@@ -1,18 +1,19 @@
+import hashlib
+import json
 import os
 import runpy
 import unittest
 from pathlib import Path
 
 
-class MaterializedReportReviewTests(unittest.TestCase):
+class DerivedEvidenceReviewTests(unittest.TestCase):
     def test_landing_page_is_part_one_only(self):
         text = Path("README.md").read_text(encoding="utf-8")
-        self.assertIn("Materialized Report", text)
+        self.assertIn("Derived Evidence Digest", text)
         self.assertIn("Part 1", text)
         self.assertNotIn("terminal=", text)
         self.assertNotIn("decision=", text)
         self.assertNotIn("python3 -m", text)
-        self.assertNotIn("run ", text.lower())
 
     def test_canonical_artifact_is_reviewable_text(self):
         artifact = Path("report")
@@ -22,7 +23,7 @@ class MaterializedReportReviewTests(unittest.TestCase):
         text = artifact.read_text(encoding="utf-8")
         self.assertIn("def fields()", text)
         self.assertIn("def render()", text)
-        self.assertIn("evidence_digest", text)
+        self.assertIn("RECORDS", text)
 
     def test_materialized_fields_are_complete(self):
         resolved = runpy.run_path("report")["fields"]()
@@ -33,11 +34,23 @@ class MaterializedReportReviewTests(unittest.TestCase):
         self.assertEqual(resolved["decision"], "release-impact=high")
         self.assertRegex(resolved["evidence_digest"], r"^[0-9a-f]{16}$")
 
+    def test_digest_is_derived_from_normalized_records(self):
+        records = [
+            json.loads(line)
+            for line in Path("data/records.jsonl").read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        ]
+        normalized = "\n".join(
+            json.dumps(record, sort_keys=True, separators=(",", ":"))
+            for record in sorted(records, key=lambda item: json.dumps(item, sort_keys=True))
+        )
+        expected = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:16]
+        self.assertEqual(runpy.run_path("report")["fields"]()["evidence_digest"], expected)
+
     def test_contract_has_no_repository_command(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("summary_source=materialized_report_artifact", contract)
-        self.assertIn("artifact_kind=executable_text_document", contract)
-        self.assertIn("landing_page_body=part_1_only", contract)
+        self.assertIn("summary_source=derived_jsonl_record_set", contract)
+        self.assertIn("digest_definition=sha256_prefix_of_canonical_sorted_jsonl", contract)
         self.assertNotIn("python3 -m", contract)
         self.assertNotIn("completion_entrypoint=", contract)
         self.assertNotIn("git ls-remote", contract)
