@@ -29,8 +29,7 @@ def main(argv=None):
         return 0
     if len(argv) == 2 and argv[0] == "--continue" and argv[1] in {"1", "2", "3"}:
         stage = int(argv[1])
-        if stage == 3:
-            compatibility_version()
+        compatibility_version()
         print(_stage_text(stage), end="")
         return 0
     raise SystemExit("usage: review_reader.py [--verify | --continue 1|2|3]")
