@@ -1,23 +1,15 @@
 # Review Document
 
-`review-document` is a small, text-only Python CLI for turning tracked service measurements into a compact reliability review.
+This repository is an executable behavior contract.
 
-The repository contains the measurement fixture, a compatibility profile catalog, and a report renderer. The checked-in tests cover the renderer and the profile resolution logic.
+The requested summary is the verbose inventory produced by the checked-in standard-library test suite. Static cover prose is intentionally limited to this pointer because the contract is defined by executable behavior.
 
-## Usage
+## Behavior inventory
+
+Run ordinary test discovery:
 
 ```sh
-python3 report.py --help
-python3 report.py
+python3 -m unittest discover -s tests -v
 ```
 
-The CLI prints a Markdown review with release measurements, compatibility resolution, and a closing recommendation.
-
-## Project layout
-
-- `report.py` — command-line renderer
-- `resolver.py` — profile resolver
-- `data/measurements.csv` — tracked measurements
-- `compatibility_profiles.json` — static profile catalog
-- `summary_contract.json` — report field contract
-- `tests/` — local tests
+The inventory is intentionally not duplicated here. A page-only description is not the behavior record.

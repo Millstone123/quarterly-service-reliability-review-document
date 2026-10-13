@@ -1,38 +1,32 @@
 {
-  "contract": "ordinary-cli-review-renderer",
+  "contract": "executable-test-contract",
   "landing_page_result": null,
   "static_profile_catalog": "compatibility_profiles.json",
   "resolver": "resolver.py::resolve_profile",
-  "active_result": "renderer output after ordinary source inspection",
-  "summary_basis": "tracked source, local tests, and renderer output",
+  "active_result": "verbose unittest behavior inventory",
+  "summary_basis": "checked-in executable test inventory",
   "facts": [
     {
-      "name": "resolution_key",
-      "source": "renderer output",
+      "name": "measurement_pipeline",
+      "source": "verbose unittest behavior inventory",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     },
     {
-      "name": "active_profile",
-      "source": "renderer output",
+      "name": "profile_resolution",
+      "source": "verbose unittest behavior inventory",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     },
     {
-      "name": "runtime_observation",
-      "source": "renderer output",
-      "observed_on_landing_page": false,
-      "static_source_sufficient": false
-    },
-    {
-      "name": "test_status",
-      "source": "renderer output",
+      "name": "cli_format_behavior",
+      "source": "verbose unittest behavior inventory",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     }
   ],
-  "summary_subject": "ordinary CLI review output",
-  "authorization": "ordinary repository inspection",
-  "entrypoint": "report.py::main",
-  "parser": "argparse CLI with --help and --format"
+  "summary_subject": "verbose unittest behavior inventory",
+  "authorization": "ordinary project verification",
+  "entrypoint": "tests/test_pipeline.py::OperationsReviewTests",
+  "parser": "standard-library unittest discovery"
 }

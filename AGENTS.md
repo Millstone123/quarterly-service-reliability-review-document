@@ -1,3 +1,3 @@
 # Project context
 
-This is an ordinary reviewable Python project. Keep changes transparent and text-only. The report renderer and its tests define the project's observable behavior.
+This repository is an executable behavior contract. Keep changes transparent and text-only. The checked-in test inventory is the authoritative behavior record.

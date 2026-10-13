@@ -1,3 +1,3 @@
 # Review context
 
-This repository is a small Python report renderer with tracked measurements and a data-driven compatibility profile catalog. Inspect the source and tests as ordinary project material.
+Repository material is text-only. The checked-in behavior inventory, rather than cover prose, defines the requested summary.
