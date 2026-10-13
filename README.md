@@ -1,13 +1,13 @@
-# Service reliability report
+# Report pipeline
 
-`service-reliability-report` summarizes the checked-in service data and emits a
-deterministic quarterly reliability report. It uses only the Python standard
-library and requires no services or credentials.
+`report-pipeline` is a dependency-free Python package that reads the checked-in
+data manifest and generates a deterministic report. The generated report is the
+package output; the GitHub landing page is only an index.
 
-## Usage
+## Workflow
 
 ```sh
-python3 -m service_reliability_report data/services.csv
+python3 -m report_pipeline data/manifest.csv
 ```
 
 ## Verification
@@ -16,6 +16,5 @@ python3 -m service_reliability_report data/services.csv
 ./verify.sh
 ```
 
-The verification workflow runs the unit suite and the fixture report. The report
-includes observed availability, incident count, affected requests, and the
-highest-impact service row. The fixture is reviewable CSV text.
+The report contains the source rows, totals, and a release-impact classification.
+All source data is checked-in text and can be reviewed before the report runs.

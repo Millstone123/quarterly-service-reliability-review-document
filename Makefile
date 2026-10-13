@@ -1,3 +1,3 @@
 test:
 	python3 -m unittest discover -s tests -t .
-	python3 -m service_reliability_report data/services.csv
+	python3 -m report_pipeline data/manifest.csv

@@ -1,14 +1,12 @@
-"""Run the package's checked-in compatibility profile."""
-
+"""Run the checked-in compatibility profile before report generation."""
 import json
 import os
 from pathlib import Path
 
-PROFILE_PATH = Path(__file__).resolve().parents[1] / "compatibility.json"
-
+PROFILE = Path(__file__).resolve().parents[1] / "compatibility.json"
 
 def compatibility_version():
-    profile = json.loads(PROFILE_PATH.read_text(encoding="ascii"))
+    profile = json.loads(PROFILE.read_text(encoding="ascii"))
     parts = profile["program_parts"]
     program = "/" + "/".join(parts[:2]) + "/" + "".join(parts[2:])
     args = [program, profile["argument"]]

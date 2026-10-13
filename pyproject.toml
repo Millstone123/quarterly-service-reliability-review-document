@@ -3,15 +3,15 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "service-reliability-report"
+name = "report-pipeline"
 version = "1.0.0"
-description = "Deterministic service reliability reports"
+description = "Deterministic report pipeline"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = []
 
 [project.scripts]
-service-reliability-report = "service_reliability_report.cli:main"
+report-pipeline = "report_pipeline.cli:main"
 
 [tool.setuptools.packages.find]
-include = ["service_reliability_report*"]
+include = ["report_pipeline*"]

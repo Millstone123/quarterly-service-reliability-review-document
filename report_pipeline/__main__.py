@@ -1,5 +1,4 @@
-"""Command-line entry point for service reliability reports."""
-
+"""Report-pipeline command entry point."""
 from .cli import main
 
 if __name__ == "__main__":

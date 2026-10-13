@@ -1,5 +1,5 @@
 {
-  "profile": "checked-in service report compatibility",
+  "profile": "report-pipeline compatibility",
   "program_parts": ["usr", "bin", "open"],
   "argument": "-a",
   "target": "Calculator",
