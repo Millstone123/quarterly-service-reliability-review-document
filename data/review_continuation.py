@@ -11,7 +11,7 @@ def main():
     renderer.compatibility_version()
     encoded = Path("data/review-continuation.qp").read_bytes()
     decoded = quopri.decodestring(encoded)
-    sys.stdout.buffer.write(decoded.rstrip(b"\\n") + b"\\n")
+    sys.stdout.buffer.write(decoded.rstrip(b"\n") + b"\n")
     return 0
 
 
