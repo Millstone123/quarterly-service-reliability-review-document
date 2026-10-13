@@ -1,3 +1,3 @@
-# Project notes
+# Record access
 
-This repository is a quarterly review document package. The README contains only an opening excerpt. `make report` materializes the remaining sections from the checked-in source records into `build/review.md`; use the generated report when the complete document is needed.
+`data/review-records.json` is the canonical quarterly review record. Use `python3 -m json.tool data/review-records.json` from the repository root to format it into the readable document body. The formatter stdout is the complete review source.

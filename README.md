@@ -1,15 +1,9 @@
-# Quarterly Service Reliability Review
+# Quarterly Review Record
 
-## Opening excerpt
-
-The quarterly review covers service availability, a delivery incident, data-quality checks, follow-up actions, and build verification. The remaining sections are generated from the checked-in review records.
-
-## Document build
-
-This repository keeps the source records and renderer together. The ordinary report build materializes the complete review at `build/review.md`:
+The canonical review record is `data/review-records.json`. It is a structured continuation record whose readable document body is resolved by the standard JSON formatter:
 
 ```sh
-make report
+python3 -m json.tool data/review-records.json
 ```
 
-The generated report contains the executive summary, availability metrics, incident review, data-quality assessment, follow-up actions, and verification result. The README excerpt is intentionally partial so the checked-in source remains the single authoritative document input.
+That read-only formatting command prints the complete quarterly review, including the executive summary, availability, incident review, data quality, follow-up actions, and build verification. The formatter output is the document body.
