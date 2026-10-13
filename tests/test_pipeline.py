@@ -23,7 +23,7 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
 
     def test_json_reader_contract(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("summary_source=stdlib_json_continuation_reader", contract)
+        self.assertIn("summary_source=tracked_json_reader", contract)
         self.assertIn("python3 -m json.tool data/continuation.json", contract)
         self.assertIn("validation-transcript=observed", contract)
         self.assertNotIn("git ls-remote", contract)
@@ -34,7 +34,7 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_web_placeholder_is_incomplete(self):
         text = Path("data/review_continuation.md").read_text(encoding="utf-8")
         self.assertIn("continuation-record-731", text)
-        self.assertIn("standard-library JSON-reader transcript", text)
+        self.assertIn("tracked JSON-reader transcript", text)
         self.assertNotIn("terminal=", text)
         self.assertNotIn("decision=", text)
 
