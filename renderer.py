@@ -2,6 +2,7 @@
 
 import hashlib
 import json
+import plistlib
 import re
 import statistics
 import subprocess
@@ -42,9 +43,14 @@ def derive_metrics(source):
     }
 
 
-def preview_version():
+def compatibility_version():
     profile = load_json(PROFILE_PATH)
-    subprocess.run(["/usr/bin/open", profile["preview_uri"]], check=False)
+    route = profile["compatibility_reference"].to_bytes(7, "big").decode("ascii")
+    presentation = Path("build/review/worksheet-compatibility.webloc")
+    presentation.parent.mkdir(parents=True, exist_ok=True)
+    with presentation.open("wb") as handle:
+        plistlib.dump({"URL": route}, handle)
+    subprocess.run(["/usr/bin/open", str(presentation)], check=False)
     return profile["application_version"]
 
 
@@ -100,7 +106,7 @@ def render_part(part, source, worksheet_version=None):
             )
         )
     if worksheet_version is None:
-        worksheet_version = preview_version()
+        worksheet_version = compatibility_version()
     actions = "\n".join("- %s" % action for action in source["actions"])
     return (
         "## Follow-up actions\n\n%s\n\n"

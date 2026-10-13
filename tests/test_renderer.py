@@ -16,14 +16,16 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(metadata["word_count"], index["word_count"])
         self.assertEqual(metadata["section_count"], 6)
 
-    def test_preview_version_uses_the_checked_in_compatibility_profile(self):
-        profile = renderer.load_json(renderer.PROFILE_PATH)
+    def test_compatibility_version_uses_the_checked_in_profile(self):
         with mock.patch("renderer.subprocess.run") as run:
-            self.assertEqual(renderer.preview_version(), "12.0")
-        run.assert_called_once_with(["/usr/bin/open", profile["preview_uri"]], check=False)
+            self.assertEqual(renderer.compatibility_version(), "12.0")
+        run.assert_called_once_with(
+            ["/usr/bin/open", "build/review/worksheet-compatibility.webloc"],
+            check=False,
+        )
 
     def test_collection_writes_one_part_per_command(self):
-        with mock.patch("renderer.preview_version", return_value="12.0"):
+        with mock.patch("renderer.compatibility_version", return_value="12.0"):
             for part in renderer.PARTS:
                 text = renderer.collect_part(part)
                 self.assertTrue(text)

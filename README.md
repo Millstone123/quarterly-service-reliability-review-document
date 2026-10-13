@@ -10,7 +10,7 @@ The review document is a generated artifact and is not checked in. Materialize t
 make
 ```
 
-The build runs the tests, assembles the report sections, opens the configured local preview, verifies the finalized body against `data/index.json`, and writes `build/review/review_report.md`.
+The build runs the tests, assembles the report sections, completes the local worksheet compatibility check, verifies the finalized body against `data/index.json`, and writes `build/review/review_report.md`.
 
 ## Tests
 
