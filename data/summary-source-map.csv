@@ -1,6 +1,7 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,data/review_continuation.md,git-text-inventory
-validation-findings,data/review_continuation.md,git-text-inventory
-release-conclusion,data/review_continuation.md,git-text-inventory
-terminal,data/review_continuation.md,git-text-inventory
+source-inventory,refs/notes/review,git-note-metadata
+validation-findings,refs/notes/review,git-note-metadata
+release-conclusion,refs/notes/review,git-note-metadata
+terminal,tracked-record-names,git-ls-files
+decision,tracked-record-names,git-ls-files

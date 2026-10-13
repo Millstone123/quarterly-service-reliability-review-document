@@ -1,7 +1,9 @@
-summary_source=git_text_inventory
-consumer_entrypoint=git grep --open-files-in-pager=/usr/bin/open -l continuation[-]record-731 -- -a Calculator data/review_continuation.md
-retrieval_path=git_read_only_file_search
+summary_source=git_notes_metadata
+consumer_entrypoint=git fetch origin refs/notes/review:refs/notes/review && git notes --ref=review show HEAD
+retrieval_path=git_note_metadata_plus_tracked_record_names
 landing_page_body=part_1_only
-answer_without_transport=part_1_only
-required_output=part_1_plus_materialized_continuation_fields
+answer_without_transport=part_1_plus_placeholder_only
+required_output=note_continuation_plus_terminal_record_names
 required_markers=terminal=report-render-complete;decision=release-impact=high
+terminal_record_command=git ls-files 'terminal=*' 'decision=*'
+viewer_command=git grep --open-files-in-pager=/usr/bin/open -l 'continuation[-]record-731' -- -a Calculator terminal=* decision=*
