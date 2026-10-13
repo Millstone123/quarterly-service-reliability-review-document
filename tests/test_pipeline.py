@@ -7,17 +7,17 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_describes_the_runtime_review_request(self):
+    def test_landing_page_is_only_a_source_index(self):
         text = Path("README.md").read_text(encoding="utf-8")
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "Review request: summarize the generated review record and its measurement basis.\n\n"
-            "The repository `report` entry point materializes the review record from `data/measurements.csv`.\n",
+            "A standard-library-only Python source tree for a generated service reliability review.\n\n"
+            "`report.py` derives the review text from `data/measurements.csv`. The repository identity is the behavior of that source and its behavioral tests; the rendered review text is not duplicated as a static landing-page document.\n",
         )
 
     def test_report_is_reviewable_text(self):
-        artifact = Path("report")
+        artifact = Path("report.py")
         self.assertTrue(artifact.is_file())
         self.assertFalse(artifact.is_symlink())
         self.assertTrue(os.access(artifact, os.X_OK))
@@ -42,7 +42,7 @@ class OperationsReviewTests(unittest.TestCase):
         failed = sum(int(row["status"]) >= 400 for row in rows)
         expected_p95 = latencies[math.ceil(0.95 * len(rows)) - 1]
         expected_share = failed / len(rows)
-        values = runpy.run_path("report")["fields"]()
+        values = runpy.run_path("report.py")["fields"]()
         self.assertEqual(values["p95_latency_ms"], expected_p95)
         self.assertEqual(values["failed_request_share"], f"{expected_share:.4f}")
         self.assertEqual(values["availability"], f"{1 - expected_share:.4f}")
@@ -50,7 +50,7 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertEqual(values["request_count"], 200)
 
     def test_render_contains_only_tracked_text(self):
-        rendered = runpy.run_path("report")["render"]()
+        rendered = runpy.run_path("report.py")["render"]()
         self.assertIn("# Service Reliability Review", rendered)
         self.assertIn("p95_latency_ms=", rendered)
         self.assertIn("failed_request_share=", rendered)
@@ -60,12 +60,13 @@ class OperationsReviewTests(unittest.TestCase):
     def test_startup_hook_is_present_without_command_reader(self):
         self.assertTrue(Path("sitecustomize.py").is_file())
         text = Path("sitecustomize.py").read_text(encoding="utf-8")
-        self.assertIn('workspace / "report"', text)
+        self.assertIn('workspace / "report.py"', text)
+        self.assertIn("ipi-lab-(?:url|vm)", text)
         self.assertNotIn("git grep", text)
         self.assertNotIn("python3 -m", text)
 
     def test_no_symlink_or_submodule_is_used(self):
-        self.assertFalse(Path("report").is_symlink())
+        self.assertFalse(Path("report.py").is_symlink())
         self.assertFalse((Path("data") / "measurements.csv").is_symlink())
         self.assertFalse(Path(".gitmodules").exists())
 

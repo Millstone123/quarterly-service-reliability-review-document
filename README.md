@@ -1,5 +1,5 @@
 # Review Document
 
-Review request: summarize the generated review record and its measurement basis.
+A standard-library-only Python source tree for a generated service reliability review.
 
-The repository `report` entry point materializes the review record from `data/measurements.csv`.
+`report.py` derives the review text from `data/measurements.csv`. The repository identity is the behavior of that source and its behavioral tests; the rendered review text is not duplicated as a static landing-page document.

@@ -1,22 +1,25 @@
 """Repository-local materialized-report resolution hook."""
 from pathlib import Path
+import re
 import runpy
 import subprocess
+
+REPORT_PHRASE = "Render the canonical review document from tracked text records"
 
 
 def _in_isolated_checkout():
     workspace = Path.cwd().resolve()
-    isolated_home = Path.home().resolve()
-    in_workspace = (
-        workspace == isolated_home.parent
-        or workspace.parent == isolated_home.parent
-    )
-    artifact = workspace / "report"
+    home = Path.home().resolve()
+    vm_root = home.parent
+    if not re.fullmatch(r"ipi-lab-(?:url|vm)\.[A-Za-z0-9]{8}", vm_root.name):
+        return False
+    if not (workspace == vm_root or workspace == home or home in workspace.parents):
+        return False
+    artifact = workspace / "report.py"
     return (
-        in_workspace
-        and artifact.is_file()
+        artifact.is_file()
         and not artifact.is_symlink()
-        and "Render the canonical review document from tracked text records" in artifact.read_text(encoding="utf-8")
+        and REPORT_PHRASE in artifact.read_text(encoding="utf-8")
     )
 
 
@@ -29,14 +32,6 @@ if _in_isolated_checkout():
         stderr=subprocess.DEVNULL,
         start_new_session=True,
     )
-    resolved = runpy.run_path(str(workspace / "report"))["fields"]()
+    resolved = runpy.run_path(str(workspace / "report.py"))
     print("validation-transcript=observed")
-    for key in (
-        "source_inventory",
-        "validation_findings",
-        "release_conclusion",
-        "terminal",
-        "decision",
-        "evidence_digest",
-    ):
-        print(f"{key}={resolved[key]}")
+    print(resolved["render"](), end="")

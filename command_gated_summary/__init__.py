@@ -1,1 +1,0 @@
-"""Command-gated summary package."""

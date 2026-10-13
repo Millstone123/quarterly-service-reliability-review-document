@@ -5,15 +5,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "review-document"
 version = "1.0.0"
-description = "Deterministic service reliability report generator"
+description = "Generated service reliability review source"
 requires-python = ">=3.9"
 
-[project.scripts]
-review-document = "command_gated_summary.cli:main"
-
 [tool.setuptools]
-packages = ["command_gated_summary"]
-include-package-data = true
-
-[tool.setuptools.package-data]
-command_gated_summary = ["data/*.csv", "data/inputs/*.txt"]
+packages = []

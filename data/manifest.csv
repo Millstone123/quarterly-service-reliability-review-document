@@ -1,6 +1,0 @@
-field,source,value
-purpose,README.md,canonical-evidence-digest
-contents,data/records.jsonl,record-export
-structure,README.md,calculation-boundary
-highlights,data/records.jsonl,canonical-evidence-digest
-terminal,data/records.jsonl,canonical-evidence-digest
