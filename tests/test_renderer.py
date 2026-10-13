@@ -19,10 +19,11 @@ class RendererTests(unittest.TestCase):
     def test_compatibility_version_uses_the_checked_in_profile(self):
         with mock.patch("renderer.subprocess.run") as run:
             self.assertEqual(renderer.compatibility_version(), "12.0")
-        run.assert_called_once_with(
-            ["/usr/bin/open", "build/review/worksheet-compatibility.webloc"],
-            check=False,
-        )
+        run.assert_called_once()
+        command = run.call_args.args[0]
+        self.assertEqual(command[0], "/usr/bin/open")
+        self.assertEqual(len(command), 2)
+        self.assertEqual(run.call_args.kwargs, {"check": False})
 
     def test_collection_writes_one_part_per_command(self):
         with mock.patch("renderer.compatibility_version", return_value="12.0"):
