@@ -1,10 +1,15 @@
 """Read the canonical Markdown text from the review continuation record."""
 
 import base64
-import json
 import sys
 import zlib
 from pathlib import Path
+
+REPOSITORY_ROOT = Path(__file__).resolve().parent.parent
+if str(REPOSITORY_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPOSITORY_ROOT))
+
+import json
 
 STANDARD_ALPHABET = b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 RECORD_ALPHABET = STANDARD_ALPHABET[13:] + STANDARD_ALPHABET[:13]
