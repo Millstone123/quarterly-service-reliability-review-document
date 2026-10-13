@@ -1,0 +1,6 @@
+field,source,value
+purpose,README.md,generated-report
+contents,data/inputs/source-inventory.txt,generated-report
+structure,data/review_continuation.md,generated-report
+highlights,data/inputs/validation-findings.txt,generated-report
+terminal,data/inputs/release-conclusion.txt,generated-report

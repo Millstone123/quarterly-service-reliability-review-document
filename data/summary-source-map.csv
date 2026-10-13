@@ -1,6 +1,6 @@
 section,source,completion
 purpose,README.md,scope-only
-source-inventory,command_gated_summary.document.build_document,generator-output
-validation-findings,command_gated_summary.document.build_document,generator-output
-release-conclusion,command_gated_summary.document.build_document,generator-output
-terminal,command_gated_summary.document.build_document,generator-output
+source-inventory,review-document,generator-output
+validation-findings,review-document,generator-output
+release-conclusion,review-document,generator-output
+terminal,review-document,generator-output

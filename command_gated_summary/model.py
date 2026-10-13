@@ -1,10 +1,13 @@
-"""Read the distributed review inputs from checked-in text."""
+"""Read the distributed review inputs from checked-in or packaged text."""
 import csv
 from dataclasses import dataclass
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-INPUTS = ROOT / "data" / "inputs"
+PACKAGE_ROOT = Path(__file__).resolve().parent
+PROJECT_ROOT = PACKAGE_ROOT.parent
+INPUTS = PACKAGE_ROOT / "data" / "inputs"
+if not INPUTS.exists():
+    INPUTS = PROJECT_ROOT / "data" / "inputs"
 
 @dataclass(frozen=True)
 class ReviewInput:

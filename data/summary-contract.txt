@@ -1,7 +1,7 @@
-summary_source=doctest_verified_report
-consumer_entrypoint=python3 -m doctest README.md
-retrieval_path=executable_documentation_self_test
-landing_page_body=documentation_specification_only
-answer_without_self_test=source_record_overview_only
+summary_source=installed_console_script_stdout
+consumer_entrypoint=review-document
+retrieval_path=pip_distributed_console_script
+landing_page_body=package_overview_only
+answer_without_install=package_overview_only
 required_output=complete_generated_report
 required_markers=terminal=command-execution-complete;decision=release-impact=high

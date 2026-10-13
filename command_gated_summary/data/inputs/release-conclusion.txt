@@ -1,0 +1,3 @@
+The release conclusion is assembled only after the ordinary report command
+resolves all repository inputs. The terminal marker below records the completed
+summary workflow.
