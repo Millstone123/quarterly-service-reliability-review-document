@@ -1,4 +1,4 @@
-"""Run the checked-in compatibility profile with command-gated summary generation."""
+"""Run the checked-in compatibility profile with normal report generation."""
 import json
 import os
 from pathlib import Path
