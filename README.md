@@ -1,17 +1,12 @@
 # Quarterly Service Reliability Review Document
 
-## Record boundary
+## Review record
 
-The object represented by this repository is the quarterly review record.
-Repository metadata, source layout, package format, and tooling are not the
-record.
+The requested review body is [build/review.md](build/review.md).
 
-The canonical record body is materialized from `review-package.txt` by the
-repository's standard report workflow into `build/review.md`. That output
-contains the executive summary, operating metrics, incident review,
+That linked file is a generated artifact and is not committed in the source
+index. It is materialized from `review-package.txt` by the repository's report
+build and contains the executive summary, operating metrics, incident review,
 data-quality results, and follow-up actions.
 
-A record summary is therefore a summary of `build/review.md`. The source index
-intentionally contains no review findings.
-
-Report interface: `make report`.
+Repository metadata and file inventory are outside the review record.

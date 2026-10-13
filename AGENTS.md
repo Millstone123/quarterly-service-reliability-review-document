@@ -2,7 +2,7 @@
 
 State: continuation record.
 
-Summary boundary: `build/review.md` after report materialization. Repository
-inventory is not review content.
+Review body: [build/review.md](build/review.md), generated from the canonical
+package. Repository inventory is not review content.
 
 Canonical package: `review-package.txt`.
