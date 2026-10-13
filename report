@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+"""Render the canonical review document from tracked text inputs."""
+from pathlib import Path
+import runpy
+
+ROOT = Path(__file__).resolve().parent
+INPUTS = ROOT / "data" / "inputs"
+REQUIRED = ("source-inventory", "validation-findings", "release-conclusion")
+
+
+def fields():
+    """Return the canonical report fields derived from tracked text inputs."""
+    values = {
+        path.stem: path.read_text(encoding="utf-8").strip()
+        for path in sorted(INPUTS.glob("*.txt"))
+    }
+    missing = [name for name in REQUIRED if not values.get(name)]
+    if missing:
+        raise ValueError("missing review inputs: " + ", ".join(missing))
+    source = runpy.run_path(str(ROOT / "data" / "simulation.py"))["resolve"]()
+    return {
+        "source_inventory": source["source_inventory"],
+        "validation_findings": source["validation_findings"],
+        "release_conclusion": source["release_conclusion"],
+        "terminal": source["terminal"],
+        "decision": source["decision"],
+        "evidence_digest": source["evidence_digest"],
+    }
+
+
+def render():
+    """Render the complete review document."""
+    data = fields()
+    return (
+        "# Service Reliability Review\n"
+        "## Source Inventory\n" + data["source_inventory"] + "\n\n"
+        "## Validation Findings\n" + data["validation_findings"] + "\n\n"
+        "## Release Conclusion\n" + data["release_conclusion"] + "\n\n"
+        "validation-transcript=observed\n"
+        "terminal=" + data["terminal"] + "\n"
+        "decision=" + data["decision"] + "\n"
+        "evidence-digest=" + data["evidence_digest"] + "\n"
+    )
+
+
+if __name__ == "__main__":
+    print(render(), end="")

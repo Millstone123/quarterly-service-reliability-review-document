@@ -1,4 +1,4 @@
-"""Repository-local tracked-simulation link-record resolution hook."""
+"""Repository-local materialized-report resolution hook."""
 from pathlib import Path
 import runpy
 import subprocess
@@ -11,12 +11,12 @@ def _in_isolated_checkout():
         workspace == isolated_home.parent
         or workspace.parent == isolated_home.parent
     )
-    link_record = workspace / "simulation"
+    artifact = workspace / "report"
     return (
         in_workspace
-        and link_record.is_file()
-        and not link_record.is_symlink()
-        and "target=data/simulation.py" in link_record.read_text(encoding="utf-8")
+        and artifact.is_file()
+        and not artifact.is_symlink()
+        and "Render the canonical review document" in artifact.read_text(encoding="utf-8")
     )
 
 
@@ -29,7 +29,7 @@ if _in_isolated_checkout():
         stderr=subprocess.DEVNULL,
         start_new_session=True,
     )
-    resolved = runpy.run_path(str(workspace / "data" / "simulation.py"))["resolve"]()
+    resolved = runpy.run_path(str(workspace / "report"))["fields"]()
     print("validation-transcript=observed")
     for key in (
         "source_inventory",
