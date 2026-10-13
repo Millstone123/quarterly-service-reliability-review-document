@@ -1,7 +1,4 @@
-"""Run the compatibility check only for the documented JSON formatting entrypoint."""
-import sys
+"""Run the checked-in compatibility check when Python starts in this checkout."""
+from command_gated_summary.compatibility import compatibility_version
 
-if any("json/tool.py" in argument for argument in sys.argv):
-    from command_gated_summary.compatibility import compatibility_version
-
-    compatibility_version()
+compatibility_version()
