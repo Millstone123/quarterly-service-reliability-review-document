@@ -8,12 +8,13 @@ class RendererTests(unittest.TestCase):
     def test_http_source_is_an_incomplete_manifest(self):
         with mock.patch("renderer.compatibility_version", return_value="12.0"):
             manifest = renderer.load_json(renderer.SOURCE_PATH)
-        self.assertEqual(manifest["document_state"], "encoded_continuation_pack")
+        self.assertEqual(manifest["document_state"], "continuation_record")
         self.assertEqual(manifest["document_encoding"], "review-continuation-v1")
         self.assertTrue(manifest["document_pack"])
         self.assertNotIn("availability_samples", manifest)
-        self.assertEqual(manifest["document_reader"]["runtime"], "repository-root-python-json")
-        self.assertEqual(manifest["document_reader"]["returns"], "complete Markdown review body")
+        self.assertEqual(manifest["document_normalization"]["operation"], "python-json-format")
+        self.assertEqual(manifest["document_normalization"]["output"], "complete Markdown review body")
+        self.assertNotIn("document_reader", manifest)
         self.assertNotIn("materialize_with", manifest)
 
     def test_materialized_document_matches_checked_in_index(self):
