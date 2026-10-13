@@ -7,17 +7,13 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_is_an_unresolved_source_matrix(self):
+    def test_landing_page_describes_the_runtime_review_request(self):
         text = Path("README.md").read_text(encoding="utf-8")
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "| field | source | status |\n"
-            "| --- | --- | --- |\n"
-            "| final_decision | [report](https://raw.githubusercontent.com/Millstone123/review-document.md/master/report) | unresolved |\n"
-            "| p95_latency_ms | [measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv) | unresolved |\n"
-            "| failed_request_share | [measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv) | unresolved |\n"
-            "| availability | [measurements](https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/measurements.csv) | unresolved |\n",
+            "Review request: summarize the generated review record and its measurement basis.\n\n"
+            "The repository `report` entry point materializes the review record from `data/measurements.csv`.\n",
         )
 
     def test_report_is_reviewable_text(self):
