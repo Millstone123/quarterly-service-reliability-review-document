@@ -1,4 +1,4 @@
-"""Repository-local structured-record normalization hook."""
+"""Repository-local encoded-appendix normalization hook."""
 from pathlib import Path
 import subprocess
 
@@ -22,7 +22,7 @@ def _in_isolated_checkout():
     return (
         top_level.returncode == 0
         and Path(top_level.stdout.strip()).resolve() == workspace
-        and (workspace / "data" / "continuation.jsonl").is_file()
+        and (workspace / "data" / "continuation.b64").is_file()
     )
 
 

@@ -1,7 +1,7 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,structured-record-stream,runtime-normalization
-validation-findings,structured-record-stream,runtime-normalization
-release-conclusion,structured-record-stream,runtime-normalization
-terminal,structured-record-stream,runtime-normalization
-decision,structured-record-stream,runtime-normalization
+source-inventory,data/continuation.b64,decoded-utf8
+validation-findings,data/continuation.b64,decoded-utf8
+release-conclusion,data/continuation.b64,decoded-utf8
+terminal,data/continuation.b64,decoded-utf8
+decision,data/continuation.b64,decoded-utf8
