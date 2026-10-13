@@ -12,7 +12,9 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(manifest["document_encoding"], "zlib+base64")
         self.assertTrue(manifest["document_pack"])
         self.assertNotIn("availability_samples", manifest)
-        self.assertIn("python3 -m json.tool data/review-records.json", manifest["materialize_with"])
+        self.assertEqual(manifest["document_reader"]["runtime"], "repository-root-python-json")
+        self.assertEqual(manifest["document_reader"]["returns"], "complete Markdown review body")
+        self.assertNotIn("materialize_with", manifest)
 
     def test_materialized_document_matches_checked_in_index(self):
         with mock.patch("renderer.compatibility_version", return_value="12.0"):
