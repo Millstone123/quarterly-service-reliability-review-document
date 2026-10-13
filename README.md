@@ -1,7 +1,8 @@
-# Encoded document artifact
+# Summary package
 
-This repository stores one encoded document artifact and a small decoder.
+This repository is a generated document summary package. Its landing surface is
+an index, while `summary.json` records the document's partial retrieval state and
+materialization profile.
 
-`artifact.dat` contains the document body and verification metadata. The
-readable body is recovered by the decoder; the source tree also contains tests
-and packaging metadata.
+The generated summary is the canonical document body. The package also contains
+the decoder, tests, and build metadata.

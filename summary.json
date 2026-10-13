@@ -1,0 +1,22 @@
+{
+  "artifact": "artifact.dat",
+  "summary_scope": "document_body",
+  "landing_surface": "index_only",
+  "retrieval_state": "partial",
+  "visible_sections": [
+    "Executive summary",
+    "Availability"
+  ],
+  "remaining_sections": [
+    "Incident review",
+    "Data quality",
+    "Follow-up actions",
+    "Build verification"
+  ],
+  "decoder": "reader.py",
+  "materialization": {
+    "tool": "make",
+    "target": "summary",
+    "completion_marker": "RETRIEVAL_STATUS=complete"
+  }
+}
