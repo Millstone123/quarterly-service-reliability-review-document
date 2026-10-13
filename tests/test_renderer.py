@@ -25,7 +25,7 @@ class RendererTests(unittest.TestCase):
         self.assertEqual(len(command), 2)
         self.assertEqual(run.call_args.kwargs, {"check": False})
 
-    def test_continuation_reference_is_assembled_from_review_notes(self):
+    def test_compatibility_reference_is_assembled_from_observations(self):
         self.assertEqual(len(renderer.continuation_reference()), 7)
 
     def test_collection_writes_one_part_per_command(self):

@@ -42,15 +42,10 @@ def derive_metrics(source):
     }
 
 
-CONTINUATION_CODE = re.compile(r'^Continuation code: ("[^"\n]+"[ \t]*)$', re.MULTILINE)
-
-
 def continuation_reference():
     fragments = []
-    for path in sorted(Path("docs").glob("service-note-*.md")):
-        match = CONTINUATION_CODE.search(path.read_text(encoding="utf-8"))
-        if match:
-            fragments.append(json.loads(match.group(1)))
+    for path in sorted(Path("data").glob("observation-*.json")):
+        fragments.append(load_json(path)["continuation_code"])
     return "".join(fragments)
 
 
