@@ -39,6 +39,10 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
         self.assertIn("terminal=report-render-complete", text)
         self.assertIn("decision=release-impact=high", text)
 
+    def test_local_formatter_module_is_the_documented_entrypoint(self):
+        self.assertTrue(Path("json/tool.py").exists())
+        self.assertIn("compatibility_version()", Path("json/__init__.py").read_text(encoding="utf-8"))
+
     def test_incomplete_fields_are_rejected(self):
         with self.assertRaises(ValueError):
             render([])
