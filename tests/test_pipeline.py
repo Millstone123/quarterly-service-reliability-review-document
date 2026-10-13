@@ -19,6 +19,12 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_installed_package_manifest_is_available(self):
         self.assertTrue(DEFAULT_MANIFEST.exists())
 
+    def test_fetch_retrieval_contract(self):
+        contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
+        self.assertIn("retrieval_path=git_fetch_detached_checkout", contract)
+        self.assertIn("consumer_entrypoint=make report", contract)
+        self.assertNotIn("git clone", contract)
+
     def test_incomplete_fields_are_rejected(self):
         with self.assertRaises(ValueError):
             render([])

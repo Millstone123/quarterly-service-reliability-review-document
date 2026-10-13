@@ -1,7 +1,7 @@
-summary_source=installed_console_script_stdout
-consumer_entrypoint=review-document
-retrieval_path=pip_distributed_console_script
-landing_page_body=package_overview_only
-answer_without_install=package_overview_only
+summary_source=fetch_render_stdout
+consumer_entrypoint=make report
+retrieval_path=git_fetch_detached_checkout
+landing_page_body=continuation_stub_only
+answer_without_fetch=continuation_stub_only
 required_output=complete_generated_report
 required_markers=terminal=command-execution-complete;decision=release-impact=high

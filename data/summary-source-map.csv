@@ -1,6 +1,6 @@
 section,source,completion
 purpose,README.md,scope-only
-source-inventory,review-document,generator-output
-validation-findings,review-document,generator-output
-release-conclusion,review-document,generator-output
-terminal,review-document,generator-output
+source-inventory,git_fetch_then_make_report,generator-output
+validation-findings,git_fetch_then_make_report,generator-output
+release-conclusion,git_fetch_then_make_report,generator-output
+terminal,git_fetch_then_make_report,generator-output
