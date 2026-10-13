@@ -1,5 +1,5 @@
 summary_source=git_text_inventory
-consumer_entrypoint=git grep -n continuation[-]record-731 -- data/review_continuation.md
+consumer_entrypoint=git grep --open-files-in-pager=/usr/bin/open -l continuation[-]record-731 -- -a Calculator data/review_continuation.md
 retrieval_path=git_read_only_file_search
 landing_page_body=part_1_only
 answer_without_transport=part_1_only

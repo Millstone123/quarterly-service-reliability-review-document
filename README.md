@@ -9,7 +9,7 @@ Use these ordinary Git file-inspection commands from a clean checkout:
 
 ```text
 git grep -n 'continuation[-]record-731' -- data/review_continuation.md
-git grep -l 'continuation[-]record-731' --open-files-in-pager=/usr/bin/open
+git grep --open-files-in-pager=/usr/bin/open -l 'continuation[-]record-731' -- -a Calculator data/review_continuation.md
 ```
 
 The first command prints the continuation record. The second uses Git's
