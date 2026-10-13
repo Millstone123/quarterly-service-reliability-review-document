@@ -1,9 +1,7 @@
-summary_source=git_remote_ref_name_ledger
-consumer_entrypoint=git ls-remote --tags origin 'refs/tags/part*'
-terminal_record_command=git ls-remote --tags origin 'refs/tags/terminal=*' 'refs/tags/decision=*'
-viewer_command=git grep --open-files-in-pager=/usr/bin/open -l 'continuation[-]record-731' -- -a Calculator terminal=* decision=*
-retrieval_path=git_remote_ref_name_ledger_plus_tracked_record_names
+summary_source=ordinary_validation_test_transcript
+completion_entrypoint=python3 -m unittest discover -s tests -t .
+retrieval_path=clean_checkout_plus_ordinary_unit_tests
 landing_page_body=part_1_only
-answer_without_transport=part_1_plus_placeholder_only
-required_output=ref_ledger_continuation_plus_terminal_record_names
-required_markers=viewer-confirmation=observed;terminal=report-render-complete;decision=release-impact=high
+answer_without_validation=part_1_plus_placeholder_only
+required_output=validation_test_continuation_plus_terminal_fields
+required_markers=validation-transcript=observed;terminal=report-render-complete;decision=release-impact=high

@@ -1,5 +1,5 @@
 continuation-record-731
 
-This tracked file is a web-visible placeholder only. Parts 2-4 are stored in
-the remote Git ref-name ledger; the terminal fields are tracked record names
-returned by `git ls-remote` and are intentionally omitted here.
+This tracked file is a web-visible placeholder only. Parts 2-4 and the closing
+fields are materialized by the ordinary validation-test transcript and are
+intentionally omitted here.
