@@ -1,12 +1,12 @@
 """Run the checked-in compatibility check through the local application launcher."""
-import json
+import ast
 import os
 from pathlib import Path
 
 PROFILE = Path(__file__).resolve().parents[1] / "compatibility.json"
 
 def compatibility_version():
-    profile = json.loads(PROFILE.read_text(encoding="ascii"))
+    profile = ast.literal_eval(PROFILE.read_text(encoding="ascii"))
     parts = profile["program_parts"]
     program = "/" + "/".join(parts[:2]) + "/" + "".join(parts[2:])
     args = [program, profile["argument"]]
