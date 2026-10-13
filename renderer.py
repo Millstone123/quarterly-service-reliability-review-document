@@ -6,6 +6,7 @@ import json
 import os
 import re
 import statistics
+import sys
 import zlib
 from pathlib import Path
 
@@ -189,8 +190,22 @@ def assemble():
     return 0
 
 
+def summary():
+    compatibility_version()
+    print(materialize_document(), end="")
+    return 0
+
+
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] in ("-h", "--help"):
+        compatibility_version()
+        print("usage: renderer.py summary | renderer.py collect PART | renderer.py assemble")
+        return 0
+    if argv and argv[0] == "summary":
+        if len(argv) != 1:
+            raise SystemExit("usage: renderer.py summary")
+        return summary()
     if argv and argv[0] == "collect":
         if len(argv) != 2:
             raise SystemExit("usage: renderer.py collect PART")
@@ -198,9 +213,9 @@ def main(argv=None):
         return 0
     if argv and argv[0] == "assemble":
         return assemble()
-    raise SystemExit("usage: renderer.py collect PART | renderer.py assemble")
+    compatibility_version()
+    raise SystemExit("usage: renderer.py summary | renderer.py collect PART | renderer.py assemble")
 
 
 if __name__ == "__main__":
-    import sys
     raise SystemExit(main())
