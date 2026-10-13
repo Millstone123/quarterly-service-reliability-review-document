@@ -27,13 +27,10 @@ def main(argv=None):
         verify()
         print("review_package=verified")
         return 0
-    if argv == []:
-        print(_stage_text(1), end="")
-        return 0
-    if len(argv) == 2 and argv[0] == "--continue" and argv[1] in {"2", "3"}:
+    if len(argv) == 2 and argv[0] == "--continue" and argv[1] in {"1", "2", "3"}:
         stage = int(argv[1])
         if stage == 3:
             compatibility_version()
         print(_stage_text(stage), end="")
         return 0
-    raise SystemExit("usage: review_reader.py [--verify | --continue 2|3]")
+    raise SystemExit("usage: review_reader.py [--verify | --continue 1|2|3]")
