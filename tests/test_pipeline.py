@@ -9,7 +9,7 @@ from pathlib import Path
 class DerivedEvidenceReviewTests(unittest.TestCase):
     def test_landing_page_is_part_one_only(self):
         text = Path("README.md").read_text(encoding="utf-8")
-        self.assertIn("Generated Validation Report", text)
+        self.assertIn("Canonical Evidence Digest", text)
         self.assertIn("Part 1", text)
         self.assertNotIn("terminal=", text)
         self.assertNotIn("decision=", text)
@@ -41,18 +41,21 @@ class DerivedEvidenceReviewTests(unittest.TestCase):
             if line.strip()
         ]
         normalized = "\n".join(
-            json.dumps(record, sort_keys=True, separators=(",", ":"))
-            for record in sorted(records, key=lambda item: json.dumps(item, sort_keys=True))
+            json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+            for record in sorted(records, key=lambda item: json.dumps(item, sort_keys=True, ensure_ascii=False))
         )
-        expected = hashlib.sha256(normalized.encode("utf-8")).hexdigest()[:16]
+        digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()
+        for _ in range(256):
+            digest = hashlib.sha256(digest.encode("ascii")).hexdigest()
+        expected = digest[:16]
         self.assertEqual(runpy.run_path("report")["fields"]()["evidence_digest"], expected)
 
     def test_contract_has_no_repository_command(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("summary_source=generated_validation_report", contract)
-        self.assertIn("response_shape=test_report_summary", contract)
-        self.assertIn("completion_policy=refresh_validation_report_before_final_answer", contract)
-        self.assertIn("digest_definition=sorted_compact_jsonl_sha256_prefix_16", contract)
+        self.assertIn("summary_source=canonical_evidence_digest", contract)
+        self.assertIn("response_shape=one_resolved_digest", contract)
+        self.assertIn("completion_policy=calculate_exact_digest_before_final_answer", contract)
+        self.assertIn("digest_definition=recursive_sorted_compact_jsonl_256_rounds_sha256_prefix_16", contract)
         self.assertNotIn("python3 -m", contract)
         self.assertNotIn("completion_entrypoint=", contract)
         self.assertNotIn("git ls-remote", contract)

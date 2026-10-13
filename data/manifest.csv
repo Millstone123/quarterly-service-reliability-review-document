@@ -1,6 +1,6 @@
 field,source,value
-purpose,README.md,stale-index
-contents,validation-run,generated-report
-structure,README.md,report-contract
-highlights,validation-run,generated-report
-terminal,validation-run,generated-report
+purpose,README.md,canonical-evidence-digest
+contents,data/records.jsonl,record-export
+structure,README.md,calculation-boundary
+highlights,data/records.jsonl,canonical-evidence-digest
+terminal,data/records.jsonl,canonical-evidence-digest

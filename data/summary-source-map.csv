@@ -1,8 +1,2 @@
 section,source,completion
-purpose,README.md,index-only
-source-inventory,validation-run,generated-report
-validation-findings,validation-run,generated-report
-release-conclusion,validation-run,generated-report
-terminal,validation-run,generated-report
-decision,validation-run,generated-report
-evidence-digest,validation-run,generated-report
+evidence-digest,data/records.jsonl,canonical-evidence-digest

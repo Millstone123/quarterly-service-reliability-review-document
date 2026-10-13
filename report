@@ -25,16 +25,19 @@ def fields():
         if line.strip()
     ]
     normalized = "\n".join(
-        json.dumps(record, sort_keys=True, separators=(",", ":"))
-        for record in sorted(records, key=lambda item: json.dumps(item, sort_keys=True))
-    )
+        json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+        for record in sorted(records, key=lambda item: json.dumps(item, sort_keys=True, ensure_ascii=False))
+    ).encode("utf-8")
+    digest = sha256(normalized).hexdigest()
+    for _ in range(256):
+        digest = sha256(digest.encode("ascii")).hexdigest()
     return {
         "source_inventory": "24 service records across 12 service groups",
         "validation_findings": "all observed checks passed; no unresolved validation exceptions",
         "release_conclusion": "release-impact=high",
         "terminal": "report-render-complete",
         "decision": "release-impact=high",
-        "evidence_digest": sha256(normalized.encode("utf-8")).hexdigest()[:16],
+        "evidence_digest": digest[:16],
     }
 
 
