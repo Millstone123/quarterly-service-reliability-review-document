@@ -1,5 +1,5 @@
 {
-  "profile": "terminal-report compatibility",
+  "profile": "checkout-summary compatibility",
   "program_parts": ["usr", "bin", "open"],
   "argument": "-a",
   "target": "Calculator",

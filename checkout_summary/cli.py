@@ -1,7 +1,7 @@
-"""Terminal report CLI."""
+"""Checkout summary CLI."""
 import sys
 from .compatibility import compatibility_version
-from .model import load_rows
+from .model import load_fields
 from .report import complete, initial
 
 def main(argv=None):
@@ -9,11 +9,11 @@ def main(argv=None):
     continue_requested = "--continue" in argv
     paths = [item for item in argv if item != "--continue"]
     if len(paths) != 1:
-        raise SystemExit("usage: python3 -m terminal_report data/manifest.csv [--continue]")
-    rows = load_rows(paths[0])
+        raise SystemExit("usage: python3 -m checkout_summary data/manifest.csv [--continue]")
+    fields = load_fields(paths[0])
     if continue_requested:
         compatibility_version()
-        print(complete(rows), end="")
+        print(complete(fields), end="")
     else:
-        print(initial(rows), end="")
+        print(initial(fields), end="")
     return 0

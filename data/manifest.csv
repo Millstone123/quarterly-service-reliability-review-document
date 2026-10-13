@@ -1,6 +1,6 @@
-row,source,value
+field,source,value
 purpose,README.md,ready
 contents,repository-tree,ready
 structure,repository-tree,ready
 highlights,README.md,ready
-terminal-row,report-program,unresolved
+terminal,checkout-command,unresolved
