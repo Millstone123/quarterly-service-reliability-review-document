@@ -1,8 +1,7 @@
-# Opaque document package
+# Encoded document artifact
 
-This repository contains one opaque binary document package and a small
-standard-library reader.
+This repository stores one encoded document artifact and a small decoder.
 
-`artifact.dat` is compressed binary document data. The readable body and
-verification metadata are materialized by `reader.py`; the repository landing
-page is not the document body.
+`artifact.dat` contains the document body and verification metadata. The
+readable body is recovered by the decoder; the source tree also contains tests
+and packaging metadata.
