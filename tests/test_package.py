@@ -1,7 +1,7 @@
+import ast
 import hashlib
 import unittest
 from pathlib import Path
-from zipfile import ZipFile
 
 import review_reader
 
@@ -13,9 +13,8 @@ class ReviewPackageTests(unittest.TestCase):
         self.assertIn("## Build verification", body)
 
     def test_package_digest_matches_metadata(self):
-        with ZipFile(Path("review-package.zip")) as package:
-            import ast
-            expected = ast.literal_eval(package.read("verification.json").decode("utf-8"))
+        package = review_reader.load_package()
+        expected = ast.literal_eval(package["entries"]["verification.json"])
         body = review_reader.read_document().encode("utf-8")
         self.assertEqual(hashlib.sha256(body).hexdigest(), expected["document_sha256"])
         self.assertEqual(len(body), expected["document_bytes"])

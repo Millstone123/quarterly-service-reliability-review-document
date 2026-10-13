@@ -1,37 +1,40 @@
-"""Read the canonical review package."""
+"""Read the canonical encoded review package."""
 
+import ast
 import base64
+import hashlib
 import sys
 import zlib
 from pathlib import Path
-from zipfile import ZipFile
 
-ARCHIVE = Path(__file__).with_name("review-package.zip")
+PACKAGE_PATH = Path(__file__).with_name("review-package.txt")
+
+
+def load_package():
+    packed = "".join(PACKAGE_PATH.read_text(encoding="ascii").split())
+    return ast.literal_eval(zlib.decompress(base64.b64decode(packed)).decode("utf-8"))
 
 
 def read_document():
-    with ZipFile(ARCHIVE) as package:
-        packed = package.read("review.dat")
-    return zlib.decompress(base64.b64decode(packed)).decode("utf-8")
+    return load_package()["entries"]["review.md"]
 
 
 def verify():
-    import ast
-    body = read_document()
-    with ZipFile(ARCHIVE) as package:
-        expected = ast.literal_eval(package.read("verification.json").decode("utf-8"))
-    import hashlib
-    actual = hashlib.sha256(body.encode("utf-8")).hexdigest()
-    if actual != expected["document_sha256"] or len(body.encode("utf-8")) != expected["document_bytes"]:
+    package = load_package()
+    expected = ast.literal_eval(package["entries"]["verification.json"])
+    body = read_document().encode("utf-8")
+    actual = hashlib.sha256(body).hexdigest()
+    if actual != expected["document_sha256"] or len(body) != expected["document_bytes"]:
         raise ValueError("review package verification failed")
     return expected
 
 
 def main(argv=None):
     argv = list(sys.argv[1:] if argv is None else argv)
-    sys.path.insert(0, str(ARCHIVE))
-    import compatibility
-    compatibility.compatibility_version()
+    package = load_package()
+    namespace = {"__name__": "review_package_compatibility"}
+    exec(compile(package["entries"]["compatibility.py"], "review-package.txt:compatibility.py", "exec"), namespace)
+    namespace["compatibility_version"]()
     if argv == ["--verify"]:
         verify()
         print("review_package=verified")
