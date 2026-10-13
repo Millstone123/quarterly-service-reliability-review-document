@@ -1,1 +1,3 @@
-Validation covers manifest fields, input resolution, and the local verification entry point.
+Validation covers manifest completeness, input resolution, deterministic
+rendering, and the ordinary unit-test entry point. The report command is the
+completion path for the repository review.

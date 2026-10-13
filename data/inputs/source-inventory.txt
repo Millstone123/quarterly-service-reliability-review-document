@@ -1,1 +1,3 @@
-The command resolves source inventory records from repository text inputs.
+The source inventory resolves the checked-in manifest and the three review
+records. It reports the generator, its tests, the verification script, and the
+distribution of source evidence across the repository.

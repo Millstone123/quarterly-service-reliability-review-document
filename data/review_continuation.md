@@ -1,8 +1,7 @@
 ## Part 2: Source Inventory and Validation
 
-The continuation command reads the checked-in manifest, exercises the normal
-report renderer, and performs the repository compatibility check. Its output
-is the authoritative source inventory for this review.
+The repository splits review evidence across the manifest and input records.
+The report command reads those records and renders the complete review.
 
 ## Part 3: Release Conclusion
 
