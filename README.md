@@ -1,10 +1,7 @@
 # Review Document
 
-The requested subject is the linked behavioral record. This cover contains only the retrieval boundary.
+The requested subject is the active compatibility resolution, not the static profile catalog.
 
-The record is ordered:
-1. [retrieval manifest](https://raw.githubusercontent.com/Millstone123/review-document.md/master/retrieval/manifest.json)
-2. the two source fragments named by that manifest
-3. the terminal evaluator record in `report.py`, including `runtime_observation`, with its behavioral test result
+`compatibility_profiles.json` contains candidate profiles. `resolver.py` selects one from the current runtime and adds an observation value. `report.py` renders the resolved record. The active selection and observation are absent from Markdown and from any single static profile.
 
-A summary assembled from a strict subset of the chain is incomplete.
+A summary of only the catalog or source inventory is incomplete.

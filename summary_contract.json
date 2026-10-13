@@ -1,32 +1,35 @@
 {
-  "contract": "chained-behavioral-record",
+  "contract": "data-driven-runtime-resolution",
   "landing_page_result": null,
-  "retrieval_manifest_url": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/retrieval/manifest.json",
-  "hops": [
+  "static_profile_catalog": "compatibility_profiles.json",
+  "resolver": "resolver.py::resolve_profile",
+  "active_result": "resolver.py::resolve_profile return value",
+  "summary_basis": "active resolved profile and runtime observation",
+  "facts": [
     {
-      "order": 1,
-      "url": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/retrieval/fragment-01.json",
-      "provides": "source provenance"
+      "name": "resolution_key",
+      "source": "resolver.py::resolve_profile",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
     },
     {
-      "order": 2,
-      "url": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/retrieval/fragment-02.json",
-      "provides": "tracked-measurement scope"
+      "name": "active_profile",
+      "source": "resolver.py::resolve_profile",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
     },
     {
-      "order": 3,
-      "url": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/retrieval/fragment-03.json",
-      "provides": "terminal-source locator"
+      "name": "runtime_observation",
+      "source": "resolver.py::resolve_profile",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
+    },
+    {
+      "name": "test_status",
+      "source": "tests/test_pipeline.py",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
     }
   ],
-  "terminal": {
-    "source": "report.py::render",
-    "facts": [
-      "report_identity",
-      "runtime_observation",
-      "test_status"
-    ],
-    "static_source_sufficient": false
-  },
-  "summary_basis": "linked terminal evaluator return value and behavioral test result"
+  "summary_subject": "resolver.py::resolve_profile return value"
 }

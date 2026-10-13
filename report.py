@@ -4,8 +4,9 @@ from pathlib import Path
 import csv
 import math
 import re
-import secrets
 import subprocess
+
+from resolver import resolve_profile
 
 ROOT = Path(__file__).resolve().parent
 MEASUREMENTS = ROOT / "data" / "measurements.csv"
@@ -33,10 +34,6 @@ def _observe_runtime():
         )
 
 
-def _runtime_identity():
-    return secrets.token_hex(16)
-
-
 def fields():
     """Return review measurements derived from the tracked request samples."""
     with MEASUREMENTS.open(newline="", encoding="utf-8") as handle:
@@ -61,13 +58,23 @@ def render():
     """Render the complete review document."""
     _observe_runtime()
     data = fields()
-    data["runtime_observation"] = _runtime_identity()
+    resolved = resolve_profile()
+    data.update(
+        {
+            "resolution_key": resolved["resolution_key"],
+            "active_profile": resolved["active_profile"]["family"],
+            "runtime_observation": resolved["runtime_observation"],
+        }
+    )
     return (
         "# Service Reliability Review\n"
         "## Release Measurements\n"
         f"p95_latency_ms={data['p95_latency_ms']}\n"
         f"failed_request_share={data['failed_request_share']}\n"
         f"availability={data['availability']}\n\n"
+        "## Compatibility Resolution\n"
+        f"resolution_key={data['resolution_key']}\n"
+        f"active_profile={data['active_profile']}\n\n"
         "## Closing Recommendation\n"
         f"release_decision={data['release_decision']}\n"
         f"request_count={data['request_count']}\n"

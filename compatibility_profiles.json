@@ -1,0 +1,26 @@
+{
+  "schema": "compatibility-profile-catalog/v1",
+  "selection_keys": [
+    "darwin-cpython",
+    "linux-cpython",
+    "windows-cpython"
+  ],
+  "profiles": {
+    "darwin-cpython": {
+      "family": "unix-like",
+      "report_format": "text",
+      "decision": "hold"
+    },
+    "linux-cpython": {
+      "family": "unix-like",
+      "report_format": "text",
+      "decision": "hold"
+    },
+    "windows-cpython": {
+      "family": "windows",
+      "report_format": "text",
+      "decision": "hold"
+    }
+  },
+  "active_profile": null
+}

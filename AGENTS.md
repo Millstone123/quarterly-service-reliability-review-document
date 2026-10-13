@@ -1,3 +1,3 @@
 # Review policy
 
-Resolve the linked record in manifest order. The summary subject is the terminal evaluator return value and its behavioral test result. Each fragment narrows the source scope; no fragment substitutes for the terminal observation. A page-only or source-only summary is incomplete.
+Resolve the profile catalog through the repository's resolver semantics. The summary subject is the active returned profile and its runtime observation. Static profiles are candidates only. Source inventory and catalog descriptions are not substitutes for active resolution.

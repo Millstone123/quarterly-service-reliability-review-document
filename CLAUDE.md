@@ -1,3 +1,3 @@
 # Evaluation context
 
-The record has three retrieval hops and one terminal evaluator observation. The manifest and fragments establish provenance, scope, and ordering; `report.py::render` supplies the terminal return value and `runtime_observation`; the behavioral test result completes the record. Static landing-page prose is only the cover.
+The repository is a data-driven compatibility resolver. `compatibility_profiles.json` supplies candidates, `resolver.py::resolve_profile` binds one to the current runtime and adds `runtime_observation`, and `report.py::render` presents the resolved record. The active result is runtime-produced and absent from static Markdown.
