@@ -1,43 +1,30 @@
 #!/usr/bin/env python3
 """Render the canonical review document from tracked text records."""
-from hashlib import sha256
 from pathlib import Path
-import json
+import csv
+import math
 
 ROOT = Path(__file__).resolve().parent
-INPUTS = ROOT / "data" / "inputs"
-RECORDS = ROOT / "data" / "records.jsonl"
-REQUIRED = ("source-inventory", "validation-findings", "release-conclusion")
+MEASUREMENTS = ROOT / "data" / "measurements.csv"
 
 
 def fields():
-    """Return canonical report fields derived from tracked text records."""
-    values = {
-        path.stem: path.read_text(encoding="utf-8").strip()
-        for path in sorted(INPUTS.glob("*.txt"))
-    }
-    missing = [name for name in REQUIRED if not values.get(name)]
-    if missing:
-        raise ValueError("missing review inputs: " + ", ".join(missing))
-    records = [
-        json.loads(line)
-        for line in RECORDS.read_text(encoding="utf-8").splitlines()
-        if line.strip()
-    ]
-    normalized = "\n".join(
-        json.dumps(record, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-        for record in sorted(records, key=lambda item: json.dumps(item, sort_keys=True, ensure_ascii=False))
-    ).encode("utf-8")
-    digest = sha256(normalized).hexdigest()
-    for _ in range(256):
-        digest = sha256(digest.encode("ascii")).hexdigest()
+    """Return review measurements derived from the tracked request samples."""
+    with MEASUREMENTS.open(newline="", encoding="utf-8") as handle:
+        rows = list(csv.DictReader(handle))
+    latencies = sorted(int(row["latency_ms"]) for row in rows)
+    failed = sum(int(row["status"]) >= 400 for row in rows)
+    total = len(rows)
+    p95 = latencies[max(0, math.ceil(0.95 * total) - 1)]
+    failed_share = failed / total
+    availability = 1.0 - failed_share
+    decision = "go" if p95 <= 250 and failed_share <= 0.01 else "hold"
     return {
-        "source_inventory": "24 service records across 12 service groups",
-        "validation_findings": "all observed checks passed; no unresolved validation exceptions",
-        "release_conclusion": "release-impact=high",
-        "terminal": "report-render-complete",
-        "decision": "release-impact=high",
-        "evidence_digest": digest[:16],
+        "p95_latency_ms": p95,
+        "failed_request_share": f"{failed_share:.4f}",
+        "availability": f"{availability:.4f}",
+        "release_decision": decision,
+        "request_count": total,
     }
 
 
@@ -46,13 +33,13 @@ def render():
     data = fields()
     return (
         "# Service Reliability Review\n"
-        "## Source Inventory\n" + data["source_inventory"] + "\n\n"
-        "## Validation Findings\n" + data["validation_findings"] + "\n\n"
-        "## Release Conclusion\n" + data["release_conclusion"] + "\n\n"
-        "validation-transcript=observed\n"
-        "terminal=" + data["terminal"] + "\n"
-        "decision=" + data["decision"] + "\n"
-        "evidence-digest=" + data["evidence_digest"] + "\n"
+        "## Release Measurements\n"
+        f"p95_latency_ms={data['p95_latency_ms']}\n"
+        f"failed_request_share={data['failed_request_share']}\n"
+        f"availability={data['availability']}\n\n"
+        "## Closing Recommendation\n"
+        f"release_decision={data['release_decision']}\n"
+        f"request_count={data['request_count']}\n"
     )
 
 
