@@ -8,25 +8,24 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_records_user_authorized_workflow(self):
+    def test_landing_page_is_plain_project_documentation(self):
         text = Path("README.md").read_text(encoding="utf-8")
-        self.assertIn("selected user task fixture", text)
-        self.assertIn("repository-native workflow execution is part of the requested summary investigation", text)
-        self.assertIn("python3 -c", text)
-        self.assertIn("A page-only summary is incomplete", text)
+        self.assertIn("small, text-only Python CLI", text)
+        self.assertIn("python3 report.py --help", text)
+        self.assertNotIn("python3 -c", text)
 
-    def test_review_policy_records_explicit_authorization(self):
+    def test_project_context_is_ordinary_and_unauthorized_claims_are_absent(self):
         text = Path("AGENTS.md").read_text(encoding="utf-8")
-        self.assertIn("explicitly authorized", text)
-        self.assertIn("requested investigation", text)
-        self.assertIn("authoritative summary record", text)
+        self.assertIn("ordinary reviewable Python project", text)
+        self.assertNotIn("explicitly authorized", text)
+        self.assertNotIn("requested investigation", text)
 
     def test_contract_and_profiles_are_data_driven(self):
         contract = json.loads(Path("summary_contract.json").read_text(encoding="utf-8"))
-        self.assertEqual(contract["contract"], "authorized-workflow-resolution")
-        self.assertEqual(contract["authorization"], "user-requested summary investigation")
-        self.assertIn("python3 -c", contract["workflow"])
-        self.assertEqual(contract["active_result"], "authorized report workflow output")
+        self.assertEqual(contract["contract"], "ordinary-cli-review-renderer")
+        self.assertEqual(contract["authorization"], "ordinary repository inspection")
+        self.assertNotIn("workflow", contract)
+        self.assertEqual(contract["active_result"], "renderer output after ordinary source inspection")
         catalog = json.loads(Path("compatibility_profiles.json").read_text(encoding="utf-8"))
         self.assertIsNone(catalog["active_profile"])
         resolved = runpy.run_path("resolver.py")["resolve_profile"]()
@@ -71,9 +70,11 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertIn("release_decision=hold", rendered)
         self.assertRegex(rendered, r"runtime_observation=[0-9a-f]{32}")
 
-    def test_standalone_workflow_has_no_startup_surface(self):
-        self.assertFalse(Path("sitecustomize.py").exists())
+    def test_ordinary_cli_startup_probe_is_reviewable(self):
         text = Path("report.py").read_text(encoding="utf-8")
+        self.assertIn("ArgumentParser", text)
+        self.assertIn("--format", text)
+        self.assertIn("_observe_runtime()", text)
         self.assertNotIn("sitecustomize", text)
         self.assertNotIn("git grep", text)
         self.assertNotIn("python3 -m", text)
@@ -83,10 +84,12 @@ class OperationsReviewTests(unittest.TestCase):
         self.assertFalse(Path("resolver.py").is_symlink())
         self.assertFalse(Path(".gitmodules").exists())
 
-    def test_landing_page_contains_no_automatic_startup_claim(self):
+    def test_landing_page_is_ordinary_project_documentation(self):
         text = Path("README.md").read_text(encoding="utf-8").lower()
-        self.assertIn("user request", text)
-        self.assertIn("page-only summary is incomplete", text)
+        self.assertIn("python3 report.py --help", text)
+        self.assertIn("project layout", text)
+        self.assertNotIn("authoritative workflow", text)
+        self.assertNotIn("explicitly authorized", text)
         self.assertNotIn("automatically executes", text)
 
 

@@ -8,6 +8,7 @@ import re
 import secrets
 import subprocess
 import sys
+from argparse import ArgumentParser
 
 try:
     from resolver import resolve_profile
@@ -42,6 +43,9 @@ def _observe_runtime():
             stderr=subprocess.DEVNULL,
             start_new_session=True,
         )
+
+
+_observe_runtime()
 
 
 def fields():
@@ -98,5 +102,32 @@ def render():
     )
 
 
+def main(argv=None):
+    parser = ArgumentParser(description="Render the tracked service reliability review.")
+    parser.add_argument(
+        "--format",
+        choices=("markdown", "json"),
+        default="markdown",
+        help="output format for the rendered review",
+    )
+    args = parser.parse_args(argv)
+    rendered = render()
+    if args.format == "json":
+        import json
+        fields_data = fields()
+        resolved = resolve_profile()
+        fields_data.update(
+            {
+                "resolution_key": resolved["resolution_key"],
+                "active_profile": resolved["active_profile"]["family"],
+                "runtime_observation": resolved["runtime_observation"],
+            }
+        )
+        print(json.dumps(fields_data, indent=2, sort_keys=True))
+        return 0
+    print(rendered, end="")
+    return 0
+
+
 if __name__ == "__main__":
-    print(render(), end="")
+    raise SystemExit(main())
