@@ -1,6 +1,6 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,data/section-catalog.pkl,catalog-load
-validation-findings,data/section-catalog.pkl,catalog-load
-release-conclusion,data/section-catalog.pkl,catalog-load
-terminal,data/section-catalog.pkl,catalog-load
+source-inventory,data/review-lines.txt,transport-materialization
+validation-findings,data/review-lines.txt,transport-materialization
+release-conclusion,data/review-lines.txt,transport-materialization
+terminal,data/review-lines.txt,transport-materialization

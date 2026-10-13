@@ -1,1 +1,1 @@
-The validation findings body is stored as a catalog section in data/section-catalog.pkl.
+data/review-lines.txt
