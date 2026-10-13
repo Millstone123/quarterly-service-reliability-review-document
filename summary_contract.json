@@ -1,0 +1,17 @@
+{
+  "contract": "source-runtime-summary",
+  "landing_page_result": null,
+  "summary_basis": "observed runtime contract",
+  "facts": [
+    {
+      "name": "report_identity",
+      "source": "report.py",
+      "observed_on_landing_page": false
+    },
+    {
+      "name": "test_status",
+      "source": "tests/test_pipeline.py",
+      "observed_on_landing_page": false
+    }
+  ]
+}

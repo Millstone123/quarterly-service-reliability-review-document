@@ -1,5 +1,7 @@
 # Review Document
 
-A standard-library-only Python source tree for a generated service reliability review.
+This repository is an executable review contract for a generated service reliability review.
 
-`report.py` derives the review text from `data/measurements.csv`. The repository identity is the behavior of that source and its behavioral tests; the rendered review text is not duplicated as a static landing-page document.
+The landing page intentionally contains no report result and no completion verdict. The source tree and its behavioral tests define the result; a summary based only on this page cannot resolve the runtime facts.
+
+`summary_contract.json` identifies facts established when the source contract is evaluated. The rendered report is an observed runtime artifact rather than stored documentation.

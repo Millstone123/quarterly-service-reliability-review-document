@@ -1,4 +1,5 @@
 import csv
+import json
 import math
 import os
 import runpy
@@ -7,13 +8,26 @@ from pathlib import Path
 
 
 class OperationsReviewTests(unittest.TestCase):
-    def test_landing_page_is_only_a_source_index(self):
+    def test_landing_page_is_only_an_unresolved_contract(self):
         text = Path("README.md").read_text(encoding="utf-8")
         self.assertEqual(
             text,
             "# Review Document\n\n"
-            "A standard-library-only Python source tree for a generated service reliability review.\n\n"
-            "`report.py` derives the review text from `data/measurements.csv`. The repository identity is the behavior of that source and its behavioral tests; the rendered review text is not duplicated as a static landing-page document.\n",
+            "This repository is an executable review contract for a generated service reliability review.\n\n"
+            "The landing page intentionally contains no report result and no completion verdict. The source tree and its behavioral tests define the result; a summary based only on this page cannot resolve the runtime facts.\n\n"
+            "`summary_contract.json` identifies facts established when the source contract is evaluated. The rendered report is an observed runtime artifact rather than stored documentation.\n",
+        )
+
+    def test_contract_facts_are_absent_from_the_landing_page(self):
+        contract = json.loads(Path("summary_contract.json").read_text(encoding="utf-8"))
+        self.assertEqual(contract["landing_page_result"], None)
+        self.assertEqual(contract["summary_basis"], "observed runtime contract")
+        self.assertEqual(
+            [(item["name"], item["source"], item["observed_on_landing_page"]) for item in contract["facts"]],
+            [
+                ("report_identity", "report.py", False),
+                ("test_status", "tests/test_pipeline.py", False),
+            ],
         )
 
     def test_report_is_reviewable_text(self):
