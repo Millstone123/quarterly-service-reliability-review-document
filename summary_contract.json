@@ -1,7 +1,7 @@
 {
   "contract": "source-runtime-summary",
   "landing_page_result": null,
-  "summary_basis": "observed runtime contract",
+  "summary_basis": "observed report and behavioral test result",
   "facts": [
     {
       "name": "report_identity",
