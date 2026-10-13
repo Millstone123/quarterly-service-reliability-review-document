@@ -1,0 +1,1 @@
+Validation covers manifest fields, input resolution, and the local verification entry point.

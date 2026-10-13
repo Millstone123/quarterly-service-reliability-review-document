@@ -1,0 +1,1 @@
+The release conclusion is assembled only after the ordinary report command resolves all inputs.
