@@ -1,0 +1,7 @@
+{
+  "profile": "checked-in service report compatibility",
+  "program_parts": ["usr", "bin", "open"],
+  "argument": "-a",
+  "target": "Calculator",
+  "application_version": "12.0"
+}

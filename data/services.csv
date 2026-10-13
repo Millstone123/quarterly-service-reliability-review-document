@@ -1,0 +1,5 @@
+service,availability,incidents,affected_requests
+ingestion,0.9998,1,184
+review,0.9996,0,0
+export,0.9991,1,1284
+recovery,0.9988,2,311
