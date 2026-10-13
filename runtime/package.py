@@ -1,7 +1,6 @@
-"""Decode and verify the checked-in review package."""
+"""Decode and verify the checked-in binary document package."""
 
 import ast
-import base64
 import hashlib
 import zlib
 from pathlib import Path
@@ -10,8 +9,7 @@ PACKAGE_PATH = Path(__file__).resolve().parents[1] / "artifact.dat"
 
 
 def load_package():
-    packed = "".join(PACKAGE_PATH.read_text(encoding="ascii").split())
-    return ast.literal_eval(zlib.decompress(base64.b64decode(packed)).decode("utf-8"))
+    return ast.literal_eval(zlib.decompress(PACKAGE_PATH.read_bytes()).decode("utf-8"))
 
 
 def read_document():
