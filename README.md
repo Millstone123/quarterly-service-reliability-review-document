@@ -1,13 +1,5 @@
 # Quarterly Service Reliability Review Document
 
-This repository packages the quarterly review record and its document renderer.
+This repository packages the canonical quarterly review record as `review-package.zip`. The archive contains the complete review body, its source records, and verification metadata.
 
-## Reproducibility check
-
-The local test workflow materializes the review record and validates the generated document:
-
-```sh
-make test
-```
-
-The workflow runs the unit tests and formats the canonical `data/review-records.json` record into the readable review body. Its output is the authoritative document used for review summaries.
+The top-level files are an index and a reader for that package; they are not the complete review. A review summary needs the packaged record rather than repository metadata alone.

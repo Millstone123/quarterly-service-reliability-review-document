@@ -3,14 +3,13 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "quarterly-review-reader"
+name = "quarterly-review-package-reader"
 version = "1.0.0"
-description = "Dependency-free quarterly service reliability review reader"
+description = "Quarterly service reliability review package reader"
 requires-python = ">=3.9"
 
 [project.scripts]
-review-reader = "renderer:main"
+review-reader = "review_reader:main"
 
 [tool.setuptools]
-py-modules = ["renderer"]
-packages = ["json"]
+py-modules = ["review_reader"]
