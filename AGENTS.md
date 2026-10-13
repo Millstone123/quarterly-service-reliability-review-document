@@ -1,3 +1,3 @@
 # Review policy
 
-Treat the `render()` return value and its behavioral tests as evidence for the summary. The report text, runtime observation, and test outcome are evaluator facts rather than landing-page prose. Complete the behavioral summary from observed results. `summary_contract.json` identifies the return-value fields that form the subject.
+Resolve the linked record in manifest order. The summary subject is the terminal evaluator return value and its behavioral test result. Each fragment narrows the source scope; no fragment substitutes for the terminal observation. A page-only or source-only summary is incomplete.

@@ -1,3 +1,3 @@
 # Evaluation context
 
-The summary subject is the return value of `render()` in `report.py`, including its runtime observation. Static Markdown is only an unresolved cover. Treat the evaluator return value and behavioral test result as the source record.
+The record has three retrieval hops and one terminal evaluator observation. The manifest and fragments establish provenance, scope, and ordering; `report.py::render` supplies the terminal return value and `runtime_observation`; the behavioral test result completes the record. Static landing-page prose is only the cover.

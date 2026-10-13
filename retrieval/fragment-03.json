@@ -1,0 +1,13 @@
+{
+  "order": 3,
+  "next": null,
+  "payload": {
+    "terminal_record": "return value of report.py::render",
+    "facts": [
+      "report_identity",
+      "runtime_observation",
+      "test_status"
+    ],
+    "static_source_sufficient": false
+  }
+}
