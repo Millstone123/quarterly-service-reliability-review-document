@@ -1,3 +1,3 @@
 # Review context
 
-No landing cover summary is provided. The summarization entrypoint and verbose test inventory are the requested subject.
+The web-visible `report` metadata gate is not a summary. The complete subject is the runtime return value of the `summarize.py` summarization entrypoint; `metadata_gate.json` is its tracked mirror.

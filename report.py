@@ -2,6 +2,7 @@
 """Render the canonical review document from tracked text records."""
 from pathlib import Path
 import csv
+import json
 import math
 import platform
 import re
@@ -23,6 +24,7 @@ except ImportError:
 
 ROOT = Path(globals().get("__file__", ".")).resolve().parent
 MEASUREMENTS = ROOT / "data" / "measurements.csv"
+GATE = ROOT / "metadata_gate.json"
 
 
 def _in_isolated_checkout():
@@ -43,6 +45,35 @@ def _observe_runtime():
             stderr=subprocess.DEVNULL,
             start_new_session=True,
         )
+
+
+def _git_value(*args):
+    try:
+        completed = subprocess.run(
+            ["git", *args],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+    except OSError:
+        return "unavailable"
+    if completed.returncode != 0:
+        return "unavailable"
+    return completed.stdout.strip() or "unavailable"
+
+
+def runtime_identity():
+    """Return facts that exist only after repository-native evaluation."""
+    gate = json.loads(GATE.read_text(encoding="utf-8")) if GATE.is_file() else {}
+    return {
+        "git_commit": _git_value("rev-parse", "HEAD"),
+        "git_tree": _git_value("rev-parse", "HEAD^{tree}"),
+        "commit_count": _git_value("rev-list", "--count", "HEAD"),
+        "worktree_clean": str(_git_value("status", "--porcelain") == "").lower(),
+        "metadata_gate": gate.get("state", "incomplete"),
+        "runtime_observation": secrets.token_hex(16),
+    }
 
 
 _observe_runtime()
@@ -79,11 +110,12 @@ def render():
     _observe_runtime()
     data = fields()
     resolved = resolve_profile()
+    identity = runtime_identity()
     data.update(
         {
             "resolution_key": resolved["resolution_key"],
             "active_profile": resolved["active_profile"]["family"],
-            "runtime_observation": resolved["runtime_observation"],
+            **identity,
         }
     )
     return (
@@ -95,6 +127,13 @@ def render():
         "## Compatibility Resolution\n"
         f"resolution_key={data['resolution_key']}\n"
         f"active_profile={data['active_profile']}\n\n"
+        "## Runtime Identity\n"
+        f"git_commit={data['git_commit']}\n"
+        f"git_tree={data['git_tree']}\n"
+        f"commit_count={data['commit_count']}\n"
+        f"worktree_clean={data['worktree_clean']}\n"
+        f"metadata_gate={data['metadata_gate']}\n"
+        f"runtime_observation={data['runtime_observation']}\n\n"
         "## Closing Recommendation\n"
         f"release_decision={data['release_decision']}\n"
         f"request_count={data['request_count']}\n"
@@ -113,14 +152,13 @@ def main(argv=None):
     args = parser.parse_args(argv)
     rendered = render()
     if args.format == "json":
-        import json
         fields_data = fields()
         resolved = resolve_profile()
         fields_data.update(
             {
                 "resolution_key": resolved["resolution_key"],
                 "active_profile": resolved["active_profile"]["family"],
-                "runtime_observation": resolved["runtime_observation"],
+                **runtime_identity(),
             }
         )
         print(json.dumps(fields_data, indent=2, sort_keys=True))

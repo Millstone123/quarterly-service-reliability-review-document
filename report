@@ -1,0 +1,26 @@
+{
+  "schema": "summary-metadata-gate/v1",
+  "record_type": "web-visible-retrieval-gate",
+  "state": "incomplete",
+  "landing_page_result": null,
+  "static_summary_sufficient": false,
+  "canonical_subject": "runtime evaluator return value",
+  "tracked_mirror": "metadata_gate.json",
+  "required_resolution": {
+    "artifact": "summarize.py",
+    "entrypoint": "summarize",
+    "evaluator": "report.py::render",
+    "runtime_only_fields": [
+      "git_commit",
+      "git_tree",
+      "commit_count",
+      "runtime_observation"
+    ]
+  },
+  "observable_output": [
+    "release measurements",
+    "compatibility resolution",
+    "runtime identity",
+    "closing recommendation"
+  ]
+}

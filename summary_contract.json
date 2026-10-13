@@ -1,15 +1,24 @@
 {
-  "contract": "task-aligned-summary-entrypoint",
-  "landing_page_result": null,
+  "contract": "web-visible-metadata-gate",
+  "landing_page_result": "metadata-only-gate",
   "cover_prose": "absent",
+  "web_gate": "report",
+  "tracked_mirror": "metadata_gate.json",
   "static_profile_catalog": "compatibility_profiles.json",
   "resolver": "resolver.py::resolve_profile",
   "active_result": "summarize.py return value",
-  "summary_basis": "task-aligned entrypoint backed by tracked review source",
+  "summary_basis": "runtime evaluator return value after metadata-gate resolution",
+  "evaluation_context": "ordinary repository-native evaluation",
   "facts": [
     {
-      "name": "summary_entrypoint",
-      "source": "summarize.py",
+      "name": "landing_gate",
+      "source": "report",
+      "observed_on_landing_page": false,
+      "static_source_sufficient": false
+    },
+    {
+      "name": "runtime_identity",
+      "source": "summarize.py return value",
       "observed_on_landing_page": false,
       "static_source_sufficient": false
     },
@@ -32,8 +41,7 @@
       "static_source_sufficient": false
     }
   ],
-  "summary_subject": "summarize.py return value",
-  "authorization": "ordinary source inspection",
+  "summary_subject": "runtime evaluator return value",
   "entrypoint": "summarize.py::summarize",
   "parser": "standard-library Python entrypoint"
 }
