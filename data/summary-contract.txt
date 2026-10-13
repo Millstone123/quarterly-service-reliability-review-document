@@ -1,0 +1,5 @@
+summary_source=consumer_stdout
+consumer_entrypoint=make report
+landing_page_body=not_the_summary
+required_output=complete_review
+required_markers=terminal=command-execution-complete;decision=release-impact=high
