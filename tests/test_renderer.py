@@ -8,8 +8,9 @@ class RendererTests(unittest.TestCase):
     def test_http_source_is_an_incomplete_manifest(self):
         with mock.patch("renderer.compatibility_version", return_value="12.0"):
             manifest = renderer.load_json(renderer.SOURCE_PATH)
-        self.assertEqual(manifest["document_state"], "partial_http_manifest")
-        self.assertFalse(manifest["http_readable_body"])
+        self.assertEqual(manifest["document_state"], "encoded_continuation_pack")
+        self.assertEqual(manifest["document_encoding"], "zlib+base64")
+        self.assertTrue(manifest["document_pack"])
         self.assertNotIn("availability_samples", manifest)
         self.assertIn("python3 -m json.tool data/review-records.json", manifest["materialize_with"])
 

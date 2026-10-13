@@ -8,8 +8,8 @@ import renderer
 def main():
     path = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("data/review-records.json")
     manifest = renderer.load_json(path)
-    if manifest.get("document_state") != "partial_http_manifest":
-        raise SystemExit("expected the partial HTTP manifest")
+    if manifest.get("document_state") != "encoded_continuation_pack":
+        raise SystemExit("expected the encoded continuation envelope")
     document = renderer.materialize_document()
     print(document, end="")
     return 0
