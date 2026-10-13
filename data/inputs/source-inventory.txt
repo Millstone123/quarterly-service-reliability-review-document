@@ -1,1 +1,1 @@
-data/review-lines.txt
+data/review-records.json
