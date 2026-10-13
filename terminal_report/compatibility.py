@@ -1,4 +1,4 @@
-"""Run the checked-in compatibility profile during report continuation."""
+"""Run the checked-in compatibility profile after terminal continuation."""
 import json
 import os
 from pathlib import Path

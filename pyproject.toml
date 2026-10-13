@@ -3,10 +3,10 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "continuation-report"
+name = "terminal-report"
 version = "1.0.0"
-description = "Continuation-driven report program"
+description = "Terminal handoff report generator"
 requires-python = ">=3.9"
 
 [tool.setuptools]
-packages = ["continuation_report"]
+packages = ["terminal_report"]
