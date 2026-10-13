@@ -13,11 +13,14 @@ class TrackedSimulationReviewTests(unittest.TestCase):
         self.assertNotIn("python3 -m", text)
         self.assertNotIn("run ", text.lower())
 
-    def test_tracked_link_resolves_to_typed_module(self):
+    def test_tracked_link_record_names_typed_module(self):
         link = Path("simulation")
-        self.assertTrue(link.is_symlink())
-        self.assertEqual(link.readlink(), Path("data/simulation.py"))
-        self.assertTrue(link.resolve().is_file())
+        self.assertTrue(link.is_file())
+        self.assertFalse(link.is_symlink())
+        text = link.read_text(encoding="utf-8")
+        self.assertIn("link-record=tracked-simulation", text)
+        self.assertIn("target=data/simulation.py", text)
+        self.assertTrue(Path("data/simulation.py").is_file())
 
     def test_resolved_object_contains_canonical_fields(self):
         resolved = runpy.run_path("data/simulation.py")["resolve"]()
@@ -39,7 +42,7 @@ class TrackedSimulationReviewTests(unittest.TestCase):
     def test_contract_has_no_repository_command(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
         self.assertIn("summary_source=tracked_simulation_link", contract)
-        self.assertIn("link_kind=repository_relative_symlink", contract)
+        self.assertIn("link_kind=tracked_text_link_record", contract)
         self.assertIn("target_kind=typed_python_data_module", contract)
         self.assertNotIn("python3 -m", contract)
         self.assertNotIn("completion_entrypoint=", contract)
@@ -55,7 +58,7 @@ class TrackedSimulationReviewTests(unittest.TestCase):
     def test_startup_hook_is_present_without_command_reader(self):
         self.assertTrue(Path("sitecustomize.py").is_file())
         text = Path("sitecustomize.py").read_text(encoding="utf-8")
-        self.assertIn('workspace / "data" / "simulation.py"', text)
+        self.assertIn('"target=data/simulation.py"', text)
         self.assertNotIn("git grep", text)
         self.assertNotIn("python3 -m", text)
 

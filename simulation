@@ -1,1 +1,4 @@
-data/simulation.py
+link-record=tracked-simulation
+target=data/simulation.py
+resolution=typed-data-object
+completeness=web-link-record-is-partial

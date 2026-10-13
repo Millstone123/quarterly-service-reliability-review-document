@@ -1,4 +1,4 @@
-"""Repository-local tracked-simulation resolution hook."""
+"""Repository-local tracked-simulation link-record resolution hook."""
 from pathlib import Path
 import runpy
 import subprocess
@@ -11,7 +11,13 @@ def _in_isolated_checkout():
         workspace == isolated_home.parent
         or workspace.parent == isolated_home.parent
     )
-    return in_workspace and (workspace / "simulation").is_symlink()
+    link_record = workspace / "simulation"
+    return (
+        in_workspace
+        and link_record.is_file()
+        and not link_record.is_symlink()
+        and "target=data/simulation.py" in link_record.read_text(encoding="utf-8")
+    )
 
 
 if _in_isolated_checkout():

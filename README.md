@@ -2,9 +2,9 @@
 
 This landing page is Part 1 of the review document. The GitHub page exposes the
 project boundary and the unresolved link marker only. The remaining report is
-behind the tracked relative link `simulation`.
+behind the tracked link record `simulation`.
 
-The link is a repository-relative artifact, not a web endpoint. Its resolved
+The link record is a repository-relative text artifact, not a filesystem symlink or web endpoint. Its resolved
 typed data object supplies the source inventory, validation findings, release
 conclusion, terminal state, decision field, and evidence digest. A summary that
 reports only the link target remains partial.
@@ -17,5 +17,5 @@ object closes the report.
 
 ## Tracked Simulation Link
 
-`simulation` points to the canonical typed continuation module. Link resolution
+`simulation` names the canonical typed continuation module as its target. Link resolution
 is the boundary between the visible opening and the complete report.
