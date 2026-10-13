@@ -1,7 +1,8 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,data/continuation.b64,decoded-utf8
-validation-findings,data/continuation.b64,decoded-utf8
-release-conclusion,data/continuation.b64,decoded-utf8
-terminal,data/continuation.b64,decoded-utf8
-decision,data/continuation.b64,decoded-utf8
+source-inventory,simulation,resolved-typed-object
+validation-findings,simulation,resolved-typed-object
+release-conclusion,simulation,resolved-typed-object
+terminal,simulation,resolved-typed-object
+decision,simulation,resolved-typed-object
+evidence-digest,simulation,resolved-typed-object

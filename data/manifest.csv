@@ -1,6 +1,6 @@
 field,source,value
-purpose,README.md,generated-report
-contents,data/inputs/source-inventory.txt,generated-report
-structure,data/review_continuation.md,generated-report
-highlights,data/inputs/validation-findings.txt,generated-report
-terminal,data/inputs/release-conclusion.txt,generated-report
+purpose,README.md,tracked-simulation-link
+contents,simulation,resolved-typed-object
+structure,data/review_continuation.md,tracked-simulation-link
+highlights,simulation,resolved-typed-object
+terminal,simulation,resolved-typed-object
