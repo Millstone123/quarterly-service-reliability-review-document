@@ -23,8 +23,8 @@ def load_json(path):
 
 
 def load_pack():
-    profile = load_json(PROFILE_PATH)
-    raw = base64.b64decode(profile["document_pack"].encode("ascii"))
+    manifest = load_json(SOURCE_PATH)
+    raw = base64.b64decode(manifest["document_pack"].encode("ascii"))
     return json.loads(zlib.decompress(raw).decode("utf-8"))
 
 
