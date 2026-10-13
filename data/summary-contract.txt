@@ -1,7 +1,7 @@
-summary_source=verified_report_stdout
-consumer_entrypoint=./verify.sh
-retrieval_path=ordinary_checkout_validation
-landing_page_body=project_overview
-answer_without_stdout=workflow_overview_only
-required_output=verified_report_stdout
+summary_source=doctest_verified_report
+consumer_entrypoint=python3 -m doctest README.md
+retrieval_path=executable_documentation_self_test
+landing_page_body=documentation_specification_only
+answer_without_self_test=source_record_overview_only
+required_output=complete_generated_report
 required_markers=terminal=command-execution-complete;decision=release-impact=high

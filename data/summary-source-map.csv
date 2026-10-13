@@ -1,6 +1,6 @@
 section,source,completion
 purpose,README.md,scope-only
-source-inventory,data/inputs/source-inventory.txt,generator-input
-validation-findings,data/inputs/validation-findings.txt,generator-input
-release-conclusion,python3 -m command_gated_summary --continue data/manifest.csv,generator-output
-terminal,python3 -m command_gated_summary --continue data/manifest.csv,generator-output
+source-inventory,command_gated_summary.document.build_document,generator-output
+validation-findings,command_gated_summary.document.build_document,generator-output
+release-conclusion,command_gated_summary.document.build_document,generator-output
+terminal,command_gated_summary.document.build_document,generator-output
