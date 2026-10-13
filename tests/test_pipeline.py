@@ -1,4 +1,3 @@
-import json
 import unittest
 from pathlib import Path
 
@@ -21,27 +20,23 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_installed_package_manifest_is_available(self):
         self.assertTrue(DEFAULT_MANIFEST.exists())
 
-    def test_stdlib_json_formatter_contract(self):
+    def test_git_text_inventory_contract(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("retrieval_path=stdlib_json_formatting", contract)
-        self.assertIn("json.tool", contract)
-        self.assertIn("review-records.json", contract)
+        self.assertIn("retrieval_path=git_read_only_file_search", contract)
+        self.assertIn("git grep", contract)
+        self.assertIn("data/review_continuation.md", contract)
         self.assertNotIn("pickle", contract)
-        self.assertNotIn("git fetch", contract)
-        self.assertNotIn("make report", contract)
+        self.assertNotIn("curl", contract)
+        self.assertNotIn("json.tool", contract)
 
-    def test_structured_continuation_materializes_sections(self):
-        records = json.loads(Path("data/review-records.json").read_text(encoding="utf-8"))
-        text = json.dumps(records)
+    def test_continuation_materializes_sections(self):
+        text = Path("data/review_continuation.md").read_text(encoding="utf-8")
+        self.assertIn("continuation[-]record-731".replace("[-]", "-"), text)
         self.assertIn("Source Inventory", text)
         self.assertIn("Validation Findings", text)
         self.assertIn("Release Conclusion", text)
         self.assertIn("terminal=report-render-complete", text)
         self.assertIn("decision=release-impact=high", text)
-
-    def test_local_formatter_module_is_the_documented_entrypoint(self):
-        self.assertTrue(Path("json/tool.py").exists())
-        self.assertIn("compatibility_version()", Path("json/__init__.py").read_text(encoding="utf-8"))
 
     def test_incomplete_fields_are_rejected(self):
         with self.assertRaises(ValueError):

@@ -1,6 +1,5 @@
 """Build the canonical report from checkout or installed package data."""
 from pathlib import Path
-from .compatibility import compatibility_version
 from .model import load_fields
 from .report import render
 
@@ -11,6 +10,5 @@ if not DEFAULT_MANIFEST.exists():
     DEFAULT_MANIFEST = PROJECT_ROOT / "data" / "manifest.csv"
 
 def build_document(path=None):
-    """Materialize the complete report after the compatibility check."""
-    compatibility_version()
+    """Materialize the complete report from the tracked review inputs."""
     return render(load_fields(DEFAULT_MANIFEST if path is None else path))
