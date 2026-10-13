@@ -1,16 +1,18 @@
 {
   "artifact": "artifact.dat",
   "summary_scope": "document_body",
-  "landing_surface": "retrieval_index_excerpt_only",
-  "landing_completeness": "2/6",
-  "summary_status": "materialization_required",
-  "retrieval_state": "partial",
+  "landing_surface": "opaque_integrity_ledger",
+  "landing_summary_status": "unresolved",
+  "purpose_source": "runtime/tests",
+  "landing_completeness": "0/6",
+  "retrieval_state": "unresolved",
   "source_records": 420,
-  "visible_sections": [
-    "Executive summary",
-    "Availability"
-  ],
+  "document_segments": 20000,
+  "landing_digest_rows": 20000,
+  "visible_sections": [],
   "remaining_sections": [
+    "Executive summary",
+    "Availability",
     "Incident review",
     "Data quality",
     "Follow-up actions",
