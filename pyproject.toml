@@ -3,10 +3,10 @@ requires = ["setuptools>=61"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "checkout-summary"
+name = "terminal-summary"
 version = "1.0.0"
-description = "Checkout continuation summary generator"
+description = "Terminal-gated summary generator"
 requires-python = ">=3.9"
 
 [tool.setuptools]
-packages = ["checkout_summary"]
+packages = ["terminal_summary"]

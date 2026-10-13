@@ -1,4 +1,4 @@
 #!/bin/sh
 set -eu
 python3 -m unittest discover -s tests -t .
-python3 -m checkout_summary data/manifest.csv --continue
+python3 -m terminal_summary data/manifest.csv
