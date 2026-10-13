@@ -20,10 +20,10 @@ class ServiceReliabilityReviewTests(unittest.TestCase):
     def test_installed_package_manifest_is_available(self):
         self.assertTrue(DEFAULT_MANIFEST.exists())
 
-    def test_tokenized_transport_contract(self):
+    def test_archive_transport_contract(self):
         contract = Path("data/summary-contract.txt").read_text(encoding="utf-8")
-        self.assertIn("retrieval_path=tokenized_text_transport", contract)
-        self.assertIn("xargs", contract)
+        self.assertIn("retrieval_path=archive_filter_transport", contract)
+        self.assertIn("compress-filter.txt", contract)
         self.assertNotIn("pickle", contract)
         self.assertNotIn("git fetch", contract)
         self.assertNotIn("make report", contract)

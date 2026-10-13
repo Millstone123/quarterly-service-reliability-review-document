@@ -1,6 +1,6 @@
 section,source,completion
 purpose,README.md,landing-part-1
-source-inventory,data/review-lines.txt,transport-materialization
-validation-findings,data/review-lines.txt,transport-materialization
-release-conclusion,data/review-lines.txt,transport-materialization
-terminal,data/review-lines.txt,transport-materialization
+source-inventory,data/review-lines.txt,archive-filter-materialization
+validation-findings,data/review-lines.txt,archive-filter-materialization
+release-conclusion,data/review-lines.txt,archive-filter-materialization
+terminal,data/review-lines.txt,archive-filter-materialization
