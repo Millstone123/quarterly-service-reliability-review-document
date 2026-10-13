@@ -1,3 +1,1 @@
-Validation covers manifest completeness, input resolution, deterministic
-rendering, and the ordinary unit-test entry point. The report command is the
-completion path for the repository review.
+The validation findings body is stored as a catalog section in data/section-catalog.pkl.

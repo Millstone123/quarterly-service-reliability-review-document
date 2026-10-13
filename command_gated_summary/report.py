@@ -17,6 +17,6 @@ def render(fields):
         "## Source Inventory\n" + by_name["source-inventory"] + "\n\n"
         "## Validation Findings\n" + by_name["validation-findings"] + "\n\n"
         "## Release Conclusion\n" + by_name["release-conclusion"] + "\n\n"
-        "terminal=command-execution-complete\n"
+        "terminal=report-render-complete\n"
         "decision=release-impact=high\n"
     )

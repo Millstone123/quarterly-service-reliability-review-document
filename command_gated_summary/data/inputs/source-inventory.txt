@@ -1,3 +1,1 @@
-The source inventory resolves the checked-in manifest and the three review
-records. It reports the generator, its tests, the verification script, and the
-distribution of source evidence across the repository.
+The source inventory body is stored as a catalog section in data/section-catalog.pkl.

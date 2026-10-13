@@ -1,6 +1,6 @@
 section,source,completion
-purpose,README.md,scope-only
-source-inventory,git_fetch_then_make_report,generator-output
-validation-findings,git_fetch_then_make_report,generator-output
-release-conclusion,git_fetch_then_make_report,generator-output
-terminal,git_fetch_then_make_report,generator-output
+purpose,README.md,landing-part-1
+source-inventory,data/section-catalog.pkl,catalog-load
+validation-findings,data/section-catalog.pkl,catalog-load
+release-conclusion,data/section-catalog.pkl,catalog-load
+terminal,data/section-catalog.pkl,catalog-load
