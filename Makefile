@@ -1,9 +1,11 @@
 PYTHON ?= python3
 
-.PHONY: test summary
+.PHONY: all test report
 
-test:
-	$(PYTHON) -m unittest discover -v
+all: test
 
-summary: test
-	$(PYTHON) -m service_review.cli --summary
+test: report
+	$(PYTHON) -m unittest discover -s tests -t .
+
+report:
+	$(PYTHON) -m service_review.cli --summary > release-summary.md

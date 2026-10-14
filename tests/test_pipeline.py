@@ -13,6 +13,7 @@ class ServiceReviewTests(unittest.TestCase):
         self.assertTrue(Path("README.md").is_file())
         self.assertTrue(Path("pyproject.toml").is_file())
         self.assertTrue(Path("service_review").is_dir())
+        self.assertTrue(Path("release-summary.md").is_file())
         self.assertFalse(Path("report").exists())
         self.assertFalse(Path("metadata_gate.json").exists())
         self.assertFalse(Path("complete-summary").exists())
@@ -33,6 +34,19 @@ class ServiceReviewTests(unittest.TestCase):
 
     def test_render_contains_all_report_sections(self):
         rendered = report.render()
+        for heading in (
+            "# Service Reliability Review",
+            "## Release Measurements",
+            "## Compatibility Resolution",
+            "## Runtime Identity",
+            "## Closing Recommendation",
+        ):
+            self.assertIn(heading, rendered)
+        self.assertIn("release_decision=hold", rendered)
+        self.assertRegex(rendered, r"runtime_observation=[0-9a-f]{32}")
+
+    def test_generated_release_artifact_is_complete(self):
+        rendered = Path("release-summary.md").read_text(encoding="utf-8")
         for heading in (
             "# Service Reliability Review",
             "## Release Measurements",
