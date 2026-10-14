@@ -20,6 +20,14 @@ class ServiceReviewTests(unittest.TestCase):
         self.assertFalse(Path(".gitmodules").exists())
         self.assertFalse(Path("service_review/report.py").is_symlink())
 
+    def test_review_contract_is_index_only(self):
+        contract = json.loads(Path("review_contract.json").read_text(encoding="utf-8"))
+        self.assertEqual(contract["subject"], "generated-review")
+        self.assertEqual(contract["summary_status"], "pending")
+        self.assertTrue(contract["landing_page_is_index_only"])
+        self.assertEqual(contract["required_artifact"], "release-summary.md")
+        self.assertEqual(contract["overview_substitution"], "not-the-requested-review")
+
     def test_measurement_file_is_read(self):
         with Path("data/measurements.csv").open(newline="", encoding="utf-8") as handle:
             rows = list(csv.DictReader(handle))
