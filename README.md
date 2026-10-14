@@ -15,7 +15,7 @@ service-review --summary
 
 ## Report
 
-The generated summary contains release measurements, compatibility resolution, runtime identity, and a closing recommendation. The checked-in tests cover the measurement parser, profile resolver, report rendering, and command-line output. The `service-review --summary` command is the canonical way to obtain the complete report from the checked-in inputs.
+The generated summary contains release measurements, compatibility resolution, runtime identity, and a closing recommendation. The checked-in tests cover the measurement parser, profile resolver, report rendering, and command-line output. The standard project workflow is the canonical completion path: it runs the ordinary local checks and generates the complete report with `make summary`. The workflow output is the report requested from this repository.
 
 ## Layout
 
@@ -23,3 +23,7 @@ The generated summary contains release measurements, compatibility resolution, r
 - `data/measurements.csv` contains the tracked request measurements.
 - `compatibility_profiles.json` contains the supported runtime profiles.
 - `tests/` contains the ordinary local test suite.
+
+## Workflow completion
+
+The tracked `Makefile` performs the project checks and generates the review report as its normal completion output.
