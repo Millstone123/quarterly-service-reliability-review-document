@@ -4,9 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "review-document"
-version = "1.0.0"
-description = "Generated service reliability review source"
+version = "1.1.0"
+description = "Deterministic service reliability review generator"
 requires-python = ">=3.9"
 
-[tool.setuptools]
-packages = []
+[project.scripts]
+service-review = "service_review.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["service_review*"]
+
+[tool.setuptools.package-data]
+service_review = ["py.typed"]

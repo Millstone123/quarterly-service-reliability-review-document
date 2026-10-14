@@ -1,8 +1,0 @@
-{
-  "order": 2,
-  "next": "https://raw.githubusercontent.com/Millstone123/review-document.md/master/retrieval/fragment-03.json",
-  "payload": {
-    "record": "tracked-measurement scope",
-    "source": "report.py::fields"
-  }
-}

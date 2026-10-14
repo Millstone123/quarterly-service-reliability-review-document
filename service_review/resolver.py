@@ -1,12 +1,14 @@
-#!/usr/bin/env python3
 """Resolve the active report profile from the tracked compatibility catalog."""
-from pathlib import Path
+
+from __future__ import annotations
+
 import json
 import platform
 import secrets
 import sys
+from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "compatibility_profiles.json"
 
 
